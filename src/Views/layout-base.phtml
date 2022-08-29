@@ -1,0 +1,59 @@
+<?php use MF\ViewHelper\Buttons; ?>
+
+<html lang="pt-br">
+	
+	<head>
+		<meta charset="utf-8">
+
+		<title><?= $this->title; ?></title>
+
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/custom.css">
+	</head>
+
+	<body>
+		<div class="container">
+
+			<div>
+				<h3><?= $this->title; ?></h3>
+			</div>
+			
+			<div class="menu_index"> 
+				<span>
+					<?php
+						foreach(Buttons::buttonsMenu() as $button) {
+							echo $button;
+						}
+					?>
+				</span>
+
+				<span>
+					<button class="buttons_menu dropdown-toggle" type="button" id="dropdown-ordenar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ordenar
+                    </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdown-ordenar">
+						<!-- aprender como fazer a ordenação e ajustar aqui o que for necessário) -->
+						  	<?php foreach($this->view->ordenar as $option_ordenacao) {
+
+								echo Buttons::ordenar($option_ordenacao);
+							} ?>
+                          </div>
+				</span>
+
+				<span>Pesquisar</span>
+
+				<span>Usuário</span>
+
+				<span>Sair</span>
+
+			</div>
+
+			<?= $this->content(); ?>
+		</div>
+	</body>
+
+	<script src="js/jquery.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/custom.js"></script>
+</html>

@@ -1,0 +1,42 @@
+<main class="conteudo_principal">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <td>Selecione</td>
+      <?php foreach($this->view->atributos as $index => $valor) { ?>
+          <td>
+            <?= $valor ?>
+          </td>
+        <?php } ?>
+      </tr>    
+    </thead>
+    
+    <tbody>
+      <?php foreach($this->view->dados as $index => $valor) { ?>
+        <tr>
+          <td class="selects">
+            <input type="checkbox" class="pecas" name="pecas" value="<?= $valor->id ?>">
+          </td>
+          <td>
+            <?= $valor->id ?>
+          </td>
+          <td>
+            <?= $valor->nome ?>
+          </td>
+          <td>
+            <?= $valor->carro ?>
+          </td>
+          <td>
+            <?= $valor->descricao ?>
+          </td>
+          <td>
+            <?= $valor->preco ?>
+          </td>
+        </tr>        
+      <?php } ?>
+    </tbody>
+  </table>
+</main>
