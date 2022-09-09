@@ -6,13 +6,16 @@ use MF\Model\Model;
 
 class PecasDAO extends Model {
 
-	public $select = 'id, nome, carro, descricao, preco';
+	//não pode ter espaço para não complicar as tags do button 'Ordenar'
+	public $select = 'idPeca,nomePeca,vlrCompraPeca,caixaPeca';
+
+	private $join = 'caixas.nomeCaixa';
 
 	public function getPecas()
 	{
-		$query = 'select '.$this->select.' from tb_pecas';
+		$query = 'select '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
 
-	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);	
 
 		return $result;
 	}

@@ -5,7 +5,7 @@
     <thead>
 
       <tr>
-        <td>Selecione</td>
+        <td>Selecionar</td>
       <?php foreach($this->view->atributos as $index => $valor) { ?>
           <td>
             <?= $valor ?>
@@ -18,22 +18,22 @@
       <?php foreach($this->view->dados as $index => $valor) { ?>
         <tr>
           <td class="selects">
-            <input type="checkbox" class="pecas" name="pecas" value="<?= $valor->id ?>">
+            <input type="checkbox" class="pecas" name="pecas" value="<?= $valor->idPeca ?>">
           </td>
           <td>
-            <?= $valor->id ?>
+            <?= $valor->idPeca ?>
           </td>
           <td>
-            <?= $valor->nome ?>
+            <?= $valor->nomePeca ?>
           </td>
           <td>
-            <?= $valor->carro ?>
+            <?= $valor->vlrCompraPeca ?>
           </td>
           <td>
-            <?= $valor->descricao ?>
+            <?= $valor->caixaPeca ?>
           </td>
           <td>
-            <?= $valor->preco ?>
+            <?= $valor->nomeCaixa ?>
           </td>
         </tr>        
       <?php } ?>
