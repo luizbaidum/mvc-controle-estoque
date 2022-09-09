@@ -44,7 +44,7 @@ class Buttons {
 
     //confirmar como faz ordenação
     public static function ordenar($option_ordenacao) {
-        $buttons_ordenar = '<span class="dropdown-item" id="'.$option_ordenacao.'" name="'.$option_ordenacao.'" value="'.$option_ordenacao.'">'.$option_ordenacao.'</span>';
+        $buttons_ordenar = '<button type="button" class="dropdown-item" id="'.$option_ordenacao.'" name="'.$option_ordenacao.'" value="'.$option_ordenacao.'">'.$option_ordenacao.'</button>';
         return $buttons_ordenar;
     }
 }
