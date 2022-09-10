@@ -11,7 +11,7 @@ class Buttons {
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdown-novo">
                         <a class="dropdown-item" href="#">Peça</a>
-                        <a class="dropdown-item" href="#">Caixa</a>
+                        <a class="dropdown-item" href="/nova_caixa">Caixa</a>
                     </div>',
             "baixar" => '<button id="baixar" class="buttons_menu" value="">Baixar/Uso</button>',
             "apagar" => '<button class="buttons_menu dropdown-toggle" type="button" id="dropdown-apagar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,8 +35,8 @@ class Buttons {
 
     public static function buttonsCrud() {
         $buttons_crud = [
-            "salvar" => '<button id="salvar" type="submit" class="buttons_crud" value="">Salvar</button>',
-			"cancelar" => '<button id="cancelar" class="buttons_crud" value="">Cancelar/Voltar</button>',
+            "salvar" => '<button id="salvar" name="salvar" type="submit" class="buttons_crud">Salvar</button>',
+			"cancelar" => '<button id="cancelar" name="cancelar" class="buttons_crud">Cancelar/Voltar</button>',
         ];
 
         return $buttons_crud;

@@ -8,22 +8,22 @@ class Route extends Bootstrap {
 
 	public function initRoutes()
 	{
-		$routes['nao-preciso-dar-nome-mas-vou-chamar-de-home'] = array(
+		$routes['index'] = array(
 			'route' => '/',
 			'controller' => 'IndexController',
 			'action' => 'index'
 		);
 
-		$routes['nao-preciso-dar-nome-mas-vou-chamar-de-sobre_nos'] = array(
-			'route' => '/sobre_nos',
-			'controller' => 'SobreNosController',
-			'action' => 'index'
+		$routes['nova_caixa'] = array(
+			'route' => '/nova_caixa',
+			'controller' => 'CaixaController',
+			'action' => 'novaCaixa'
 		);
 
-		$routes['nao-preciso-dar-nome-mas-vou-chamar-de-novo'] = array(
-			'route' => '/sobre_nos/novo',
-			'controller' => 'SobreNosController',
-			'action' => 'novo'
+		$routes['nova_caixa/insert'] = array(
+			'route' => '/nova_caixa/insert',
+			'controller' => 'CaixaController',
+			'action' => 'insert'
 		);
 
 		$routes['nao-preciso-dar-nome-mas-vou-chamar-de-infos'] = array(
