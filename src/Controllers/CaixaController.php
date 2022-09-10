@@ -7,19 +7,16 @@ use MF\Model\Container;
 
 class CaixaController extends Action {
 
-	public function novaCaixa()
+	public function index()
 	{	
-		$peca = Container::getModel('PecasDAO');
-
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_caixa', 'Cadastrar nova caixa', 'layout-base-cruds');
 	}
 
-    public function insert()
+    public function novaCaixa()
 	{	
-		$peca = Container::getModel('PecasDAO');
+		$caixa = Container::getModel('CaixasDAO');
 
-		//conteudo da pagina, titulo da pagina, layout base
-		$this->render('nova_caixa', 'Cadastrar nova caixa', 'layout-base-cruds');
+		$caixa->insert($_POST);
 	}
 }

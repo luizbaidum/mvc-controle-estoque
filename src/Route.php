@@ -17,13 +17,13 @@ class Route extends Bootstrap {
 		$routes['nova_caixa'] = array(
 			'route' => '/nova_caixa',
 			'controller' => 'CaixaController',
-			'action' => 'novaCaixa'
+			'action' => 'index'
 		);
 
 		$routes['nova_caixa/insert'] = array(
 			'route' => '/nova_caixa/insert',
 			'controller' => 'CaixaController',
-			'action' => 'insert'
+			'action' => 'novaCaixa'
 		);
 
 		$routes['nao-preciso-dar-nome-mas-vou-chamar-de-infos'] = array(
