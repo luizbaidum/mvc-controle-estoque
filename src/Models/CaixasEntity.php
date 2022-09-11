@@ -9,14 +9,6 @@
         protected $corCaixa;
         protected $descricaoCaixa;
 
-        function __construct($idCaixa, $nomeCaixa, $corCaixa, $descricaoCaixa)
-        {
-            $this->idCaixa = $idCaixa;
-            $this->nomeCaixa = $nomeCaixa; 
-            $this->corCaixa = $corCaixa;
-            $this->descricaoCaixa = $descricaoCaixa; 
-        }
-
         /**
          * Get the value of idCaixa
          */ 
