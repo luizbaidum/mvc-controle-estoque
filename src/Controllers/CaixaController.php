@@ -19,9 +19,11 @@ class CaixaController extends Action {
 	{	
 		try {
 			$caixa = Container::getModel('CaixasDAO');
+			$processo_finalizado = 'processo_iniciado';
 
 			$obj = new CaixasEntity();
 
+			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
 			$obj->setIdCaixa($_POST['idCaixa']);
 			$obj->setNomeCaixa($_POST['nomeCaixa']);
 			$obj->setCorCaixa($_POST['corCaixa']);
@@ -29,16 +31,17 @@ class CaixaController extends Action {
 
 			if($caixa->insert($obj) == true) {
 
-				echo 'sucesso';
-				//criar um arquivo de Alertas e chama-lo aqui
-				//fazer com que ele apareça na página sem precisar mudar de página e tbm limpar os caracteres digitados
+				$processo_finalizado = true;
+				echo $processo_finalizado;
 			} else {
 
-				throw new Exception('Erro ao lançar nova Caixa. Volte a página anterior e verifique se o ID da Caixa já está cadastrado.');
+				throw new Exception('Erro ao lançar nova Caixa. Verifique se o ID da Caixa já está cadastrado.');
 			}
 
 		} catch (Exception $e) {
 
+			$processo_finalizado = false;
+			echo $processo_finalizado;
 			echo $e->getMessage();
 		}
 	}
