@@ -15,7 +15,5 @@
 			//stdClass
 			return new $class($con);
 		} 
-
 	}
-
 ?>

@@ -19,6 +19,6 @@ class IndexController extends Action {
 		$this->view->ordenar = explode(",", $atributos);
 
 		//conteudo da pagina, titulo da pagina, layout base
-		$this->render('index', 'Controle de Estoque de Peças', 'layout-base');
+		$this->render('index', 'Controle de Estoque de Peças', 'layout-base-index');
 	}
 }
