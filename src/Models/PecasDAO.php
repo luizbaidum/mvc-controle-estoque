@@ -19,4 +19,13 @@ class PecasDAO extends Model {
 
 		return $result;
 	}
+
+	function insert($obj)
+	{
+		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `caixaPeca`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getCaixaPeca()."')";
+
+		$result = $this->db->exec($query);
+
+		return $result;
+	}
 };

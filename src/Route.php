@@ -26,10 +26,16 @@ class Route extends Bootstrap {
 			'action' => 'novaCaixa'
 		);
 
-		$routes['nao-preciso-dar-nome-mas-vou-chamar-de-infos'] = array(
-			'route' => '/infos',
-			'controller' => 'InfosController',
+		$routes['nova_peca'] = array(
+			'route' => '/nova_peca',
+			'controller' => 'PecaController',
 			'action' => 'index'
+		);
+
+		$routes['nova_peca/insert'] = array(
+			'route' => '/nova_peca/insert',
+			'controller' => 'PecaController',
+			'action' => 'novaPeca'
 		);
 
 		$this->setRoutes($routes);

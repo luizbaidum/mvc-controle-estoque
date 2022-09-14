@@ -4,108 +4,87 @@
 
     class PecasEntity {
 
-        protected $id;
-        protected $nome;
-        protected $carro;
-        protected $descricao;
-        protected $preco;
+        protected $idPeca;
+        protected $nomePeca;
+        protected $vlrCompraPeca;
+        protected $caixaPeca;
 
         /**
-         * Get the value of id
+         * Get the value of idPeca
          */ 
-        public function getId()
+        public function getIdPeca()
         {
-                return $this->id;
+                return $this->idPeca;
         }
 
         /**
-         * Set the value of id
+         * Set the value of idPeca
          *
          * @return  self
          */ 
-        public function setId($id)
+        public function setIdPeca($idPeca)
         {
-                $this->id = $id;
+                $this->idPeca = $idPeca;
 
                 return $this;
         }
 
         /**
-         * Get the value of nome
+         * Get the value of nomePeca
          */ 
-        public function getNome()
+        public function getNomePeca()
         {
-                return $this->nome;
+                return $this->nomePeca;
         }
 
         /**
-         * Set the value of nome
+         * Set the value of nomePeca
          *
          * @return  self
          */ 
-        public function setNome($nome)
+        public function setNomePeca($nomePeca)
         {
-                $this->nome = $nome;
+                $this->nomePeca = $nomePeca;
 
                 return $this;
         }
 
         /**
-         * Get the value of carro
+         * Get the value of vlrCompraPeca
          */ 
-        public function getCarro()
+        public function getVlrCompraPeca()
         {
-                return $this->carro;
+                return $this->vlrCompraPeca;
         }
 
         /**
-         * Set the value of carro
+         * Set the value of vlrCompraPeca
          *
          * @return  self
          */ 
-        public function setCarro($carro)
+        public function setVlrCompraPeca($vlrCompraPeca)
         {
-                $this->carro = $carro;
+                $this->vlrCompraPeca = $vlrCompraPeca;
 
                 return $this;
         }
 
         /**
-         * Get the value of descricao
+         * Get the value of caixaPeca
          */ 
-        public function getDescricao()
+        public function getCaixaPeca()
         {
-                return $this->descricao;
+                return $this->caixaPeca;
         }
 
         /**
-         * Set the value of descricao
+         * Set the value of caixaPeca
          *
          * @return  self
          */ 
-        public function setDescricao($descricao)
+        public function setCaixaPeca($caixaPeca)
         {
-                $this->descricao = $descricao;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of preco
-         */ 
-        public function getPreco()
-        {
-                return $this->preco;
-        }
-
-        /**
-         * Set the value of preco
-         *
-         * @return  self
-         */ 
-        public function setPreco($preco)
-        {
-                $this->preco = $preco;
+                $this->caixaPeca = $caixaPeca;
 
                 return $this;
         }
