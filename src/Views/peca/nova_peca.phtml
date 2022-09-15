@@ -9,6 +9,8 @@
     <input type="number" class="form-control" id="idPeca" name="idPeca" required>
   </div>
 
+  <h2><?php print_r($this->view->dt2); ?></h2>
+
   <div class="form-group">
 
     <label for="nomePeca">Nome da peça* (números/letras)</label>
@@ -27,5 +29,7 @@
 
     <label for="caixaPeca">Caixa onde está a peça</label>
       
-    <textarea class="form-control" id="caixaPeca" name="caixaPeca" rows="1"></textarea>
+    <select class="form-control" id="caixaPeca" name="caixaPeca">
+        <option>Default select</option>
+    </select>
   </div>

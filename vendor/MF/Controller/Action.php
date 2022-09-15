@@ -30,6 +30,11 @@ abstract class Action {
 		}
 	}
 
+	protected function teste($data)
+	{	
+		$this->view->dt2 = $data;
+	}
+
 	protected function content()
 	{	
 		$classe_atual = get_class($this);

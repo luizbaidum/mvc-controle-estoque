@@ -11,6 +11,17 @@ class PecaController extends Action {
 
 	public function index()
 	{	
+		//prepara os dados
+		$caixa = Container::getModel('CaixasDAO');
+		$lista_caixas = $caixa->selectCaixas();
+
+		$teste = [
+			'nome' => 'luli',
+			'idade' => 16
+		];
+		
+		$this->teste($teste);
+
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-cruds');
 	}
