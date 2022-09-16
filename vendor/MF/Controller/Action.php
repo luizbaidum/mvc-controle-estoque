@@ -30,12 +30,29 @@ abstract class Action {
 		}
 	}
 
+	protected function singleDataToView($single_data)
+	{	
+		$this->single_data = $single_data;
+	}
+
+	protected function arrayDataToView($array_data)
+	{	
+		$this->array_data = $array_data;
+	}
+
+	//Dado que vem em matriz (array de arrays)
+	protected function matrizDataToView($matriz_data)
+	{	
+		$this->matriz_data = $matriz_data;
+	}
+	
 	protected function content()
 	{	
 		$classe_atual = get_class($this);
 		$classe_atual = str_replace('src\Controllers\\', '', $classe_atual);
 		$classe_atual = str_replace('Controller', '', $classe_atual);
 		
+		include "../vendor/MF/ViewHelper/DataExtract.php";
 		require_once "../src/Views/".$classe_atual."/".$this->view->pagina.".phtml";
 	}
 }

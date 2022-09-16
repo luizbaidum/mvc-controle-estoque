@@ -10,7 +10,7 @@ class Buttons {
                         Novo
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdown-novo">
-                        <a class="dropdown-item" href="#">Peça</a>
+                        <a class="dropdown-item" href="/nova_peca">Peça</a>
                         <a class="dropdown-item" href="/nova_caixa">Caixa</a>
                     </div>',
             "baixar" => '<button id="baixar" class="buttons_menu" value="">Baixar/Uso</button>',

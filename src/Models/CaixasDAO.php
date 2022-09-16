@@ -14,4 +14,13 @@ class CaixasDAO extends Model {
 
 		return $result;
 	}
+
+	function selectCaixas()
+	{
+		$query = "SELECT `idCaixa`, `nomeCaixa` FROM `caixas`";
+
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $result;
+	}
 }
