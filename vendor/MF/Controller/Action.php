@@ -30,9 +30,20 @@ abstract class Action {
 		}
 	}
 
-	protected function dataToView($data_array)
+	protected function singleDataToView($single_data)
 	{	
-		$this->data_array = $data_array;
+		$this->single_data = $single_data;
+	}
+
+	protected function arrayDataToView($array_data)
+	{	
+		$this->array_data = $array_data;
+	}
+
+	//Dado que vem em matriz (array de arrays)
+	protected function matrizDataToView($matriz_data)
+	{	
+		$this->matriz_data = $matriz_data;
 	}
 	
 	protected function content()

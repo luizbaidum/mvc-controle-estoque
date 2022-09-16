@@ -8,8 +8,6 @@
 
     <input type="number" class="form-control" id="idPeca" name="idPeca" required>
   </div>
-  
-  <?php echo $nome; ?>
 
   <div class="form-group">
 
@@ -30,6 +28,10 @@
     <label for="caixaPeca">Caixa onde está a peça</label>
       
     <select class="form-control" id="caixaPeca" name="caixaPeca">
-        <option>Default select</option>
+
+      <?php foreach($this->matriz_data as $key => $value) {
+
+        echo '<option id="'.$value["idCaixa"].'" value="'.$value["idCaixa"].'">'.$value["nomeCaixa"].'</option>';
+      } ?>
     </select>
   </div>

@@ -19,7 +19,7 @@ class CaixasDAO extends Model {
 	{
 		$query = "SELECT `idCaixa`, `nomeCaixa` FROM `caixas`";
 
-		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);	
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
 		return $result;
 	}
