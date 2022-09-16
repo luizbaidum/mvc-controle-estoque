@@ -2,8 +2,6 @@
 
 namespace MF\Model;
 
-use src\Conexao;
-
 abstract class Model {
 
 	protected $db;
