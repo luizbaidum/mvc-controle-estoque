@@ -20,7 +20,7 @@ class PecaController extends Action {
 			'idade' => 16
 		];
 		
-		$this->teste($teste);
+		$this->dataToView($teste);
 
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-cruds');

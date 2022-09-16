@@ -30,17 +30,18 @@ abstract class Action {
 		}
 	}
 
-	protected function teste($data)
+	protected function dataToView($data_array)
 	{	
-		$this->view->dt2 = $data;
+		$this->data_array = $data_array;
 	}
-
+	
 	protected function content()
 	{	
 		$classe_atual = get_class($this);
 		$classe_atual = str_replace('src\Controllers\\', '', $classe_atual);
 		$classe_atual = str_replace('Controller', '', $classe_atual);
 		
+		include "../vendor/MF/ViewHelper/DataExtract.php";
 		require_once "../src/Views/".$classe_atual."/".$this->view->pagina.".phtml";
 	}
 }
