@@ -14,7 +14,7 @@ class Conexao {
 			return $con;
 		} catch(\PDOException $e) {
 
-			return 'Erro na conexão com o Banco de Dados';
+			return false;
 		}
 	}
 }
