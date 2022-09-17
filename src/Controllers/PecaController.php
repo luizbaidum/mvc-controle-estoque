@@ -32,6 +32,7 @@ class PecaController extends Action {
 			$obj->setIdPeca($_POST['idPeca']);
 			$obj->setNomePeca($_POST['nomePeca']);
 			$obj->setVlrCompraPeca($_POST['vlrCompraPeca']);
+			$obj->setQtdPeca($_POST['caixaPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
 			if($peca->insert($obj) == true) {
