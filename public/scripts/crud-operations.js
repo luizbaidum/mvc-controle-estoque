@@ -1,10 +1,18 @@
 $('#salvar').on('click', (e) => {
 
     e.preventDefault();
+    //VALIDAÇÃO DE CAMPOS REQUIRED----------
+
+    let a = $('form').find($("*"));
+
+    Object.keys(a).forEach(key => {
+        //console.log(a[key]);
+        if(a[key].hasAttribute('required') && (a[key].value=='' || a[key].value==undefined)) {
+            console.log(a[key]);
+        }
+      });
 
     let dados = $('form').serialize();
-    console.log(dados);
-    //DE ALGUMA FORMA, PRA MIM MÁGICA, A URL ESTÁ SENDO RECONHECIDA COMO A ROTA CORRETA E O LET DADOS TÁ SENDO RECONHECIDO NORMALMENTE PELO PHP SEM EU PRECISAR FAZER NADA DIFERENTE
 
     //NOVA CAIXA----------------------------
     if($('#operation').val() == 'nova_caixa') {

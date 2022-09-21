@@ -3,6 +3,7 @@ $('#cancelar').on('click', () => {
     window.location.replace("/");
 })
 
+//Formata valores para br_R$
 $('#vlrCompraPeca').on('keyup', () => {
 
     let valor = $('#vlrCompraPeca').val();
@@ -18,4 +19,4 @@ $('#vlrCompraPeca').on('keyup', () => {
     if(valor == 'NaN') $('#vlrCompraPeca').val('');
 })
 
-//fazer a conversao pra US no php
+//fazer a conversao pra US no  php
