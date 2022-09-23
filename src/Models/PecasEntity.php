@@ -7,6 +7,7 @@
         protected $idPeca;
         protected $nomePeca;
         protected $vlrCompraPeca;
+        protected $qtdPeca;
         protected $caixaPeca;
 
         /**
@@ -65,6 +66,23 @@
         public function setVlrCompraPeca($vlrCompraPeca)
         {
                 $this->vlrCompraPeca = $vlrCompraPeca;
+
+                return $this;
+        }
+
+        public function getQtdPeca()
+        {
+                return $this->qtdPeca;
+        }
+
+        /**
+         * Set the value of qtdPeca
+         *
+         * @return  self
+         */ 
+        public function setQtdPeca($qtdPeca)
+        {
+                $this->qtdPeca = $qtdPeca;
 
                 return $this;
         }

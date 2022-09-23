@@ -15,14 +15,14 @@ class PecasDAO extends Model {
 	{
 		$query = 'select '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
 
-	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);	
+	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 
 		return $result;
 	}
 
 	function insert($obj)
 	{
-		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `caixaPeca`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getCaixaPeca()."')";
+		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`, `dataHora`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getQtdPeca()."','".$obj->getCaixaPeca()."', '".$this->getTime()."')";
 
 		$result = $this->db->exec($query);
 

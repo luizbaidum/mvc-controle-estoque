@@ -5,6 +5,7 @@ namespace src\Controllers;
 use Exception;
 use MF\Controller\Action;
 use MF\Model\Container;
+use src\Helpers\NumbersHelper;
 use src\Models\PecasEntity;
 
 class PecaController extends Action {
@@ -31,7 +32,8 @@ class PecaController extends Action {
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
 			$obj->setIdPeca($_POST['idPeca']);
 			$obj->setNomePeca($_POST['nomePeca']);
-			$obj->setVlrCompraPeca($_POST['vlrCompraPeca']);
+			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
+			$obj->setQtdPeca($_POST['caixaPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
 			if($peca->insert($obj) == true) {

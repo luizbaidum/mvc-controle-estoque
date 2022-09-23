@@ -8,7 +8,7 @@ class CaixasDAO extends Model {
 
 	function insert($obj)
 	{
-		$query = "INSERT INTO `caixas` (`idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa`) VALUES (".$obj->getIdCaixa().", '".$obj->getNomeCaixa()."', '".$obj->getCorCaixa()."', '".$obj->getDescricaoCaixa()."')";
+		$query = "INSERT INTO `caixas` (`idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa`, `dataHora`) VALUES (".$obj->getIdCaixa().", '".$obj->getNomeCaixa()."', '".$obj->getCorCaixa()."', '".$obj->getDescricaoCaixa()."', '".$this->getTime()."')";
 
 		$result = $this->db->exec($query);
 
