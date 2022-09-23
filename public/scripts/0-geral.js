@@ -18,5 +18,3 @@ $('#vlrCompraPeca').on('keyup', () => {
     $('#vlrCompraPeca').val(valor);
     if(valor == 'NaN') $('#vlrCompraPeca').val('');
 })
-
-//fazer a conversao pra US no  php

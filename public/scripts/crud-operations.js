@@ -1,16 +1,30 @@
 $('#salvar').on('click', (e) => {
 
+    console.log('1');
+
     e.preventDefault();
+
     //VALIDAÇÃO DE CAMPOS REQUIRED----------
+    let elementos = $('form').find('*');
 
-    let a = $('form').find($("*"));
+    let requeridos = [];
 
-    Object.keys(a).forEach(key => {
-        //console.log(a[key]);
-        if(a[key].hasAttribute('required') && (a[key].value=='' || a[key].value==undefined)) {
-            console.log(a[key]);
+    elementos.each(function(key, value) {
+        
+        if(value.hasAttribute('required')) {
+            
+            if(value.value == '' || value.value == undefined || value.value == null) {
+
+                requeridos.push(value);
+            }
         }
-      });
+    });
+
+    if(requeridos.length>0) {
+
+        alert('Existem campos obrigatórios NÃO preenchidos.');
+        return;
+    }    
 
     let dados = $('form').serialize();
 
