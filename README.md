@@ -1,18 +1,20 @@
 # mvc-controle-estoque
 
-ideias para lançar:
-> no uso, permitir inserir nome do cliente, data, qntd, carro e placa p/ registro
-> criar uma tabela que vai registrar td isso, mais a peça e seu o valor
-> permitir tbm que seja inserido qnto o cliente pagou pela peça
+Este projeto em arquitetura MVC, usando PHP, Ajax (Jquery), CSS e HTML trata-se do atendimento ao pedido do meu mecânico preferido para ajuda-lo a controlar seu estoque de peças.
 
-> criar coluna p/ registrar data das operações em tds tabelas
+O "cliente" guarda peças automotivas em Caixas de papelão.
 
-> tabela p/ registrar valor das peças guardadas e valores q os clientes pagaram
+Por enquanto não pretendo inserir APIs p/ ler códigos de barra ou pesquisar Notas Fiscais, então os lançamentos CRUDs de peças e caixas será feito a mão.
+Pretendo deixar esta atividade intuitiva, rápida e fácil.
 
-> implementar o opção de pesquisa
+> Objetivos e ideias p/ o sistema:
+- [x] CRUD peças e caixas
+- [x] registro data/hora de insert e update
+- [ ] pesquisa e oedenação
+- [ ] CRUD de clientes (nome, carro, km)
+- [ ] valor financeiro do estoque
+- [ ] registro do valor cobrado pela peça
+- [ ] registro de NF da peça (data, cnpj)
+- [ ] alinha infos relevantes das peças e caixas
 
-> nas peças permitir registrar NF e onde comprou e data da compra
-
-> verificar interesse em registrar p/ qual carro a peça serve
-
-data: 15/09
+data: 22/09
