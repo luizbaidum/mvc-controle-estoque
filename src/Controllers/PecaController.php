@@ -18,7 +18,7 @@ class PecaController extends Action {
 		$this->matrizDataToView($lista_caixas);
 
 		//conteudo da pagina, titulo da pagina, layout base
-		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-cruds');
+		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-inserts');
 	}
 
     public function novaPeca()
@@ -50,6 +50,18 @@ class PecaController extends Action {
 			$processo_finalizado = false;
 			echo $processo_finalizado;
 			echo $e->getMessage();
+		}
+	}
+
+	public function deletarPeca()
+	{
+		foreach($_POST as $key => $value) {
+			foreach($value as $idPeca) {
+
+				$peca = Container::getModel('PecasDAO');
+
+				$peca->deletar($idPeca);
+			}
 		}
 	}
 }

@@ -18,7 +18,7 @@
       <?php foreach($this->view->dados as $index => $valor) { ?>
         <tr>
           <td class="selects">
-            <input type="checkbox" class="pecas" name="pecas" value="<?= $valor->idPeca ?>">
+            <input type="checkbox" class="pecas" name="idPeca[]" value="<?= $valor->idPeca ?>">
           </td>
           <td>
             <?= $valor->idPeca ?>

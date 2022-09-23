@@ -28,4 +28,15 @@ class PecasDAO extends Model {
 
 		return $result;
 	}
+
+	function deletar($peca)
+	{
+		$query = "DELETE FROM `pecas` WHERE `pecas`.`idPeca` = $peca;";
+
+		$result = $this->db->exec($query);
+
+		return $result;
+
+		//apagando!!
+	}
 };
