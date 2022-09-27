@@ -11,10 +11,13 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [x] CRUD peças e caixas
 - [x] registro data/hora de insert e update
 - [ ] pesquisa e oedenação
+- [ ] busca sql por keydown ao digitar nome de nova peça
 - [ ] CRUD de clientes (nome, carro, km)
 - [ ] valor financeiro do estoque
 - [ ] registro do valor cobrado pela peça
 - [ ] registro de NF da peça (data, cnpj)
-- [ ] alinha infos relevantes das peças e caixas
+- [ ] alinhar infos relevantes das peças e caixas c/ cliente
+- [ ] script de upload de imagens
+- [ ] table e tratamento p/ imagens
 
-data: 22/09
+data: 26/09
