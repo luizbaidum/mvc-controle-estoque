@@ -19,5 +19,6 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] alinhar infos relevantes das peças e caixas c/ cliente
 - [ ] script de upload de imagens
 - [ ] table e tratamento p/ imagens
+- [ ] alterar alert de confirm de crud p/ modalzinho
 
 data: 26/09
