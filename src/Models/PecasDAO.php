@@ -29,12 +29,18 @@ class PecasDAO extends Model {
 		return $result;
 	}
 
-	function deletar($peca)
+	function deletar($pecas_excluir)
 	{
-		$query = "DELETE FROM `pecas` WHERE `pecas`.`idPeca` = $peca;";
+		$idPeca = implode(" ", $pecas_excluir);
+
+		$query = "DELETE FROM `pecas` WHERE `pecas`.`idPeca` IN (".str_replace(' ', ', ', $idPeca).");";
 
 		$result = $this->db->exec($query);
 
-		return $result;
+		if(gettype($result) == 'integer') {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 };

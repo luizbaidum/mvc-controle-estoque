@@ -1,5 +1,8 @@
 $('#delPeca').click(function() {
 
+
+    //FAZER NEGOCIO Q PEGA SE NENHUM CHECKBOX ESTÁ SELECIONADO
+    
     $('#form-index').submit();
 } )
 
@@ -15,11 +18,10 @@ $('#form-index').submit((e) => {
         dataType: "json",
         data: dados,
         success: function(response) {
-            if(response == 1) {
+            if(response.resultado_operacao == 1) {
 
-                alert('Peça(s) excluídas com sucesso!')
+                alert('Peça(s) ID'+ response.ids_operacao +' excluída(s) com sucesso!')
                 document.location.reload();
-                //fazer pagina recarregar e ver se está dando aviso correto
             } else {
 
                 alert('Erro ao excluir Peça(s). Por favor, tente novamente');
@@ -27,3 +29,4 @@ $('#form-index').submit((e) => {
         }
     })
 })
+

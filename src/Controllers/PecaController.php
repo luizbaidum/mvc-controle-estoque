@@ -56,12 +56,13 @@ class PecaController extends Action {
 	public function deletarPeca()
 	{
 		$pecas_excluir = $_POST['idPeca'];
-
-		foreach($pecas_excluir as $id) {
 	
-			$peca = Container::getModel('PecasDAO');
+		$peca = Container::getModel('PecasDAO');
 
-			$peca->deletar($id);
-		}
+		$resultado_operacao = $peca->deletar($pecas_excluir);
+
+		$resposta = array('resultado_operacao' => $resultado_operacao, 'ids_operacao' => $pecas_excluir);
+    
+        echo json_encode($resposta);
 	}
 }
