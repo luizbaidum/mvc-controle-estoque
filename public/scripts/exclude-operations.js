@@ -1,39 +1,29 @@
-$('#delPeca').on('click', () => {
+$('#delPeca').click(function() {
 
-    //VALIDAÇÃO DE CHECKBOX SELECTED----------
-    let elementos = $('table').find('*');
+    $('#form-index').submit();
+} )
 
-    let selecionados = [];
+$('#form-index').submit((e) => {
 
-    elementos.each(function(key, value) {
-        
-        if(value.tagName =='INPUT' && value.type == 'checkbox' && value.checked) {
-            
-            selecionados.push(value);
-        }
-    });
+    e.preventDefault();
 
-    if(selecionados.length<=0) {
+    let dados = $('#form-index').serialize();
 
-        alert('Por favor, selecione alguma peça para apagar.')
-        return;
-    }
-    
-    let dados = selecionados;
-
-    let delete_peca = $.ajax({
-
+    $.ajax({
         method: "POST",
         url: "/delete_peca",
         dataType: "json",
         data: dados,
-      })
+        success: function(response) {
+            if(response == 1) {
 
-    delete_peca.done(() => {
-           
-        });
+                alert('Peça(s) excluídas com sucesso!')
+                document.location.reload();
+                //fazer pagina recarregar e ver se está dando aviso correto
+            } else {
 
-    delete_peca.fail(() => {
-            
-        });
+                alert('Erro ao excluir Peça(s). Por favor, tente novamente');
+            }
+        }
+    })
 })

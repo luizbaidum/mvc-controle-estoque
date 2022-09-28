@@ -36,7 +36,5 @@ class PecasDAO extends Model {
 		$result = $this->db->exec($query);
 
 		return $result;
-
-		//apagando!!
 	}
 };
