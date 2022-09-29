@@ -29,41 +29,39 @@ $('#salvar').on('click', (e) => {
     //NOVA CAIXA----------------------------
     if($('#operation').val() == 'nova_caixa') {
 
-        let nova_caixa = $.ajax({
-
+        $.ajax({
             method: "POST",
             url: "nova_caixa/insert",
             dataType: "json",
             data: dados,
-          })
+            success: function(response) {
+                if(response.resultado_operacao == true) {
     
-        nova_caixa.done(() => {
-                alert("Caixa ID " + $('#idCaixa').val() + " inserida com sucesso!");
-                $('form')[0].reset();
-            });
-    
-        nova_caixa.fail(() => {
-                alert("Erro no processo de inserir Caixa ID " + $('#idCaixa').val() + ". Verifique se este ID já está cadastrado.");
-            });
+                    alert("Caixa ID " + response.id_operacao + " inserida com sucesso!");
+                    $('form')[0].reset();
+                } else {
+                    alert("Erro no processo de inserir Caixa ID " + response.id_operacao + ". Verifique se este ID já está cadastrado.");
+                }
+            }
+        })
     }    
     //NOVA PEÇA----------------------------
     if($('#operation').val() == 'nova_peca') {
 
-        let nova_caixa = $.ajax({
-
+        $.ajax({
             method: "POST",
             url: "nova_peca/insert",
             dataType: "json",
             data: dados,
-          })
+            success: function(response) {
+                if(response.resultado_operacao == true) {
     
-        nova_caixa.done(() => {
-                alert("Peca ID " + $('#idPeca').val() + " inserida com sucesso!");
-                $('form')[0].reset();
-            });
-    
-        nova_caixa.fail(() => {
-                alert("Erro no processo de inserir Peca ID " + $('#idPeca').val() + ". Verifique se este ID já está cadastrado.");
-            });
+                    alert("Peca ID " + response.id_operacao + " inserida com sucesso!");
+                    $('form')[0].reset();
+                } else {
+                    alert("Erro no processo de inserir Peca ID " + response.id_operacao + ". Verifique se este ID já está cadastrado.");
+                }
+            }
+        })
     } 
 })

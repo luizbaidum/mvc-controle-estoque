@@ -19,7 +19,6 @@ class CaixaController extends Action {
 	{	
 		try {
 			$caixa = Container::getModel('CaixasDAO');
-			$processo_finalizado = 'processo_iniciado';
 
 			$obj = new CaixasEntity();
 
@@ -29,20 +28,21 @@ class CaixaController extends Action {
 			$obj->setCorCaixa($_POST['corCaixa']);
 			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
 
-			if($caixa->insert($obj) == true) {
+			$resultado_operacao = $caixa->insert($obj);
 
-				$processo_finalizado = true;
-				echo $processo_finalizado;
+			if($resultado_operacao == 1) {
+
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
+				echo json_encode($resposta);
 			} else {
-
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdCaixa());
 				throw new Exception('Erro ao lançar nova Caixa. Verifique se o ID da Caixa já está cadastrado.');
 			}
 
 		} catch (Exception $e) {
 
-			$processo_finalizado = false;
-			echo $processo_finalizado;
-			echo $e->getMessage();
+			echo json_encode($resposta);
+			$e->getMessage();
 		}
 	}
 }
