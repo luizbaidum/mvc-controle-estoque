@@ -18,13 +18,13 @@ $('#form-index').submit((e) => {
         dataType: "json",
         data: dados,
         success: function(response) {
-            if(response.resultado_operacao == 1) {
+            if(response.resultado_operacao == true) {
 
-                alert('Peça(s) ID'+ response.ids_operacao +' excluída(s) com sucesso!')
-                document.location.reload();
+                alert('Peça(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
+                window.location.href = "/";
             } else {
 
-                alert('Erro ao excluir Peça(s). Por favor, tente novamente');
+                alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
             }
         }
     })

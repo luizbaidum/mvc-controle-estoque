@@ -55,14 +55,24 @@ class PecaController extends Action {
 
 	public function deletarPeca()
 	{
-		$pecas_excluir = $_POST['idPeca'];
+		try {
+			$pecas_excluir = $_POST['idPeca'];
 	
-		$peca = Container::getModel('PecasDAO');
+			$peca = Container::getModel('PecasDAO');
+	
+			$resultado_operacao = $peca->deletar($pecas_excluir);
 
-		$resultado_operacao = $peca->deletar($pecas_excluir);
+			if($resultado_operacao == count($pecas_excluir)) {
+				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $pecas_excluir);
+				throw new Exception('Erro ao deletar peça(s).');
+			}
+		} catch (Exception $e) {
 
-		$resposta = array('resultado_operacao' => $resultado_operacao, 'ids_operacao' => $pecas_excluir);
-    
-        echo json_encode($resposta);
+			echo json_encode($resposta);
+			$e->getMessage();
+		}
 	}
 }

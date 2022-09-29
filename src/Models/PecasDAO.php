@@ -37,10 +37,6 @@ class PecasDAO extends Model {
 
 		$result = $this->db->exec($query);
 
-		if(gettype($result) == 'integer') {
-			return 1;
-		} else {
-			return 0;
-		}
+		return $result;
 	}
 };
