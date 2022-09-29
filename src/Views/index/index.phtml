@@ -1,42 +1,45 @@
 <main class="conteudo_principal">
 
-  <table>
+  <form method="POST" id="form-index">
 
-    <thead>
+    <table>
 
-      <tr>
-        <td>Selecionar</td>
-      <?php foreach($this->view->atributos as $index => $valor) { ?>
-          <td>
-            <?= $valor ?>
-          </td>
-        <?php } ?>
-      </tr>    
-    </thead>
-    
-    <tbody>
-      <?php foreach($this->view->dados as $index => $valor) { ?>
+      <thead>
+
         <tr>
-          <td class="selects">
-            <input type="checkbox" class="pecas" name="pecas" value="<?= $valor->idPeca ?>">
-          </td>
-          <td>
-            <?= $valor->idPeca ?>
-          </td>
-          <td>
-            <?= $valor->nomePeca ?>
-          </td>
-          <td>
-            <?= $valor->vlrCompraPeca ?>
-          </td>
-          <td>
-            <?= $valor->caixaPeca ?>
-          </td>
-          <td>
-            <?= $valor->nomeCaixa ?>
-          </td>
-        </tr>        
-      <?php } ?>
-    </tbody>
-  </table>
+          <td>Selecionar</td>
+        <?php foreach($this->view->atributos as $index => $valor) { ?>
+            <td>
+              <?= $valor ?>
+            </td>
+          <?php } ?>
+        </tr>    
+      </thead>
+      
+      <tbody>
+        <?php foreach($this->view->dados as $index => $valor) { ?>
+          <tr>
+            <td class="selects">
+              <input type="checkbox" class="pecas" name="idPeca[]" value="<?= $valor->idPeca ?>">
+            </td>
+            <td>
+              <?= $valor->idPeca ?>
+            </td>
+            <td>
+              <?= $valor->nomePeca ?>
+            </td>
+            <td>
+              <?= $valor->vlrCompraPeca ?>
+            </td>
+            <td>
+              <?= $valor->caixaPeca ?>
+            </td>
+            <td>
+              <?= $valor->nomeCaixa ?>
+            </td>
+          </tr>        
+        <?php } ?>
+      </tbody>
+    </table>
+  </form>  
 </main>

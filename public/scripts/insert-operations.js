@@ -1,7 +1,5 @@
 $('#salvar').on('click', (e) => {
 
-    console.log('1');
-
     e.preventDefault();
 
     //VALIDAÇÃO DE CAMPOS REQUIRED----------

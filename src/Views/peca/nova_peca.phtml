@@ -32,11 +32,11 @@
 
   <div class="form-group">
 
-    <label for="caixaPeca">Caixa onde está a peça</label>
+    <label for="caixaPeca">Caixa onde está a peça *</label>
       
-    <select class="form-control" id="caixaPeca" name="caixaPeca">
+    <select class="form-control" id="caixaPeca" name="caixaPeca" required>
 
-      <option>Selecione</option>
+      <option value="">Selecione</option>
 
       <?php foreach($this->matriz_data as $key => $value) {
 

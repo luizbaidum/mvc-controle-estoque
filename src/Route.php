@@ -38,6 +38,12 @@ class Route extends Bootstrap {
 			'action' => 'novaPeca'
 		);
 
+		$routes['delete_peca'] = array(
+			'route' => '/delete_peca',
+			'controller' => 'PecaController',
+			'action' => 'deletarPeca'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

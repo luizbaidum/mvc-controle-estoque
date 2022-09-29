@@ -18,7 +18,7 @@ class PecaController extends Action {
 		$this->matrizDataToView($lista_caixas);
 
 		//conteudo da pagina, titulo da pagina, layout base
-		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-cruds');
+		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-inserts');
 	}
 
     public function novaPeca()
@@ -50,6 +50,29 @@ class PecaController extends Action {
 			$processo_finalizado = false;
 			echo $processo_finalizado;
 			echo $e->getMessage();
+		}
+	}
+
+	public function deletarPeca()
+	{
+		try {
+			$pecas_excluir = $_POST['idPeca'];
+	
+			$peca = Container::getModel('PecasDAO');
+	
+			$resultado_operacao = $peca->deletar($pecas_excluir);
+
+			if($resultado_operacao == count($pecas_excluir)) {
+				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $pecas_excluir);
+				throw new Exception('Erro ao deletar peça(s).');
+			}
+		} catch (Exception $e) {
+
+			echo json_encode($resposta);
+			$e->getMessage();
 		}
 	}
 }

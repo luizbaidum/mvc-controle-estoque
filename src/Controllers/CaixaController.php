@@ -12,7 +12,7 @@ class CaixaController extends Action {
 	public function index()
 	{	
 		//conteudo da pagina, titulo da pagina, layout base
-		$this->render('nova_caixa', 'Cadastrar nova caixa', 'layout-base-cruds');
+		$this->render('nova_caixa', 'Cadastrar nova caixa', 'layout-base-inserts');
 	}
 
     public function novaCaixa()
