@@ -7,13 +7,13 @@ $('#salvar').on('click', (e) => {
 
     let requeridos = [];
 
-    elementos.each(function(key, value) {
+    elementos.each(function(key, elemento) {
         
-        if(value.hasAttribute('required')) {
+        if(elemento.hasAttribute('required')) {
             
-            if(value.value == '' || value.value == undefined || value.value == null) {
+            if(elemento.value == '' || elemento.value == undefined || elemento.value == null) {
 
-                requeridos.push(value);
+                requeridos.push(elemento);
             }
         }
     });
