@@ -25,7 +25,6 @@ class PecaController extends Action {
 	{	
 		try {
 			$peca = Container::getModel('PecasDAO');
-			$processo_finalizado = 'processo_iniciado';
 
 			$obj = new PecasEntity();
 
@@ -36,20 +35,21 @@ class PecaController extends Action {
 			$obj->setQtdPeca($_POST['caixaPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
-			if($peca->insert($obj) == true) {
+			$resultado_operacao = $peca->insert($obj);
 
-				$processo_finalizado = true;
-				echo $processo_finalizado;
+			if($resultado_operacao == 1) {
+
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
+				echo json_encode($resposta);
 			} else {
-
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
 				throw new Exception('Erro ao lançar nova Peça. Verifique se o ID da Peça já está cadastrado.');
 			}
 
 		} catch (Exception $e) {
 
-			$processo_finalizado = false;
-			echo $processo_finalizado;
-			echo $e->getMessage();
+			echo json_encode($resposta);
+			$e->getMessage();
 		}
 	}
 
