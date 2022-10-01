@@ -14,6 +14,12 @@ class Route extends Bootstrap {
 			'action' => 'index'
 		);
 
+		$routes['todas_caixas'] = array(
+			'route' => '/todas_caixas',
+			'controller' => 'CaixaController',
+			'action' => 'exibirCaixas'
+		);
+
 		$routes['nova_caixa'] = array(
 			'route' => '/nova_caixa',
 			'controller' => 'CaixaController',

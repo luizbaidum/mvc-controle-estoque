@@ -18,3 +18,29 @@ $('#vlrCompraPeca').on('keyup', () => {
     $('#vlrCompraPeca').val(valor);
     if(valor == 'NaN') $('#vlrCompraPeca').val('');
 })
+
+$('#delCaixa').on('click', () => {
+
+    $.ajax({
+        method: "POST",
+        url: "/todas_caixas",
+        dataType: "json",
+        complete: function(response) {
+            tratarDadosArray(response);
+        }
+    })
+})
+
+function tratarDadosArray(response) {
+    dados_array = response.responseText;
+    dados_array.each((key, value) => {
+        console.log(key);
+        console.log(value);
+    })
+}
+
+function abrirModal(conteudo) {
+   
+    $('#id-modalForm').modal('show');
+    $(".modal-body").html(conteudo.responseText);
+}

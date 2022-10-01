@@ -45,4 +45,16 @@ class CaixaController extends Action {
 			$e->getMessage();
 		}
 	}
+
+	public function exibirCaixas()
+	{
+		$caixa = Container::getModel('CaixasDAO');
+
+		$caixas = $caixa->selectCaixas();
+
+		$this->view->dados = $caixas;
+		echo json_encode($this->view->dados);
+		//conteudo da pagina, titulo da pagina, layout base
+		//$this->render('todas_caixas', 'Caixas cadastradas', 'layout-base-inserts');
+	}
 }
