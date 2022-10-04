@@ -20,7 +20,7 @@ body {
   justify-content: center;
 }
 
-table, form {
+table {
   width: 100%;
   text-align: center;
 }
@@ -35,4 +35,8 @@ td {
 
 .selects {
   width: 75px;
+}
+
+#form-index {
+  width: 100%;
 }

@@ -45,4 +45,16 @@ class CaixaController extends Action {
 			$e->getMessage();
 		}
 	}
+
+	public function exibirCaixas()
+	{
+		$caixa = Container::getModel('CaixasDAO');
+
+		$caixas = $caixa->selectCaixas();
+
+		$this->view->dados = $caixas;
+
+		//página miolo (conteudo do modal), titulo da pagina
+		$this->renderModal('todas_caixas', 'Caixas cadastradas');
+	}
 }

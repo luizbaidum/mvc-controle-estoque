@@ -1,16 +1,19 @@
 $('#delPeca').click(function() {
-
-
-    //FAZER NEGOCIO Q PEGA SE NENHUM CHECKBOX ESTÁ SELECIONADO
     
-    $('#form-index').submit();
+    var dados = null;
+
+    dados = $('#form-index').serialize();
+
+    if(dados == '' || dados == null) {
+        alert('Por favor, selecione ao menos uma peça para excluir.');
+    } else {
+        $('#form-index').submit();
+    }    
 } )
 
 $('#form-index').submit((e) => {
 
     e.preventDefault();
-
-    let dados = $('#form-index').serialize();
 
     $.ajax({
         method: "POST",
