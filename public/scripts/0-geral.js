@@ -31,16 +31,17 @@ $('#delCaixa').on('click', () => {
     })
 })
 
+var conteudo_pronto = new Array();
+
 function tratarDadosArray(response) {
+
     dados_array = response.responseText;
-    dados_array.each((key, value) => {
-        console.log(key);
-        console.log(value);
-    })
+
+    abrirModal(dados_array);
 }
 
-function abrirModal(conteudo) {
-   
+function abrirModal(conteudo) 
+{
+    $(".modal-body").html(conteudo);
     $('#id-modalForm').modal('show');
-    $(".modal-body").html(conteudo.responseText);
 }

@@ -53,8 +53,8 @@ class CaixaController extends Action {
 		$caixas = $caixa->selectCaixas();
 
 		$this->view->dados = $caixas;
-		echo json_encode($this->view->dados);
-		//conteudo da pagina, titulo da pagina, layout base
-		//$this->render('todas_caixas', 'Caixas cadastradas', 'layout-base-inserts');
+
+		//página miolo (conteudo do modal), titulo da pagina
+		$this->renderModal('todas_caixas', 'Caixas cadastradas');
 	}
 }

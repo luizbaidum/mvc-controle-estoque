@@ -1,7 +1,12 @@
-<div class="container">
+<?php 
+    foreach($this->view->dados as $caixas) {
 
-    <?php 
-        echo $this->view->dados;
-    ?>
+        foreach($caixas as $index => $caixa) {
 
-</div>
+            echo '<br>';
+            echo $index;
+            echo '<br>';
+            echo $caixa;
+        }
+    }
+?>

@@ -30,6 +30,16 @@ abstract class Action {
 		}
 	}
 
+	protected function renderModal($view, $title)
+	{
+		//atributo da stdClass
+		$this->view->pagina = $view;
+
+		$this->title = $title;
+
+		$this->content();
+	}
+
 	protected function singleDataToView($single_data)
 	{	
 		$this->single_data = $single_data;
