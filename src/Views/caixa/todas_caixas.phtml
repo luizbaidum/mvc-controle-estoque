@@ -8,13 +8,13 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form action="/delete_caixa">
+<form action="/delete_caixa" method="POST">
 
     <div class="modal-body">
         <?php foreach($this->matriz_data as $caixas): ?>
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input"  name="caixa" value="<?= $caixas['idCaixa'] ?>">
-                <label class="form-check-label"><?= $caixas['nomeCaixa'] ?></label>
+                <input type="checkbox" class="form-check-input" name="caixa[]" value="<?= $caixas['idCaixa'] ?>" id="id-<?=$caixas['idCaixa']?>">
+                <label class="form-check-label" for="id-<?=$caixas['idCaixa']?>"><?= $caixas['nomeCaixa'] ?></label>
             </div>
         <?php endforeach; ?>
     </div>
