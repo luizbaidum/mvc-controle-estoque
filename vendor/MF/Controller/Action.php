@@ -30,19 +30,16 @@ abstract class Action {
 		}
 	}
 
-	protected function renderModal($view, $title)
+	protected function renderModal($view, $titulo, $buttons_type)
 	{
-		//atributo da stdClass
+		//$this->view = obj / pagina = atributo
 		$this->view->pagina = $view;
 
-		$this->title = $title;
+		$this->titulo = $titulo;
+
+		$this->view->buttons = $buttons_type;
 
 		$this->content();
-	}
-
-	protected function singleDataToView($single_data)
-	{	
-		$this->single_data = $single_data;
 	}
 
 	protected function arrayDataToView($array_data)

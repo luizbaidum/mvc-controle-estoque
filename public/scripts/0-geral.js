@@ -26,22 +26,20 @@ $('#delCaixa').on('click', () => {
         url: "/todas_caixas",
         dataType: "json",
         complete: function(response) {
-            tratarDadosArray(response);
+            tratarDados(response);
         }
     })
 })
 
-var conteudo_pronto = new Array();
+function tratarDados(response) {
 
-function tratarDadosArray(response) {
+    dados_modal = response.responseText;
 
-    dados_array = response.responseText;
-
-    abrirModal(dados_array);
+    abrirModal(dados_modal);
 }
 
 function abrirModal(conteudo) 
 {
-    $(".modal-body").html(conteudo);
-    $('#id-modalForm').modal('show');
+    $(".modal-content").html(conteudo);
+    $('#id-modal-form').modal('show');
 }

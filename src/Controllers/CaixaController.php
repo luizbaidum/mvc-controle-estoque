@@ -52,9 +52,12 @@ class CaixaController extends Action {
 
 		$caixas = $caixa->selectCaixas();
 
-		$this->view->dados = $caixas;
+		$this->title = 'Teste titulo';
 
-		//página miolo (conteudo do modal), titulo da pagina
-		$this->renderModal('todas_caixas', 'Caixas cadastradas');
+		$this->matrizDataToView($caixas);
+
+		//página miolo (conteudo do modal), titulo da pagina, tipo dos botões
+		$this->renderModal('todas_caixas', 'Lista Caixas Ativas', 'deletar');
+		//quero dar mais coisas p/ essa função pq ela tá muito simples, talvez passar o $define dos buttos aqui dentro e por sua vez os buttons acionados no base modal
 	}
 }
