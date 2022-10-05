@@ -58,6 +58,11 @@ class CaixaController extends Action {
 
 		//página miolo (conteudo do modal), titulo da pagina, tipo dos botões
 		$this->renderModal('todas_caixas', 'Lista Caixas Ativas', 'deletar');
-		//quero dar mais coisas p/ essa função pq ela tá muito simples, talvez passar o $define dos buttos aqui dentro e por sua vez os buttons acionados no base modal
+	}
+
+	public function deletarCaixa()
+	{
+		echo '<pre>';
+		print_r($_POST);
 	}
 }
