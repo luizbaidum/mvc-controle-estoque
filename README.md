@@ -20,5 +20,4 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] script de upload de imagens
 - [ ] table e tratamento p/ imagens
 - [ ] alterar alert de confirm de crud p/ modalzinho
-
-data: 26/09
+- [ ] tentar dinamizar o form submetido
