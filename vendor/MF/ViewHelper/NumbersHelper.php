@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Helpers;
+namespace MF\ViewHelper;
 
 class NumbersHelper {
 
