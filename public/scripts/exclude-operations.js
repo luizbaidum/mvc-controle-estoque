@@ -1,6 +1,6 @@
 var dados = null;
 //PEÇAS 
-$('#delPeca').click(function() {
+$('#del-peca').click(function() {
     
     dados = $('#form-index').serialize();
 

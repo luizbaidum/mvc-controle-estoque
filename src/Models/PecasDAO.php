@@ -31,9 +31,9 @@ class PecasDAO extends Model {
 
 	function deletar($pecas_excluir)
 	{
-		$idPeca = implode(" ", $pecas_excluir);
+		$id_peca = implode(" ", $pecas_excluir);
 
-		$query = "DELETE FROM `pecas` WHERE `pecas`.`idPeca` IN (".str_replace(' ', ', ', $idPeca).");";
+		$query = "DELETE FROM `pecas` WHERE `pecas`.`idPeca` IN (".str_replace(' ', ', ', $id_peca).");";
 
 		$result = $this->db->exec($query);
 

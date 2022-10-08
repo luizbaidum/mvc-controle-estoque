@@ -19,7 +19,7 @@ $('#vlrCompraPeca').on('keyup', () => {
     if(valor == 'NaN') $('#vlrCompraPeca').val('');
 })
 
-$('#delCaixa').on('click', () => {
+$('#del-caixa').on('click', () => {
 
     $.ajax({
         method: "POST",

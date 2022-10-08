@@ -19,8 +19,8 @@ class Buttons {
                             Apagar
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-apagar">
-                            <button class="dropdown-item" id="delPeca">Peça</button>
-                            <button class="dropdown-item" id="delCaixa">Caixa</button>
+                            <button class="dropdown-item" id="del-peca">Peça</button>
+                            <button class="dropdown-item" id="del-caixa">Caixa</button>
                         </div></span>',
             "editar" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-editar" data-toggle="dropdown" aria-haspopup="true">
                             Editar
