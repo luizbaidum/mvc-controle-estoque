@@ -55,8 +55,8 @@ class Buttons {
     {
         if($operacao == 'deletar') {
             $buttons_crud = [
-                "salvar" => '<button type="submit" class="btn btn-danger">Excluir selecionados</button>',
-                "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>'
+                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-exclusao">Excluir selecionados</button>',
+                "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }
             

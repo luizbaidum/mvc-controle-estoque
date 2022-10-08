@@ -8,7 +8,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form action="/delete_caixa" method="POST">
+<form id="form-del-caixas" method="POST">
 
     <div class="modal-body">
         <?php foreach($this->matriz_data as $caixas): ?>
@@ -18,11 +18,11 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <div class="modal-footer">
-        <?php
-            foreach(Buttons::buttons_modal_crud($this->view->buttons) as $button) {
-                echo $button;
-            }
-        ?>
-    </div>
-</form>
+</form>   
+<div class="modal-footer">
+    <?php
+        foreach(Buttons::buttons_modal_crud($this->view->buttons) as $button) {
+            echo $button;
+        }
+    ?>
+</div>
