@@ -5,7 +5,7 @@ namespace src\Controllers;
 use Exception;
 use MF\Controller\Action;
 use MF\Model\Container;
-use src\Helpers\NumbersHelper;
+use MF\ViewHelper\NumbersHelper;
 use src\Models\PecasEntity;
 
 class PecaController extends Action {
