@@ -1,5 +1,6 @@
+<!-- Consigo acessar o valor de uma array usando o index como variável -->
+
 <?php 
-    //Dado que vem em array
     if(isset($this->array_data) && $this->array_data != null)
-        extract($this->array_data);   
+        extract($this->array_data);
 ?>

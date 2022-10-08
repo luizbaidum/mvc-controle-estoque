@@ -50,6 +50,12 @@ class Route extends Bootstrap {
 			'action' => 'deletarPeca'
 		);
 
+		$routes['delete_caixa'] = array(
+			'route' => '/delete_caixa',
+			'controller' => 'CaixaController',
+			'action' => 'deletarCaixa'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

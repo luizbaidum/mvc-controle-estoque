@@ -4,7 +4,8 @@ namespace MF\ViewHelper;
 
 class Buttons {
 
-    public static function buttonsMenu() {
+    public static function buttonsMenu() 
+    {
         $buttons_menu = [
             "novo" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-novo" data-toggle="dropdown" aria-haspopup="true">
                         Novo
@@ -18,8 +19,8 @@ class Buttons {
                             Apagar
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-apagar">
-                            <button class="dropdown-item" id="delPeca">Peça</button>
-                            <button class="dropdown-item" id="delCaixa">Caixa</button>
+                            <button class="dropdown-item" id="del-peca">Peça</button>
+                            <button class="dropdown-item" id="del-caixa">Caixa</button>
                         </div></span>',
             "editar" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-editar" data-toggle="dropdown" aria-haspopup="true">
                             Editar
@@ -33,7 +34,8 @@ class Buttons {
         return $buttons_menu;
     }
 
-    public static function buttonsCrud() {
+    public static function buttonsCrud() 
+    {
         $buttons_crud = [
             "salvar" => '<button id="salvar" type="submit" class="buttons_crud">Salvar</button>',
 			"cancelar" => '<button id="cancelar" class="buttons_crud">Cancelar/Voltar</button>',
@@ -43,8 +45,21 @@ class Buttons {
     }
 
     //confirmar como faz ordenação
-    public static function ordenar($option_ordenacao) {
+    public static function ordenar($option_ordenacao) 
+    {
         $buttons_ordenar = '<button type="button" class="dropdown-item" id="'.$option_ordenacao.'" name="'.$option_ordenacao.'" value="'.$option_ordenacao.'">'.$option_ordenacao.'</button>';
         return $buttons_ordenar;
+    }
+
+    public static function buttons_modal_crud($operacao) 
+    {
+        if($operacao == 'deletar') {
+            $buttons_crud = [
+                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-exclusao">Excluir selecionados</button>',
+                "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
+            ];
+        }
+            
+        return $buttons_crud;
     }
 }

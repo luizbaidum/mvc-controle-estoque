@@ -1,12 +1,28 @@
-<?php 
-    foreach($this->view->dados as $caixas) {
+<?php use MF\ViewHelper\Buttons; ?>
 
-        foreach($caixas as $index => $caixa) {
+<div class="modal-header">
 
-            echo '<br>';
-            echo $index;
-            echo '<br>';
-            echo $caixa;
+    <h5 class="modal-title"><?= $this->titulo ?></h5>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form id="form-del-caixas" method="POST">
+
+    <div class="modal-body">
+        <?php foreach($this->matriz_data as $caixas): ?>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="caixa[]" value="<?= $caixas['idCaixa'] ?>" id="id-<?=$caixas['idCaixa']?>">
+                <label class="form-check-label" for="id-<?=$caixas['idCaixa']?>"><?= $caixas['nomeCaixa'] ?></label>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</form>   
+<div class="modal-footer">
+    <?php
+        foreach(Buttons::buttons_modal_crud($this->view->buttons) as $button) {
+            echo $button;
         }
-    }
-?>
+    ?>
+</div>

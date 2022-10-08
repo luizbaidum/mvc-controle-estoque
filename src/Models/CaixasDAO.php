@@ -23,4 +23,15 @@ class CaixasDAO extends Model {
 
 		return $result;
 	}
+
+	function deletar($caixas_excluir)
+	{
+		$id_caixa = implode(" ", $caixas_excluir);
+
+		$query = "DELETE FROM `caixas` WHERE `caixas`.`idCaixa` IN (".str_replace(' ', ', ', $id_caixa).");";
+
+		$result = $this->db->exec($query);
+
+		return $result;
+	}
 }
