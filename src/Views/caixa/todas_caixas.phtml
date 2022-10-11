@@ -8,7 +8,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form id="form-del-caixas" method="POST">
+<form id="<?='form-'.$this->view->operacao.'-caixas'?>" method="POST">
 
     <div class="modal-body">
         <?php foreach($this->matriz_data as $caixas): ?>

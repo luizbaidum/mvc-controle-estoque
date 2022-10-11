@@ -48,16 +48,17 @@ class CaixaController extends Action {
 
 	public function exibirCaixas()
 	{
+
+		$operacao = lcfirst($_GET['operacao']);
+
 		$caixa = Container::getModel('CaixasDAO');
 
 		$caixas = $caixa->selectCaixas();
 
-		$this->title = 'Teste titulo';
-
 		$this->matrizDataToView($caixas);
 
 		//página miolo (conteudo do modal), titulo da pagina, tipo dos botões
-		$this->renderModal('todas_caixas', 'Lista Caixas Ativas', 'deletar');
+		$this->renderModal('todas_caixas', 'Lista Caixas Ativas', $operacao);
 	}
 
 	public function deletarCaixa()

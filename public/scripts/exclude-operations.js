@@ -34,20 +34,18 @@ $('#form-index').submit((e) => {
 })
 
 //CAIXAS
-$(document).on('click', '#salvar-exclusao', () => {
+$(document).on('click', '#salvar-apagar', () => {
 
-    dados = $('#form-del-caixas').serialize();
-
-    console.log(dados);
+    dados = $('#form-apagar-caixas').serialize();
 
     if(dados == '' || dados == null) {
         alert('Por favor, selecione ao menos uma caixa para excluir.');
     } else {
-        $('#form-del-caixas').submit();
+        $('#form-apagar-caixas').submit();
     } 
 })
 
-$(document).on('submit', '#form-del-caixas', (e) => {
+$(document).on('submit', '#form-apagar-caixas', (e) => {
     
     e.preventDefault();
 
