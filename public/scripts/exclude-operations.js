@@ -1,4 +1,3 @@
-var dados = null;
 //PEÇAS 
 $('#del-peca').click(function() {
     

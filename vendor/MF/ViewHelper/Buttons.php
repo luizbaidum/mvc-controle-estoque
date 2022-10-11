@@ -18,12 +18,12 @@ class Buttons {
             "apagar" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-apagar" data-toggle="dropdown" aria-haspopup="true">Apagar</button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-apagar">
                             <button class="dropdown-item" id="del-peca">Peça</button>
-                            <button class="dropdown-item" id="listar-caixas">Caixa</button>
+                            <button class="dropdown-item listar-caixas">Caixa</button>
                         </div></span>',
             "editar" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-editar" data-toggle="dropdown" aria-haspopup="true">Editar</button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-editar">
                             <button class="dropdown-item" id="edit-peca">Peça</button>
-                            <button class="dropdown-item" id="listar-caixas">Caixa</button>
+                            <button class="dropdown-item listar-caixas">Caixa</button>
                         </div></span>',
         ];
         return $buttons_menu;
@@ -50,14 +50,14 @@ class Buttons {
     {
         if($operacao == 'apagar') {
             $buttons_crud = [
-                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-apagar">Excluir selecionados</button>',
+                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-apagar">Excluir selecionadas</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }
 
         if($operacao == 'editar') {
             $buttons_crud = [
-                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-editar">Excluir selecionados</button>',
+                "salvar" => '<button type="button" class="btn btn-info" id="salvar-editar">Editar selecionada</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }

@@ -83,4 +83,33 @@ class CaixaController extends Action {
 			$e->getMessage();
 		}
 	}
+
+	public function editarCaixa()
+	{
+		try {
+			$id_caixa = $_POST['caixa'][0];
+	
+			$caixa = Container::getModel('CaixasDAO');
+
+			$caixa_editar = $caixa->selectCaixa($id_caixa);
+
+			$this->arrayDataToView($caixa_editar[0]);
+
+			$this->render('editar_caixa', 'Editar caixa ID '. $id_caixa, 'layout-base-inserts');
+	
+			//$resultado_operacao = $caixa->deletar($caixas_excluir);
+
+			/*if($resultado_operacao == count($caixas_excluir)) {
+				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $caixas_excluir);
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $caixas_excluir);
+				throw new Exception('Erro ao deletar peça(s).');
+			}*/
+		} catch (Exception $e) {
+
+			//echo json_encode($resposta);
+			$e->getMessage();
+		}
+	}
 }

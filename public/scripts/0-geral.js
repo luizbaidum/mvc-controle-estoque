@@ -1,3 +1,5 @@
+var dados = null;
+/****************************************************/
 $('#cancelar').on('click', () => {
 
     window.location.replace("/");
@@ -19,7 +21,7 @@ $('#vlrCompraPeca').on('keyup', () => {
     if(valor == 'NaN') $('#vlrCompraPeca').val('');
 })
 /****************************************************/
-$('#listar-caixas').on('click', (e) => {
+$('.listar-caixas').on('click', (e) => {
 
     //operação p/ capturar o innerText do botão que o usuário clica e transformar isso no modal que se quer abrir
     let pai = e.target.parentElement.parentElement.innerText;
