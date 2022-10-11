@@ -10,7 +10,7 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 > Objetivos e ideias p/ o sistema:
 - [x] CRUD peças e caixas
 - [x] registro data/hora de insert e update
-- [ ] pesquisa e oedenação
+- [ ] pesquisa e ordenação
 - [ ] busca sql por keydown ao digitar nome de nova peça
 - [ ] CRUD de clientes (nome, carro, km)
 - [ ] valor financeiro do estoque
@@ -21,3 +21,5 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] table e tratamento p/ imagens
 - [ ] alterar alert de confirm de crud p/ modalzinho
 - [ ] tentar dinamizar o form submetido
+- [ ] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
+- [ ] coluna qtd de peças.
