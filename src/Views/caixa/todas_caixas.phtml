@@ -8,7 +8,9 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form id="<?='form-'.$this->view->operacao.'-caixas'?>" method="POST">
+<form id="form-todas-caixas" method="POST">
+
+    <input type="hidden" id="operacao" name="operacao" value="<?= $this->view->operacao ?>">
 
     <div class="modal-body">
         <?php foreach($this->matriz_data as $caixas): ?>
@@ -27,7 +29,7 @@
 </form>   
 <div class="modal-footer">
     <?php
-        foreach(Buttons::buttons_modal_crud($this->view->buttons) as $button) {
+        foreach(Buttons::buttons_modal_crud($this->view->operacao) as $button) {
             echo $button;
         }
     ?>

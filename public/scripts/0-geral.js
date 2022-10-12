@@ -2,7 +2,7 @@ var dados = null;
 /****************************************************/
 $('#cancelar').on('click', () => {
 
-    window.location.replace("/");
+    window.location.href = "/";
 })
 /****************************************************/
 //Formata valores para br_R$
@@ -38,12 +38,12 @@ $('.listar-caixas').on('click', (e) => {
         dataType: "json",
         data: {operacao: operacao},
         complete: function(response) {
-            tratarDados(response);
+            tratarDadosModal(response);
         }
     })
 })
-
-function tratarDados(response) 
+/****************************************************/
+function tratarDadosModal(response) 
 {
     dados_modal = response.responseText;
     abrirModal(dados_modal);
@@ -53,5 +53,16 @@ function abrirModal(conteudo)
 {
     $(".modal-content").html(conteudo);
     $('#id-modal-form').modal('show');
+}
+
+function tratarDadosPagina(response)
+{
+    dados_pagina = response.responseText;
+    carregarPagina(dados_pagina);
+}
+
+function carregarPagina(conteudo) 
+{
+    $('body').html(conteudo)
 }
 /****************************************************/

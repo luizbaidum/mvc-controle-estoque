@@ -57,7 +57,7 @@ class Buttons {
 
         if($operacao == 'editar') {
             $buttons_crud = [
-                "salvar" => '<button type="button" class="btn btn-info" id="salvar-editar">Editar selecionada</button>',
+                "salvar" => '<button type="button" class="btn btn-info" id="ir-editar">Editar selecionada</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }

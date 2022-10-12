@@ -37,8 +37,6 @@ abstract class Action {
 
 		$this->titulo = $titulo;
 
-		$this->view->buttons = $operacao;
-
 		$this->view->operacao = $operacao;
 
 		$this->content();

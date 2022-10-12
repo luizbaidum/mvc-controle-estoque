@@ -64,4 +64,9 @@ $('#salvar').on('click', (e) => {
             }
         })
     } 
+
+    if($('#operation').val() == 'editar_caixa') {
+        console.log('ain kkk')
+        //colocar o click em outro JS e separar por funcao os inserts e edits
+    }
 })

@@ -1,35 +1,54 @@
 //CAIXAS
-$(document).on('click', '#salvar-editar', () => {
+$(document).on('click', '#ir-editar', () => {
+        
+    dados = $('#form-todas-caixas').serialize();
 
-    dados = $('#form-editar-caixas').serialize();
-
-    if(dados == '' || dados == null) {
+    if(dados.indexOf("caixa") <= 0) {
         alert('Por favor, selecione ao menos uma caixa para editar.');
     } else {
-        $('#form-editar-caixas').submit();
-    } 
+        $('#form-todas-caixas').submit();
+    }   
 })
 
-$(document).on('submit', '#form-editar-caixas', (e) => {
-    
+$(document).on('submit', '#form-todas-caixas', (e) => {
+
     e.preventDefault();
+
+    if($('#operacao').val() == 'editar') {
 
     $.ajax({
         method: "POST",
-        url: "/editar_caixa",
+        url: "/prepara_caixa",
         dataType: "json",
         data: dados,
-        //success: /function(response) {
-            /*if(response.resultado_operacao == true) {
-
-                alert('Caixa(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
-                window.location.href = "/";
-            } else {
-
-                alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
-            }
+        complete: function(response) {
+            tratarDadosPagina(response)
         }
-    */ });
+        });
+    }      
 });
 
-//atenção: a pagina q exibe as infos da caixa é uma coisa e a function q edita a caixa no bd é outra coisa. arrumar isso
+//EDITAR CAIXA----------------------------
+$('#salvar').on('click', (e) => {
+
+    if($('#operation').val() == 'editar_caixa') {
+
+        console.log('aqui porra')
+
+        /*$.ajax({
+            method: "POST",
+            url: "nova_caixa/insert",
+            dataType: "json",
+            data: dados,
+            success: function(response) {
+                if(response.resultado_operacao == true) {
+
+                    alert("Caixa ID " + response.id_operacao + " inserida com sucesso!");
+                    $('form')[0].reset();
+                } else {
+                    alert("Erro no processo de inserir Caixa ID " + response.id_operacao + ". Verifique se este ID já está cadastrado.");
+                }
+            }
+        })*/
+    };
+})

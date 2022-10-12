@@ -84,7 +84,7 @@ class CaixaController extends Action {
 		}
 	}
 
-	public function editarCaixa()
+	public function preparaCaixa()
 	{
 		try {
 			$id_caixa = $_POST['caixa'][0];
@@ -97,18 +97,10 @@ class CaixaController extends Action {
 
 			$this->render('editar_caixa', 'Editar caixa ID '. $id_caixa, 'layout-base-inserts');
 	
-			//$resultado_operacao = $caixa->deletar($caixas_excluir);
-
-			/*if($resultado_operacao == count($caixas_excluir)) {
-				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $caixas_excluir);
-				echo json_encode($resposta);
-			} else {
-				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $caixas_excluir);
-				throw new Exception('Erro ao deletar peça(s).');
-			}*/
+			if(!$caixa_editar) {
+				throw new Exception('Erro ao deletar caixa(s).');
+			} 
 		} catch (Exception $e) {
-
-			//echo json_encode($resposta);
 			$e->getMessage();
 		}
 	}
