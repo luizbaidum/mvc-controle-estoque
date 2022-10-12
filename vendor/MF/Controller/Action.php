@@ -30,14 +30,14 @@ abstract class Action {
 		}
 	}
 
-	protected function renderModal($view, $titulo, $buttons_type)
+	protected function renderModal($view, $titulo, $operacao)
 	{
 		//$this->view = obj / pagina = atributo
 		$this->view->pagina = $view;
 
 		$this->titulo = $titulo;
 
-		$this->view->buttons = $buttons_type;
+		$this->view->operacao = $operacao;
 
 		$this->content();
 	}

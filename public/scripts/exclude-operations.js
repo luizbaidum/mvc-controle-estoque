@@ -1,4 +1,3 @@
-var dados = null;
 //PEÇAS 
 $('#del-peca').click(function() {
     
@@ -32,39 +31,39 @@ $('#form-index').submit((e) => {
         }
     })
 })
-
 //CAIXAS
-$(document).on('click', '#salvar-exclusao', () => {
+$(document).on('click', '#salvar-apagar', () => {
 
-    dados = $('#form-del-caixas').serialize();
+    dados = $('#form-todas-caixas').serialize();
 
-    console.log(dados);
-
-    if(dados == '' || dados == null) {
-        alert('Por favor, selecione ao menos uma caixa para excluir.');
+    if(dados.indexOf("caixa") <= 0) {
+        alert('Por favor, selecione ao menos uma caixa para apagar.');
     } else {
-        $('#form-del-caixas').submit();
-    } 
+        $('#form-todas-caixas').submit();
+    }
 })
 
-$(document).on('submit', '#form-del-caixas', (e) => {
-    
+$(document).on('submit', '#form-todas-caixas', (e) => {
+
     e.preventDefault();
 
-    $.ajax({
-        method: "POST",
-        url: "/delete_caixa",
-        dataType: "json",
-        data: dados,
-        success: function(response) {
-            if(response.resultado_operacao == true) {
+    if($('#operacao').val() == 'apagar') {
 
-                alert('Caixa(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
-                window.location.href = "/";
-            } else {
-
-                alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+        $.ajax({
+            method: "POST",
+            url: "/delete_caixa",
+            dataType: "json",
+            data: dados,
+            success: function(response) {
+                if(response.resultado_operacao == true) {
+                    
+                    alert('Caixa(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
+                    window.location.href = "/";
+                } else {
+    
+                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+                }
             }
-        }
-    });
+        });
+    }
 });

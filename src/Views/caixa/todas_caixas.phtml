@@ -8,12 +8,20 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form id="form-del-caixas" method="POST">
+<form id="form-todas-caixas" method="POST">
+
+    <input type="hidden" id="operacao" name="operacao" value="<?= $this->view->operacao ?>">
 
     <div class="modal-body">
         <?php foreach($this->matriz_data as $caixas): ?>
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" name="caixa[]" value="<?= $caixas['idCaixa'] ?>" id="id-<?=$caixas['idCaixa']?>">
+
+                <?php if($this->view->operacao == 'apagar') {
+                        $tipo = 'checkbox'; 
+                    } else {
+                        $tipo = 'radio'; } ?>
+
+                <input type="<?=$tipo?>" class="form-check-input" name="caixa[]" value="<?= $caixas['idCaixa'] ?>" id="id-<?=$caixas['idCaixa']?>">
                 <label class="form-check-label" for="id-<?=$caixas['idCaixa']?>"><?= $caixas['nomeCaixa'] ?></label>
             </div>
         <?php endforeach; ?>
@@ -21,7 +29,7 @@
 </form>   
 <div class="modal-footer">
     <?php
-        foreach(Buttons::buttons_modal_crud($this->view->buttons) as $button) {
+        foreach(Buttons::buttons_modal_crud($this->view->operacao) as $button) {
             echo $button;
         }
     ?>

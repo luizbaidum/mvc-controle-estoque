@@ -15,6 +15,15 @@ class CaixasDAO extends Model {
 		return $result;
 	}
 
+	function selectCaixa($id)
+	{
+		$query = "SELECT `idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa` FROM `caixas` WHERE `idCaixa` = $id";
+
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+
+		return $result;
+	}
+
 	function selectCaixas()
 	{
 		$query = "SELECT `idCaixa`, `nomeCaixa` FROM `caixas`";
@@ -32,6 +41,15 @@ class CaixasDAO extends Model {
 
 		$result = $this->db->exec($query);
 
+		return $result;
+	}
+
+	function editar($obj)
+	{
+		$query = "UPDATE `caixas` SET `idCaixa` = ".$obj->getIdCaixa().", `nomeCaixa` = '".$obj->getNomeCaixa()."', `corCaixa` = '".$obj->getCorCaixa()."', `descricaoCaixa` = '".$obj->getDescricaoCaixa()."', `dataHora` = '".$this->getTime()."' WHERE `idCaixa` = ".$obj->getOldId()."";
+
+		$result = $this->db->exec($query);
+		
 		return $result;
 	}
 }
