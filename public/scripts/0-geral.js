@@ -1,5 +1,42 @@
 var dados = null;
 /****************************************************/
+$('#salvar').on('click', (e) => {
+
+    e.preventDefault();
+
+    //VALIDAÇÃO DE CAMPOS REQUIRED----------
+    let elementos = $('form').find('*');
+
+    let requeridos = [];
+
+    elementos.each(function(key, elemento) {
+        
+        if(elemento.hasAttribute('required')) {
+            
+            if(elemento.value == '' || elemento.value == undefined || elemento.value == null) {
+
+                requeridos.push(elemento);
+            }
+        }
+    });
+
+    if(requeridos.length>0) {
+
+        alert('Existem campos obrigatórios NÃO preenchidos.');
+        return;
+    }    
+
+    let dados = $('form').serialize();
+
+    if($('#operation').val() == 'nova_caixa') {
+        novaCaixa(dados);
+    } else if ($('#operation').val() == 'nova_peca') {
+        novaPeca(dados);
+    } else if($('#operation').val() == 'editar_caixa') {
+        editarCaixa(dados);
+    }
+})    
+/****************************************************/
 $('#cancelar').on('click', () => {
 
     window.location.href = "/";

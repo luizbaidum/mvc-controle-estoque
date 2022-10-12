@@ -28,27 +28,21 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
     }      
 });
 
-//EDITAR CAIXA----------------------------
-$('#salvar').on('click', (e) => {
+function editarCaixa(dados)
+{
+    $.ajax({
+        method: "POST",
+        url: "/editar_caixa",
+        dataType: "json",
+        data: dados,
+        success: function(response) {
+            if(response.resultado_operacao == true) {
 
-    if($('#operation').val() == 'editar_caixa') {
-
-        console.log('aqui porra')
-
-        /*$.ajax({
-            method: "POST",
-            url: "nova_caixa/insert",
-            dataType: "json",
-            data: dados,
-            success: function(response) {
-                if(response.resultado_operacao == true) {
-
-                    alert("Caixa ID " + response.id_operacao + " inserida com sucesso!");
-                    $('form')[0].reset();
-                } else {
-                    alert("Erro no processo de inserir Caixa ID " + response.id_operacao + ". Verifique se este ID já está cadastrado.");
-                }
+                alert("Caixa ID " + response.id_operacao + " editada com sucesso!");
+                window.location.href = "/";
+            } else {
+                alert("Erro no processo de editar Caixa ID " + response.id_operacao + ".");
             }
-        })*/
-    };
-})
+        }
+    })
+}

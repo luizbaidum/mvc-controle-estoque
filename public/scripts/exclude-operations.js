@@ -31,7 +31,6 @@ $('#form-index').submit((e) => {
         }
     })
 })
-
 //CAIXAS
 $(document).on('click', '#salvar-apagar', () => {
 

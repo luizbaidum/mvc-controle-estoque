@@ -84,7 +84,7 @@ class CaixaController extends Action {
 		}
 	}
 
-	public function preparaCaixa()
+	public function prepararCaixa()
 	{
 		try {
 			$id_caixa = $_POST['caixa'][0];
@@ -101,6 +101,40 @@ class CaixaController extends Action {
 				throw new Exception('Erro ao deletar caixa(s).');
 			} 
 		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+
+	public function editarCaixa()
+	{	
+		try {
+			$caixa = Container::getModel('CaixasDAO');
+
+			$obj = new CaixasEntity();
+
+			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
+			$obj->setIdCaixa($_POST['idCaixa']);
+			$obj->setNomeCaixa($_POST['nomeCaixa']);
+			$obj->setCorCaixa($_POST['corCaixa']);
+			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
+			$obj->setOldId($_POST['oldId']);
+
+			$resultado_operacao = $caixa->editar($obj);
+
+			if($resultado_operacao == 1) {
+
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdCaixa());
+				throw new Exception('Erro ao editar Caixa.');
+			}
+
+			//fazer checar se ID da caixa está em uso, se sim, não pode editar o id.
+
+		} catch (Exception $e) {
+
+			//echo json_encode($resposta);
 			$e->getMessage();
 		}
 	}

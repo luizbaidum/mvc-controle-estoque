@@ -8,6 +8,7 @@
         protected $nomeCaixa;
         protected $corCaixa;
         protected $descricaoCaixa;
+        protected $oldId;
 
         /**
          * Get the value of idCaixa
@@ -85,6 +86,26 @@
         public function setDescricaoCaixa($descricaoCaixa)
         {
                 $this->descricaoCaixa = $descricaoCaixa;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of oldId
+         */ 
+        public function getOldId()
+        {
+                return $this->oldId;
+        }
+
+        /**
+         * Set the value of oldId
+         *
+         * @return  self
+         */ 
+        public function setOldId($oldId)
+        {
+                $this->oldId = $oldId;
 
                 return $this;
         }
