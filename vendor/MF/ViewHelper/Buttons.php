@@ -57,7 +57,14 @@ class Buttons {
 
         if($operacao == 'editar') {
             $buttons_crud = [
-                "salvar" => '<button type="button" class="btn btn-info" id="ir-editar">Editar selecionada</button>',
+                "salvar" => '<button type="button" class="btn btn-info" id="preparar-editar">Editar selecionada</button>',
+                "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
+            ];
+        }
+
+        if($operacao == 'confirmar-editar') {
+            $buttons_crud = [
+                "salvar" => '<button type="button" class="btn btn-danger" id="salvar">Confirmar edição</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }

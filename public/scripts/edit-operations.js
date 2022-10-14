@@ -1,5 +1,5 @@
 //CAIXAS
-$(document).on('click', '#ir-editar', () => {
+$(document).on('click', '#preparar-editar', () => {
         
     dados = $('#form-todas-caixas').serialize();
 
@@ -18,11 +18,11 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
 
     $.ajax({
         method: "POST",
-        url: "/prepara_caixa",
+        url: "/preparar_caixa",
         dataType: "json",
         data: dados,
         complete: function(response) {
-            tratarDadosPagina(response)
+            tratarDadosModal(response)
         }
         });
     }      

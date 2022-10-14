@@ -39,4 +39,16 @@ class PecasDAO extends Model {
 
 		return $result;
 	}
+
+	function vericarCaixaEmUso($id_caixa)
+	{
+		$query = 'SELECT `idPeca` FROM `pecas` WHERE `caixaPeca` = '.$id_caixa.'';
+
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);;
+
+		if($result)
+			return true;
+		else
+			return false;
+	}
 };

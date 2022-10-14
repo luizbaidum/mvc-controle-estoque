@@ -6,6 +6,7 @@ use Exception;
 use MF\Controller\Action;
 use MF\Model\Container;
 use src\Models\CaixasEntity;
+use src\Models\PecasDAO;
 
 class CaixaController extends Action {
 
@@ -46,9 +47,8 @@ class CaixaController extends Action {
 		}
 	}
 
-	public function exibirCaixas()
+	public function todasCaixas()
 	{
-
 		$operacao = lcfirst($_GET['operacao']);
 
 		$caixa = Container::getModel('CaixasDAO');
@@ -86,6 +86,10 @@ class CaixaController extends Action {
 
 	public function prepararCaixa()
 	{
+		$peca = Container::getModel('PecasDAO');
+
+		$operacao = 'confirmar-editar';
+
 		try {
 			$id_caixa = $_POST['caixa'][0];
 	
@@ -93,9 +97,12 @@ class CaixaController extends Action {
 
 			$caixa_editar = $caixa->selectCaixa($id_caixa);
 
+			$this->view->disabled = false;
+			if($peca->vericarCaixaEmUso($id_caixa)) $this->view->disabled = true;
+
 			$this->arrayDataToView($caixa_editar[0]);
 
-			$this->render('editar_caixa', 'Editar caixa ID '. $id_caixa, 'layout-base-inserts');
+			$this->renderModal('editar_caixa', 'Editar caixa ID '. $id_caixa, $operacao);
 	
 			if(!$caixa_editar) {
 				throw new Exception('Erro ao deletar caixa(s).');
@@ -112,8 +119,9 @@ class CaixaController extends Action {
 
 			$obj = new CaixasEntity();
 
-			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
-			$obj->setIdCaixa($_POST['idCaixa']);
+			$id_caixa = $_POST['idCaixa'] ?? $_POST['oldId'];
+
+			$obj->setIdCaixa($id_caixa);
 			$obj->setNomeCaixa($_POST['nomeCaixa']);
 			$obj->setCorCaixa($_POST['corCaixa']);
 			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
@@ -130,11 +138,9 @@ class CaixaController extends Action {
 				throw new Exception('Erro ao editar Caixa.');
 			}
 
-			//fazer checar se ID da caixa está em uso, se sim, não pode editar o id.
-
 		} catch (Exception $e) {
 
-			//echo json_encode($resposta);
+			echo json_encode($resposta);
 			$e->getMessage();
 		}
 	}
