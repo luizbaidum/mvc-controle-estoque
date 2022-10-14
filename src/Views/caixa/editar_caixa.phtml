@@ -7,7 +7,15 @@
 
     <label for="idCaixa">ID da caixa* (apenas números)</label>
 
-    <input type="number" class="form-control" id="idCaixa" name="idCaixa" value="<?= $idCaixa ?>" required>
+    <input 
+      type="number" 
+      class="form-control" 
+      id="idCaixa" 
+      name="idCaixa" 
+      value="<?= $idCaixa ?>" 
+      required
+      <?php if($this->view->disabled) echo 'disabled' ?>
+    >
   </div>
 
   <div class="form-group">
