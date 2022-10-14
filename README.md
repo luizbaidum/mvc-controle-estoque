@@ -23,3 +23,4 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] tentar dinamizar o form submetido
 - [ ] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
 - [ ] coluna qtd de peças.
+- [ ] repassar codigo e buscar mais padronização
