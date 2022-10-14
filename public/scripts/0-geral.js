@@ -1,6 +1,6 @@
 var dados = null;
 /****************************************************/
-$('#salvar').on('click', (e) => {
+$(document).on('click', '#salvar', (e) => {
 
     e.preventDefault();
 
@@ -34,6 +34,8 @@ $('#salvar').on('click', (e) => {
         novaPeca(dados);
     } else if($('#operation').val() == 'editar_caixa') {
         editarCaixa(dados);
+    } else if($('#operation').val() == 'apagar_caixa') {
+        apagarCaixa(dados);
     }
 })    
 /****************************************************/
@@ -100,6 +102,6 @@ function tratarDadosPagina(response)
 
 function carregarPagina(conteudo) 
 {
-    $('body').html(conteudo)
+    $('body').html(conteudo);
 }
 /****************************************************/

@@ -47,9 +47,8 @@ class CaixaController extends Action {
 		}
 	}
 
-	public function exibirCaixas()
+	public function todasCaixas()
 	{
-
 		$operacao = lcfirst($_GET['operacao']);
 
 		$caixa = Container::getModel('CaixasDAO');
@@ -89,6 +88,8 @@ class CaixaController extends Action {
 	{
 		$peca = Container::getModel('PecasDAO');
 
+		$operacao = 'confirmar-editar';
+
 		try {
 			$id_caixa = $_POST['caixa'][0];
 	
@@ -97,12 +98,11 @@ class CaixaController extends Action {
 			$caixa_editar = $caixa->selectCaixa($id_caixa);
 
 			$this->view->disabled = false;
-
 			if($peca->vericarCaixaEmUso($id_caixa)) $this->view->disabled = true;
 
 			$this->arrayDataToView($caixa_editar[0]);
 
-			$this->render('editar_caixa', 'Editar caixa ID '. $id_caixa, 'layout-base-inserts');
+			$this->renderModal('editar_caixa', 'Editar caixa ID '. $id_caixa, $operacao);
 	
 			if(!$caixa_editar) {
 				throw new Exception('Erro ao deletar caixa(s).');
@@ -119,7 +119,9 @@ class CaixaController extends Action {
 
 			$obj = new CaixasEntity();
 
-			$obj->setIdCaixa($_POST['idCaixa']);
+			$id_caixa = $_POST['idCaixa'] ?? $_POST['oldId'];
+
+			$obj->setIdCaixa($id_caixa);
 			$obj->setNomeCaixa($_POST['nomeCaixa']);
 			$obj->setCorCaixa($_POST['corCaixa']);
 			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);

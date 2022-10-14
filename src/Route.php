@@ -17,7 +17,7 @@ class Route extends Bootstrap {
 		$routes['todas_caixas'] = array(
 			'route' => '/todas_caixas',
 			'controller' => 'CaixaController',
-			'action' => 'exibirCaixas'
+			'action' => 'todasCaixas'
 		);
 
 		$routes['nova_caixa'] = array(
@@ -56,8 +56,8 @@ class Route extends Bootstrap {
 			'action' => 'deletarCaixa'
 		);
 
-		$routes['prepara_caixa'] = array(
-			'route' => '/prepara_caixa',
+		$routes['preparar_caixa'] = array(
+			'route' => '/preparar_caixa',
 			'controller' => 'CaixaController',
 			'action' => 'prepararCaixa'
 		);
