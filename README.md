@@ -12,7 +12,6 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [x] registro data/hora de insert e update
 - [ ] pesquisa e ordenação
 - [ ] busca sql por keydown ao digitar nome de nova peça
-- [ ] CRUD de clientes (nome, carro, km)
 - [ ] valor financeiro do estoque
 - [ ] registro do valor cobrado pela peça
 - [ ] registro de NF da peça (data, cnpj)
