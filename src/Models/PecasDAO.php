@@ -7,7 +7,7 @@ use MF\Model\Model;
 class PecasDAO extends Model {
 
 	//não pode ter espaço para não complicar as tags do button 'Ordenar'
-	public $select = 'idPeca,nomePeca,vlrCompraPeca,caixaPeca';
+	public $select = 'idPeca,nomePeca,vlrCompraPeca,qtdPeca,caixaPeca';
 
 	private $join = 'caixas.nomeCaixa';
 

@@ -32,7 +32,7 @@ class PecaController extends Action {
 			$obj->setIdPeca($_POST['idPeca']);
 			$obj->setNomePeca($_POST['nomePeca']);
 			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
-			$obj->setQtdPeca($_POST['caixaPeca']);
+			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
 			$resultado_operacao = $peca->insert($obj);
