@@ -32,8 +32,8 @@ class Buttons {
     public static function buttonsCrud() 
     {
         $buttons_crud = [
-            "salvar" => '<button id="salvar" type="submit" class="buttons_crud">Salvar</button>',
-			"cancelar" => '<button id="cancelar" class="buttons_crud">Cancelar/Voltar</button>',
+            "salvar" => '<button id="salvar" type="button" class="buttons_crud">Salvar</button>',
+			"cancelar" => '<button id="cancelar" class="buttons_crud" type="button">Cancelar/Voltar</button>',
         ];
         return $buttons_crud;
     }

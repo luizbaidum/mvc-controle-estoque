@@ -21,15 +21,14 @@
 			
 			    <?= $this->content(); ?>
 
-                <div class="menu_index"> 
-                    <span>
-                        <?php
-                            foreach(Buttons::buttonsCrud() as $button) {
-                                echo $button;
-                            }
-                        ?>
-                    </span>               
-                </form><!--form aberto no content() e fechado aqui-->
+			<div class="menu_index"> 
+				<span>
+					<?php
+						foreach(Buttons::buttonsCrud() as $button) {
+							echo $button;
+						}
+					?>
+				</span>               
 			</div>
 		</div>
 
