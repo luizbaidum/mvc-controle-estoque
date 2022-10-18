@@ -108,3 +108,12 @@ function carregarPagina(conteudo)
     $('body').html(conteudo);
 }
 /****************************************************/
+$('#form-pesquisar').on('submit', (e) => {
+    e.preventDefault();
+    dados = $('#form-pesquisar').serialize();
+    console.log(dados);
+})
+
+$('#sair-pesquisar').on('click', () => {
+    window.location.href = "/";
+})
