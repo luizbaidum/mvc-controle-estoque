@@ -1,4 +1,4 @@
-<form method="post" action="/editar_peca/editar">
+<form method="post">
 
   <div class="form-group">
 
@@ -6,28 +6,28 @@
 
     <label for="idPeca">ID da peça* (apenas números)</label>
 
-    <input type="number" class="form-control" id="idPeca" name="idPeca" required>
+    <input type="number" class="form-control" id="idPeca" name="idPeca" value="<?= $idPeca ?>" required>
   </div>
 
   <div class="form-group">
 
     <label for="nomePeca">Nome da peça* (números/letras)</label>
 
-    <input type="text" class="form-control" id="nomePeca" name="nomePeca" required>
+    <input type="text" class="form-control" id="nomePeca" name="nomePeca" value="<?= $nomePeca ?>" required>
   </div>
 
   <div class="form-group">
 
     <label for="vlrCompraPeca">Valor pago pela peça* (apenas números)</label>
 
-    <input type="text" class="form-control" maxlength="9" id="vlrCompraPeca" name="vlrCompraPeca" required>
+    <input type="text" class="form-control" maxlength="9" id="vlrCompraPeca" name="vlrCompraPeca" value="<?= $vlrCompraPeca ?>" required>
   </div>
 
   <div class="form-group">
 
     <label for="qtdPeca">Qtd de peças compradas* (apenas números)</label>
 
-    <input type="text" class="form-control" id="qtdPeca" name="qtdPeca" required>
+    <input type="text" class="form-control" id="qtdPeca" name="qtdPeca" value="<?= $qtdPeca ?>" required>
   </div>
 
   <div class="form-group">
@@ -35,12 +35,17 @@
     <label for="caixaPeca">Caixa onde está a peça *</label>
       
     <select class="form-control" id="caixaPeca" name="caixaPeca" required>
-
+    
       <option value="">Selecione</option>
 
-      <?php foreach($this->matriz_data as $key => $value) {
+      <?php 
+        
+        foreach($this->matriz_data as $key => $value) {
 
-        echo '<option id="'.$value["idCaixa"].'" value="'.$value["idCaixa"].'">'.$value["nomeCaixa"].'</option>';
+          $selected = '';
+          if($value["idCaixa"] == $caixaPeca) $selected = 'selected';  
+
+          echo '<option id="'.$value["idCaixa"].'" value="'.$value["idCaixa"].'" '.$selected.'>'.$value["nomeCaixa"].'</option>';
       } ?>
     </select>
   </div>

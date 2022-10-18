@@ -55,6 +55,7 @@ $('#prepara-edit-peca').click((e) => {
     if($("[type='checkbox']:checked").length != 1) {
         alert('Por favor, selecione UMA peça para editar.');
     } else {
+        operacao = 'editar_peca';
         $('#form-index').submit();
     }
 });
@@ -63,22 +64,35 @@ $('#form-index').submit((e) => {
 
     e.preventDefault();
 
+    if(operacao == 'editar_peca') {
+
+        $.ajax({
+            method: "POST",
+            url: "/prepara_edit_peca",
+            dataType: "json",
+            data: dados,
+            complete: function(response) {
+                tratarDadosPagina(response)
+            }
+        })
+    }
+})
+
+function editarPeca(dados)
+{
     $.ajax({
         method: "POST",
-        url: "/prepara_edit_peca",
-
-        //continuar daqui passar os dados e chamar a pagina
+        url: "/editar_peca",
         dataType: "json",
         data: dados,
         success: function(response) {
             if(response.resultado_operacao == true) {
 
-                alert('Peça(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
+                alert("Peça ID " + response.id_operacao + " editada com sucesso!");
                 window.location.href = "/";
             } else {
-
-                alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+                alert("Erro no processo de editar Peça ID " + response.id_operacao + ".");
             }
         }
     })
-})
+}

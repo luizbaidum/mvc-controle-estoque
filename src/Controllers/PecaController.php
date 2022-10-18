@@ -75,4 +75,61 @@ class PecaController extends Action {
 			$e->getMessage();
 		}
 	}
+
+	public function prepararEditarPeca()
+	{
+		try {	
+			$peca = Container::getModel('PecasDAO');
+			$caixa = Container::getModel('CaixasDAO');
+
+			$id_peca = $_POST['idPeca'][0];
+			$lista_caixas = $caixa->selectCaixas();
+
+			$peca_editar = $peca->selectPeca($id_peca);
+
+			$this->arrayDataToView($peca_editar[0]);
+
+			$this->matrizDataToView($lista_caixas);
+			
+			$this->render('editar_peca', 'Editar peça ID: '.$id_peca, 'layout-base-inserts');
+
+			if(!$peca_editar || !$lista_caixas) throw new Exception('Erro ao carregar peça para edição.');
+
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+
+	public function editarPeca()
+	{	
+		try { //terminar de criar esta function
+			$peca = Container::getModel('PecasDAO');
+
+			$obj = new PecasEntity();
+
+			$id_caixa = $_POST['idCaixa'] ?? $_POST['oldId']; //fazer isso na view
+
+			$obj->setIdCaixa($id_caixa);
+			$obj->setNomeCaixa($_POST['nomeCaixa']);
+			$obj->setCorCaixa($_POST['corCaixa']);
+			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
+			$obj->setOldId($_POST['oldId']);
+
+			$resultado_operacao = $caixa->editar($obj);
+
+			if($resultado_operacao == 1) {
+
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdCaixa());
+				throw new Exception('Erro ao editar Caixa.');
+			}
+
+		} catch (Exception $e) {
+
+			echo json_encode($resposta);
+			$e->getMessage();
+		}
+	}
 }

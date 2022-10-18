@@ -13,9 +13,18 @@ class PecasDAO extends Model {
 
 	public function getPecas()
 	{
-		$query = 'select '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
+		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+
+		return $result;
+	}
+
+	function selectPeca($id)
+	{
+		$query = 'SELECT '.$this->select.' FROM `pecas` WHERE `idPeca` = '.$id;
+
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
 		return $result;
 	}
