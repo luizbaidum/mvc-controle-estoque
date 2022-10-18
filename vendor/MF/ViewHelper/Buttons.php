@@ -22,7 +22,7 @@ class Buttons {
                         </div></span>',
             "editar" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-editar" data-toggle="dropdown" aria-haspopup="true">Editar</button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-editar">
-                            <button class="dropdown-item" id="edit-peca">Peça</button>
+                            <button class="dropdown-item" id="prepara-edit-peca">Peça</button>
                             <button class="dropdown-item listar-caixas">Caixa</button>
                         </div></span>',
         ];
