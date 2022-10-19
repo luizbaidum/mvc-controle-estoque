@@ -9,6 +9,7 @@
         protected $vlrCompraPeca;
         protected $qtdPeca;
         protected $caixaPeca;
+        protected $oldId;
 
         /**
          * Get the value of idPeca
@@ -103,6 +104,26 @@
         public function setCaixaPeca($caixaPeca)
         {
                 $this->caixaPeca = $caixaPeca;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of oldId
+         */ 
+        public function getOldId()
+        {
+                return $this->oldId;
+        }
+
+        /**
+         * Set the value of oldId
+         *
+         * @return  self
+         */ 
+        public function setOldId($oldId)
+        {
+                $this->oldId = $oldId;
 
                 return $this;
         }

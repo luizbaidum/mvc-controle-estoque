@@ -7,15 +7,24 @@ use MF\Model\Model;
 class PecasDAO extends Model {
 
 	//não pode ter espaço para não complicar as tags do button 'Ordenar'
-	public $select = 'idPeca,nomePeca,vlrCompraPeca,caixaPeca';
+	public $select = 'idPeca,nomePeca,vlrCompraPeca,qtdPeca,caixaPeca';
 
 	private $join = 'caixas.nomeCaixa';
 
 	public function getPecas()
 	{
-		$query = 'select '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
+		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+
+		return $result;
+	}
+
+	function selectPeca($id)
+	{
+		$query = 'SELECT '.$this->select.' FROM `pecas` WHERE `idPeca` = '.$id;
+
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
 		return $result;
 	}
@@ -50,5 +59,14 @@ class PecasDAO extends Model {
 			return true;
 		else
 			return false;
+	}
+
+	function editar($obj)
+	{
+		$query = "UPDATE `pecas` SET `idPeca` = ".$obj->getIdPeca().", `nomePeca` = '".$obj->getNomePeca()."', `vlrCompraPeca` = ".$obj->getVlrCompraPeca().",  `qtdPeca` = ".$obj->getQtdPeca().", `caixaPeca` = ".$obj->getCaixaPeca().", `dataHora` = '".$this->getTime()."' WHERE `idPeca` = ".$obj->getOldId()."";
+
+		$result = $this->db->exec($query);
+		
+		return $result;
 	}
 };

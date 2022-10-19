@@ -22,7 +22,7 @@ class Buttons {
                         </div></span>',
             "editar" => '<span><button class="buttons_menu dropdown-toggle" type="button" id="dropdown-editar" data-toggle="dropdown" aria-haspopup="true">Editar</button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-editar">
-                            <button class="dropdown-item" id="edit-peca">Peça</button>
+                            <button class="dropdown-item" id="prepara-edit-peca">Peça</button>
                             <button class="dropdown-item listar-caixas">Caixa</button>
                         </div></span>',
         ];
@@ -32,8 +32,8 @@ class Buttons {
     public static function buttonsCrud() 
     {
         $buttons_crud = [
-            "salvar" => '<button id="salvar" type="submit" class="buttons_crud">Salvar</button>',
-			"cancelar" => '<button id="cancelar" class="buttons_crud">Cancelar/Voltar</button>',
+            "salvar" => '<button id="salvar" type="button" class="buttons_crud">Salvar</button>',
+			"cancelar" => '<button id="cancelar" class="buttons_crud" type="button">Cancelar/Voltar</button>',
         ];
         return $buttons_crud;
     }

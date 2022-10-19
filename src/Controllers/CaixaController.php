@@ -104,9 +104,8 @@ class CaixaController extends Action {
 
 			$this->renderModal('editar_caixa', 'Editar caixa ID '. $id_caixa, $operacao);
 	
-			if(!$caixa_editar) {
-				throw new Exception('Erro ao deletar caixa(s).');
-			} 
+			if(!$caixa_editar) throw new Exception('Erro ao deletar caixa(s).');
+
 		} catch (Exception $e) {
 			$e->getMessage();
 		}

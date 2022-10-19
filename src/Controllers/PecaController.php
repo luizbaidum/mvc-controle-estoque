@@ -32,7 +32,7 @@ class PecaController extends Action {
 			$obj->setIdPeca($_POST['idPeca']);
 			$obj->setNomePeca($_POST['nomePeca']);
 			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
-			$obj->setQtdPeca($_POST['caixaPeca']);
+			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
 			$resultado_operacao = $peca->insert($obj);
@@ -69,6 +69,62 @@ class PecaController extends Action {
 				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $pecas_excluir);
 				throw new Exception('Erro ao deletar peça(s).');
 			}
+		} catch (Exception $e) {
+
+			echo json_encode($resposta);
+			$e->getMessage();
+		}
+	}
+
+	public function prepararEditarPeca()
+	{
+		try {	
+			$peca = Container::getModel('PecasDAO');
+			$caixa = Container::getModel('CaixasDAO');
+
+			$id_peca = $_POST['idPeca'][0];
+			$lista_caixas = $caixa->selectCaixas();
+
+			$peca_editar = $peca->selectPeca($id_peca);
+
+			$this->arrayDataToView($peca_editar[0]);
+
+			$this->matrizDataToView($lista_caixas);
+			
+			$this->render('editar_peca', 'Editar peça ID: '.$id_peca, 'layout-base-inserts');
+
+			if(!$peca_editar || !$lista_caixas) throw new Exception('Erro ao carregar peça para edição.');
+
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+
+	public function editarPeca()
+	{	
+		try {
+			$peca = Container::getModel('PecasDAO');
+
+			$obj = new PecasEntity();
+
+			$obj->setIdPeca($_POST['idPeca']);
+			$obj->setNomePeca($_POST['nomePeca']);
+			$obj->setVlrCompraPeca($_POST['vlrCompraPeca']);
+			$obj->setQtdPeca($_POST['qtdPeca']);
+			$obj->setCaixaPeca($_POST['caixaPeca']);
+			$obj->setOldId($_POST['oldId']);
+
+			$resultado_operacao = $peca->editar($obj);
+
+			if($resultado_operacao == 1) {
+
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
+				throw new Exception('Erro ao editar Peça.');
+			}
+
 		} catch (Exception $e) {
 
 			echo json_encode($resposta);

@@ -68,6 +68,18 @@ class Route extends Bootstrap {
 			'action' => 'editarCaixa'
 		);
 
+		$routes['prepara_edit_peca'] = array(
+			'route' => '/prepara_edit_peca',
+			'controller' => 'PecaController',
+			'action' => 'prepararEditarPeca'
+		);
+
+		$routes['editar_caixa'] = array(
+			'route' => '/editar_peca',
+			'controller' => 'PecaController',
+			'action' => 'editarPeca'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

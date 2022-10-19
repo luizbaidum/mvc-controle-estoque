@@ -1,7 +1,8 @@
 var dados = null;
+var operacao = null;
 /****************************************************/
-$(document).on('click', '#salvar', (e) => {
-
+$('#salvar').on('click', (e) => {    
+    
     e.preventDefault();
 
     //VALIDAÇÃO DE CAMPOS REQUIRED----------
@@ -36,6 +37,8 @@ $(document).on('click', '#salvar', (e) => {
         editarCaixa(dados);
     } else if($('#operation').val() == 'apagar_caixa') {
         apagarCaixa(dados);
+    } else if($('#operation').val() == 'editar_peca') {
+        editarPeca(dados);
     }
 })    
 /****************************************************/

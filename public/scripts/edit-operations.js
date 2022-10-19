@@ -4,7 +4,7 @@ $(document).on('click', '#preparar-editar', () => {
     dados = $('#form-todas-caixas').serialize();
 
     if(dados.indexOf("caixa") <= 0) {
-        alert('Por favor, selecione ao menos uma caixa para editar.');
+        alert('Por favor, selecione uma caixa para editar.');
     } else {
         $('#form-todas-caixas').submit();
     }   
@@ -42,6 +42,56 @@ function editarCaixa(dados)
                 window.location.href = "/";
             } else {
                 alert("Erro no processo de editar Caixa ID " + response.id_operacao + ".");
+            }
+        }
+    })
+}
+
+//PEÇAS
+$('#prepara-edit-peca').click((e) => {
+
+    dados = $('#form-index').serialize();
+
+    if($("[type='checkbox']:checked").length != 1) {
+        alert('Por favor, selecione UMA peça para editar.');
+    } else {
+        operacao = 'editar_peca';
+        $('#form-index').submit();
+    }
+});
+
+$('#form-index').submit((e) => {
+
+    e.preventDefault();
+
+    if(operacao == 'editar_peca') {
+
+        $.ajax({
+            method: "POST",
+            url: "/prepara_edit_peca",
+            dataType: "json",
+            data: dados,
+            complete: function(response) {
+                tratarDadosPagina(response)
+            }
+        })
+    }
+})
+
+function editarPeca(dados)
+{
+    $.ajax({
+        method: "POST",
+        url: "/editar_peca",
+        dataType: "json",
+        data: dados,
+        success: function(response) {
+            if(response.resultado_operacao == true) {
+
+                alert("Peça ID " + response.id_operacao + " editada com sucesso!");
+                window.location.href = "/";
+            } else {
+                alert("Erro no processo de editar Peça ID " + response.id_operacao + ".");
             }
         }
     })
