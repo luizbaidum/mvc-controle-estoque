@@ -102,28 +102,27 @@ class PecaController extends Action {
 
 	public function editarPeca()
 	{	
-		try { //terminar de criar esta function
+		try {
 			$peca = Container::getModel('PecasDAO');
 
 			$obj = new PecasEntity();
 
-			$id_caixa = $_POST['idCaixa'] ?? $_POST['oldId']; //fazer isso na view
-
-			$obj->setIdCaixa($id_caixa);
-			$obj->setNomeCaixa($_POST['nomeCaixa']);
-			$obj->setCorCaixa($_POST['corCaixa']);
-			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
+			$obj->setIdPeca($_POST['idPeca']);
+			$obj->setNomePeca($_POST['nomePeca']);
+			$obj->setVlrCompraPeca($_POST['vlrCompraPeca']);
+			$obj->setQtdPeca($_POST['qtdPeca']);
+			$obj->setCaixaPeca($_POST['caixaPeca']);
 			$obj->setOldId($_POST['oldId']);
 
-			$resultado_operacao = $caixa->editar($obj);
+			$resultado_operacao = $peca->editar($obj);
 
 			if($resultado_operacao == 1) {
 
-				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
 				echo json_encode($resposta);
 			} else {
-				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdCaixa());
-				throw new Exception('Erro ao editar Caixa.');
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
+				throw new Exception('Erro ao editar Peça.');
 			}
 
 		} catch (Exception $e) {

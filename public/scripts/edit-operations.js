@@ -47,7 +47,7 @@ function editarCaixa(dados)
     })
 }
 
-//CAIXAS
+//PEÇAS
 $('#prepara-edit-peca').click((e) => {
 
     dados = $('#form-index').serialize();

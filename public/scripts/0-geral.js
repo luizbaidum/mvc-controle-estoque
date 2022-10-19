@@ -1,8 +1,8 @@
 var dados = null;
 var operacao = null;
 /****************************************************/
-$(document).on('click', '#salvar', (e) => {
-
+$('#salvar').on('click', (e) => {    
+    
     e.preventDefault();
 
     //VALIDAÇÃO DE CAMPOS REQUIRED----------

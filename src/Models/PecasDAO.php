@@ -60,4 +60,13 @@ class PecasDAO extends Model {
 		else
 			return false;
 	}
+
+	function editar($obj)
+	{
+		$query = "UPDATE `pecas` SET `idPeca` = ".$obj->getIdPeca().", `nomePeca` = '".$obj->getNomePeca()."', `vlrCompraPeca` = ".$obj->getVlrCompraPeca().",  `qtdPeca` = ".$obj->getQtdPeca().", `caixaPeca` = ".$obj->getCaixaPeca().", `dataHora` = '".$this->getTime()."' WHERE `idPeca` = ".$obj->getOldId()."";
+
+		$result = $this->db->exec($query);
+		
+		return $result;
+	}
 };
