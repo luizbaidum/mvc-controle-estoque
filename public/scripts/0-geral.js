@@ -107,4 +107,34 @@ function carregarPagina(conteudo)
 {
     $('body').html(conteudo);
 }
+
+function tratarDadosTable(response)
+{
+    dados_table = response.responseText;
+    carregarTable(dados_table);
+}
+
+function carregarTable(conteudo) 
+{
+    $('tbody').html(conteudo);
+}
 /****************************************************/
+$('#form-pesquisar').on('submit', (e) => {
+    e.preventDefault();
+
+    dados = $('#form-pesquisar').serialize();
+
+    $.ajax({
+        method: "POST",
+        url: "/pesquisar",
+        dataType: "json",
+        data: dados,
+        complete: function(response) {
+            tratarDadosTable(response);
+        }
+    })
+})
+
+$('#sair-pesquisar').on('click', () => {
+    window.location.href = "/";
+})

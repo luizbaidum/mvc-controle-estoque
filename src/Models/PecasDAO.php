@@ -9,11 +9,20 @@ class PecasDAO extends Model {
 	//não pode ter espaço para não complicar as tags do button 'Ordenar'
 	public $select = 'idPeca,nomePeca,vlrCompraPeca,qtdPeca,caixaPeca';
 
-	private $join = 'caixas.nomeCaixa';
+	private $join = 'caixas.idCaixa,caixas.nomeCaixa';
 
 	public function getPecas()
 	{
-		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
+		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
+
+	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+
+		return $result;
+	}
+
+	public function getPecasPesquisa($coluna, $item)
+	{
+		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna.' LIKE "%'.$item.'%"';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 

@@ -7,12 +7,15 @@
       <thead>
 
         <tr>
-          <td>Selecionar</td>
-        <?php foreach($this->view->atributos as $index => $valor) { ?>
-            <td>
-              <?= $valor ?>
-            </td>
-          <?php } ?>
+          <?php 
+            if(isset($this->view->atributos) && gettype($this->view->atributos) == 'array'):
+              echo '<td>Selecionar</td>';
+              foreach($this->view->atributos as $index => $valor) { ?>
+                <td>
+                  <?= $valor ?>
+                </td>
+            <?php } 
+            endif; ?>
         </tr>    
       </thead>
       
