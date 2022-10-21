@@ -13,7 +13,7 @@ class PecasDAO extends Model {
 
 	public function getPecas()
 	{
-		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE caixaPeca = caixas.idCaixa';
+		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 
@@ -22,7 +22,7 @@ class PecasDAO extends Model {
 
 	public function getPecasPesquisa($coluna, $item)
 	{
-		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas WHERE '.$coluna.' LIKE "%'.$item.'%" GROUP BY '.$coluna.'';
+		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna.' LIKE "%'.$item.'%"';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 
