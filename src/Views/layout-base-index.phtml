@@ -42,34 +42,7 @@
 					</span>
 
 					<hr>
-					<!-- criar novo arquivo php e por isso dentro -->
-					<form id="form-pesquisar">
-
-						<div class="form-row m-1">
-
-							<div class="col-auto">
-
-								<select class="custom-select" id="base-pesquisa" name="base-pesquisa">
-								<option selected>Escolha</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-								<!-- construir as options -->
-								</select>
-							</div>
-							
-								<div class="col-auto custom-control">
-
-								<input type="text" name="item-pesquisa" class="form-control" id="item-pesquisa" placeholder="Digite">
-								</div>
-
-							<div class="col-auto">
-
-								<button type="submit" class="btn btn-primary" id="aplicar-pesquisa">Pesquisar</button>
-								<button class="btn btn-danger" id="sair-pesquisar">Sair da pesquisa</button>
-							</div>
-						</div>
-					</form>
+					<?php include 'pesquisa.phtml' ?>
 				</div>
 			</div>
 

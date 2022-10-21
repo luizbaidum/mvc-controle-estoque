@@ -30,6 +30,14 @@ abstract class Action {
 		}
 	}
 
+	protected function renderPesquisa($view)
+	{	
+		//atributo da stdClass
+		$this->view->pagina = $view;
+
+		$this->content();
+	}
+
 	protected function renderModal($view, $titulo, $operacao)
 	{
 		//$this->view = obj / pagina = atributo

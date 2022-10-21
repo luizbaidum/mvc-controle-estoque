@@ -80,6 +80,12 @@ class Route extends Bootstrap {
 			'action' => 'editarPeca'
 		);
 
+		$routes['pesquisar'] = array(
+			'route' => '/pesquisar',
+			'controller' => 'IndexController',
+			'action' => 'pesquisar'
+		);
+
 		$this->setRoutes($routes);
 	}
 }
