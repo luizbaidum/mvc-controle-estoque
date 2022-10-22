@@ -2,9 +2,17 @@ var dados = null;
 var operacao = null;
 /****************************************************/
 $('#salvar').on('click', (e) => {    
-    
     e.preventDefault();
+    scriptDeSalvar();
+})    
 
+$(document).on('click','#salvar-do-modal', (e) => {    
+    e.preventDefault();
+    scriptDeSalvar();
+})    
+/****************************************************/
+function scriptDeSalvar() 
+{
     //VALIDAÇÃO DE CAMPOS REQUIRED----------
     let elementos = $('form').find('*');
 
@@ -40,7 +48,7 @@ $('#salvar').on('click', (e) => {
     } else if($('#operation').val() == 'editar_peca') {
         editarPeca(dados);
     }
-})    
+}
 /****************************************************/
 $('#cancelar').on('click', () => {
 

@@ -64,7 +64,7 @@ class Buttons {
 
         if($operacao == 'confirmar-editar') {
             $buttons_crud = [
-                "salvar" => '<button type="button" class="btn btn-danger" id="salvar">Confirmar edição</button>',
+                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-do-modal">Confirmar edição</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }
