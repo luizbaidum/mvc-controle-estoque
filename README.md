@@ -19,7 +19,7 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] script de upload de imagens
 - [ ] table e tratamento p/ imagens
 - [ ] alterar alert de confirm de crud p/ modalzinho
-- [ ] tentar dinamizar o form submetido
-- [ ] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
-- [ ] coluna qtd de peças.
+- [x] tentar dinamizar o form submetido
+- [x] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
+- [x] coluna qtd de peças.
 - [ ] repassar codigo e buscar mais padronização
