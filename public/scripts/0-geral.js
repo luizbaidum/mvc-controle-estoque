@@ -10,7 +10,7 @@ $(document).on('click','#salvar-do-modal', (e) => {
     e.preventDefault();
     scriptDeSalvar();
 })    
-
+/****************************************************/
 function scriptDeSalvar() 
 {
     //VALIDAÇÃO DE CAMPOS REQUIRED----------
