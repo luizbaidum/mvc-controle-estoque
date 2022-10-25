@@ -86,6 +86,12 @@ class Route extends Bootstrap {
 			'action' => 'pesquisar'
 		);
 
+		$routes['ordenar'] = array(
+			'route' => '/ordenar',
+			'controller' => 'IndexController',
+			'action' => 'ordenar'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

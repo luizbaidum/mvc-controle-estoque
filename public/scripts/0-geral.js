@@ -1,5 +1,7 @@
 var dados = null;
 var operacao = null;
+var pesquisa_item = null;
+var pesquisa_obj = null; 
 /****************************************************/
 $('#salvar').on('click', (e) => {    
     e.preventDefault();
@@ -132,6 +134,9 @@ $('#form-pesquisar').on('submit', (e) => {
 
     dados = $('#form-pesquisar').serialize();
 
+    pesquisa_item = $('select[name="base-pesquisa"]').prop('value');
+    pesquisa_obj = $('input[name="item-pesquisa"]').prop('value');;
+
     $.ajax({
         method: "POST",
         url: "/pesquisar",
@@ -145,4 +150,23 @@ $('#form-pesquisar').on('submit', (e) => {
 
 $('#sair-pesquisar').on('click', () => {
     window.location.href = "/";
+})
+/****************************************************/
+$('.ordenar').click((e) => {
+
+    dados = {
+        order_by: $(e.target).text(),
+        pesquisa_item: pesquisa_item,
+        pesquisa_obj: pesquisa_obj
+    };
+
+    $.ajax({
+        method: "POST",
+        url: "/ordenar",
+        dataType: "json",
+        data: dados,
+        complete: function(response) {
+            tratarDadosTable(response);
+        }
+    })
 })

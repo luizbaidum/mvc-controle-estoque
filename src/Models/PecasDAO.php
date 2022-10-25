@@ -78,4 +78,26 @@ class PecasDAO extends Model {
 		
 		return $result;
 	}
+
+	function selectWithOrdenation($variaveis)
+	{
+		$order_by = $variaveis["order_by"];
+
+		if($variaveis['pesquisa_item'] != '' && $variaveis['pesquisa_obj'] != '') {
+			
+			$coluna = explode("-", $variaveis['pesquisa_item']);
+			$item = $variaveis['pesquisa_obj'];
+
+			$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna[1].' LIKE "%'.$item.'%"';
+		} else {
+
+			$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
+		}
+
+		$query .= ' ORDER BY '.$order_by.' ASC';
+
+	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+
+		return $result;
+	}
 };
