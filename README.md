@@ -10,7 +10,7 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 > Objetivos e ideias p/ o sistema:
 - [x] CRUD peças e caixas
 - [x] registro data/hora de insert e update
-- [ ] pesquisa e ordenação
+- [x] pesquisa e ordenação
 - [ ] busca sql por keydown ao digitar nome de nova peça
 - [ ] valor financeiro do estoque
 - [ ] registro do valor cobrado pela peça
