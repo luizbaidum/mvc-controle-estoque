@@ -28,7 +28,6 @@ class IndexController extends Action {
 		} catch (Exception $e) {
 			$e->getMessage();
 		}
-		
 	}
 
 	public function pesquisar()
@@ -45,6 +44,18 @@ class IndexController extends Action {
 
 			$this->renderPesquisa('index');
 			
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+
+	public function ordenar()
+	{	
+		try {
+			$peca = Container::getModel('PecasDAO');
+			
+			echo '<pre>';
+			print_r($peca->selectWithOrdenation($_POST));
 		} catch (Exception $e) {
 			$e->getMessage();
 		}
