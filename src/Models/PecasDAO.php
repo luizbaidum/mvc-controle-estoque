@@ -94,7 +94,7 @@ class PecasDAO extends Model {
 			$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
 		}
 
-		$query .= ' ORDER BY '.$order_by.'';
+		$query .= ' ORDER BY '.$order_by.' ASC';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 

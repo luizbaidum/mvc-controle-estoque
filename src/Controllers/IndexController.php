@@ -54,8 +54,12 @@ class IndexController extends Action {
 		try {
 			$peca = Container::getModel('PecasDAO');
 			
-			echo '<pre>';
-			print_r($peca->selectWithOrdenation($_POST));
+			$ordem = $peca->selectWithOrdenation($_POST);
+
+			$this->view->dados = $ordem;
+
+			$this->renderPesquisa('index');
+
 		} catch (Exception $e) {
 			$e->getMessage();
 		}
