@@ -15,7 +15,7 @@ $('#form-index').submit((e) => {
 
     e.preventDefault();
 
-    if(operacao == 'deletar_peca') {
+    if(operacao == 'deletar_peca' && confirmarExclusao() == true) {
         $.ajax({
             method: "POST",
             url: "/delete_peca",
@@ -32,6 +32,8 @@ $('#form-index').submit((e) => {
                 }
             }
         })
+    } else {
+        window.location.href = "/";
     }
 })
 //CAIXAS
@@ -50,7 +52,7 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
 
     e.preventDefault();
 
-    if($('#operacao').val() == 'apagar') {
+    if($('#operacao').val() == 'apagar' && confirmarExclusao() == true) {
 
         $.ajax({
             method: "POST",
@@ -68,5 +70,14 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
                 }
             }
         });
+    } else {
+        window.location.href = "/";
     }
 });
+
+function confirmarExclusao()
+{
+    let confirmacao = confirm('Confirma exclusão?');
+
+    return confirmacao;
+}
