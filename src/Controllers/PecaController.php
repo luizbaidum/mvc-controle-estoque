@@ -131,4 +131,26 @@ class PecaController extends Action {
 			$e->getMessage();
 		}
 	}
+
+	public function preparar_baixa()
+	{	
+		try {
+			$peca = Container::getModel('PecasDAO');
+
+			foreach($_GET['idPeca'] as $id) {
+				$pecas[] = $peca->selectPeca($id);
+			}
+
+			if(count($pecas) > 0) {
+
+				//testar: criar pagina p/ uso dentro da pasta de pecas e chamar function arraytoview e usar inserts como fundo
+				//renderizar pagina aqui dentro
+			} else {
+				throw new Exception('Erro ao selecionar peça(s) para baixa.');
+			}
+
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
 }

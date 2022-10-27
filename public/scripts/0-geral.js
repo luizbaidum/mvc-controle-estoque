@@ -170,3 +170,27 @@ $('.ordenar').click((e) => {
         }
     })
 })
+/****************************************************/
+$('#baixar').click(() => {
+
+    dados = $('#form-index').serialize();
+
+    if($("[type='checkbox']:checked").length < 1) {
+        alert('Por favor, selecione pelo menos uma peça para baixar.');
+    } else {
+        prepararBaixa(dados);
+    }
+});
+
+function prepararBaixa(pecas)
+{
+    $.ajax({
+        method: "GET",
+        url: "/preparar_baixa",
+        dataType: "json",
+        data: dados,
+        /*complete: function(response) {
+            tratarDadosPagina(response)
+        }*/
+    })
+}

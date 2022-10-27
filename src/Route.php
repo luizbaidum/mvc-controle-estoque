@@ -92,6 +92,12 @@ class Route extends Bootstrap {
 			'action' => 'ordenar'
 		);
 
+		$routes['preparar_baixa'] = array(
+			'route' => '/preparar_baixa',
+			'controller' => 'PecaController',
+			'action' => 'preparar_baixa'
+		);
+
 		$this->setRoutes($routes);
 	}
 }
