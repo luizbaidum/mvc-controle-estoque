@@ -189,8 +189,8 @@ function prepararBaixa(pecas)
         url: "/preparar_baixa",
         dataType: "json",
         data: dados,
-        /*complete: function(response) {
+        complete: function(response) {
             tratarDadosPagina(response)
-        }*/
+        }
     })
 }

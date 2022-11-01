@@ -142,13 +142,11 @@ class PecaController extends Action {
 			}
 
 			if(count($pecas) > 0) {
-
-				//testar: criar pagina p/ uso dentro da pasta de pecas e chamar function arraytoview e usar inserts como fundo
-				//renderizar pagina aqui dentro
+				$this->matrizDataToView($pecas);
+				$this->render('baixar_peca', 'Baixar peça(s)', 'layout-base-inserts');
 			} else {
 				throw new Exception('Erro ao selecionar peça(s) para baixa.');
 			}
-
 		} catch (Exception $e) {
 			$e->getMessage();
 		}
