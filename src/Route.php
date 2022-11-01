@@ -95,7 +95,13 @@ class Route extends Bootstrap {
 		$routes['preparar_baixa'] = array(
 			'route' => '/preparar_baixa',
 			'controller' => 'PecaController',
-			'action' => 'preparar_baixa'
+			'action' => 'prepararBaixa'
+		);
+
+		$routes['baixar_peca'] = array(
+			'route' => '/baixar_peca',
+			'controller' => 'PecaController',
+			'action' => 'baixarPeca'
 		);
 
 		$this->setRoutes($routes);

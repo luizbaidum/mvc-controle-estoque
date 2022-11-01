@@ -96,3 +96,22 @@ function editarPeca(dados)
         }
     })
 }
+
+function baixarPeca(dados)
+{
+    $.ajax({
+        method: "POST",
+        url: "/baixar_peca",
+        dataType: "json",
+        data: dados,
+        success: function(response) {
+            if(response.resultado_operacao == true) {
+
+                alert("Peça ID " + response.id_operacao + " editada com sucesso!");
+                window.location.href = "/";
+            } else {
+                alert("Erro no processo de editar Peça ID " + response.id_operacao + ".");
+            }
+        }
+    })
+}

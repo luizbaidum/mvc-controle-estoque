@@ -7,6 +7,7 @@ use MF\Controller\Action;
 use MF\Model\Container;
 use MF\ViewHelper\NumbersHelper;
 use src\Models\PecasEntity;
+use src\Models\UsoPecaEntity;
 
 class PecaController extends Action {
 
@@ -132,7 +133,7 @@ class PecaController extends Action {
 		}
 	}
 
-	public function preparar_baixa()
+	public function prepararBaixa()
 	{	
 		try {
 			$peca = Container::getModel('PecasDAO');
@@ -146,6 +147,34 @@ class PecaController extends Action {
 				$this->render('baixar_peca', 'Baixar peça(s)', 'layout-base-inserts');
 			} else {
 				throw new Exception('Erro ao selecionar peça(s) para baixa.');
+			}
+		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+
+	public function baixarPeca()
+	{	
+		try {
+			$model_uso = Container::getModel('UsoPecaDAO');
+
+			foreach($_POST['idPeca'] as $k => $peca_baixar) {
+
+				$obj = new UsoPecaEntity();
+
+				$obj->setIdPeca($peca_baixar);
+				$obj->setQtdUso($_POST['dataUso'][$k]);
+				$obj->setDataUso($_POST['qtdUso'][$k]);
+				//fzer set datahora e seguir na function abaixo
+				//lembrar de fazer function q abate valor utilizado
+
+				$model_uso->insertUso($obj);
+			};
+
+			if(false) {
+				
+			} else {
+				throw new Exception('Erro no precesso de baixar Peça(s).');
 			}
 		} catch (Exception $e) {
 			$e->getMessage();

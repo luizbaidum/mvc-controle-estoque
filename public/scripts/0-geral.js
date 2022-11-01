@@ -49,6 +49,8 @@ function scriptDeSalvar()
         apagarCaixa(dados);
     } else if($('#operation').val() == 'editar_peca') {
         editarPeca(dados);
+    } else if($('#operation').val() == 'baixar_peca') {
+        baixarPeca(dados);
     }
 }
 /****************************************************/

@@ -11,25 +11,25 @@
         <div class="form-group col-12 col-sm-3">
 
           <label for="inputEmail4">ID Peça</label>
-          <input type="text" class="form-control" id="idPeca-<?= $attr[0]['idPeca']; ?>" value="<?= $attr[0]['idPeca']; ?>" name="idPeca[]" disabled>
+          <input type="text" class="form-control" id="idPeca-<?= $attr[0]['idPeca']; ?>" value="<?= $attr[0]['idPeca']; ?>" name="idPeca[]" readonly>
         </div>
         
         <div class="form-group col-12 col-sm-3">
 
           <label for="inputEmail4">Nome Peça</label>
-          <input type="text" class="form-control" id="idNomePeca-<?= $attr[0]['idPeca']; ?>" value="<?= $attr[0]['nomePeca']; ?>" name="nomePeca[]" disabled>
+          <input type="text" class="form-control" id="idNomePeca-<?= $attr[0]['idPeca']; ?>" value="<?= $attr[0]['nomePeca']; ?>" name="nomePeca[]" readonly>
         </div>
 
         <div class="form-group col-12 col-sm-3">
 
           <label for="inputEmail4">Data baixa</label>
-          <input type="date" class="form-control" id="idDataBaixa-<?= $attr[0]['nomePeca']; ?>" value="<?= $attr[0]['nomePeca']; ?>" name="dataUso[]">
+          <input type="date" class="form-control" id="idDataBaixa-<?= $attr[0]['nomePeca']; ?>" value="" name="dataUso[]" required>
         </div>
 
         <div class="form-group col-12 col-sm-3">
-          
+
           <label for="inputState">Quantidade baixa</label>
-          <select id="inputState" class="form-control" id="idQtdPeca-<?= $attr[0]['idPeca']; ?>" value="" name="qtdUso[]">
+          <select id="inputState" class="form-control" id="idQtdPeca-<?= $attr[0]['idPeca']; ?>" value="" name="qtdUso[]" required>
             <option>Escolha</option>
             <?php for($i = 0; $i <= $attr[0]['qtdPeca']; $i++): ?>
               <option><?= $i ?></option>
