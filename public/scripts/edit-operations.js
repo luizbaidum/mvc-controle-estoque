@@ -85,7 +85,7 @@ function editarPeca(dados)
         url: "/editar_peca",
         dataType: "json",
         data: dados,
-        success: function(response) {
+        complete: function(response) {
             if(response.resultado_operacao == true) {
 
                 alert("Peça ID " + response.id_operacao + " editada com sucesso!");
@@ -104,13 +104,13 @@ function baixarPeca(dados)
         url: "/baixar_peca",
         dataType: "json",
         data: dados,
-        success: function(response) {
-            if(response.resultado_operacao == true) {
-
-                alert("Peça ID " + response.id_operacao + " editada com sucesso!");
+        complete: function(response) {
+            let ids = response.responseJSON.id_operacao.toString();
+            if(response.responseJSON.resultado_operacao == true) {
+                alert("Peça(s) ID " + ids + " baixada(s) com sucesso!");
                 window.location.href = "/";
             } else {
-                alert("Erro no processo de editar Peça ID " + response.id_operacao + ".");
+                alert("Erro no processo de baixar Peça(s) ID " + ids + ".");
             }
         }
     })

@@ -13,8 +13,8 @@ class PecaController extends Action {
 
 	public function index()
 	{	
-		$caixa = Container::getModel('CaixasDAO');
-		$lista_caixas = $caixa->selectCaixas();
+		$model_caixa = Container::getModel('CaixasDAO');
+		$lista_caixas = $model_caixa->selectCaixas();
 
 		$this->matrizDataToView($lista_caixas);
 
@@ -25,7 +25,7 @@ class PecaController extends Action {
     public function novaPeca()
 	{	
 		try {
-			$peca = Container::getModel('PecasDAO');
+			$model_peca = Container::getModel('PecasDAO');
 
 			$obj = new PecasEntity();
 
@@ -36,7 +36,7 @@ class PecaController extends Action {
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
-			$resultado_operacao = $peca->insert($obj);
+			$resultado_operacao = $model_peca->insert($obj);
 
 			if($resultado_operacao == 1) {
 
@@ -59,9 +59,9 @@ class PecaController extends Action {
 		try {
 			$pecas_excluir = $_POST['idPeca'];
 	
-			$peca = Container::getModel('PecasDAO');
+			$model_peca = Container::getModel('PecasDAO');
 	
-			$resultado_operacao = $peca->deletar($pecas_excluir);
+			$resultado_operacao = $model_peca->deletar($pecas_excluir);
 
 			if($resultado_operacao == count($pecas_excluir)) {
 				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
@@ -80,13 +80,13 @@ class PecaController extends Action {
 	public function prepararEditarPeca()
 	{
 		try {	
-			$peca = Container::getModel('PecasDAO');
-			$caixa = Container::getModel('CaixasDAO');
+			$model_peca = Container::getModel('PecasDAO');
+			$model_caixa = Container::getModel('CaixasDAO');
 
 			$id_peca = $_POST['idPeca'][0];
-			$lista_caixas = $caixa->selectCaixas();
+			$lista_caixas = $model_caixa->selectCaixas();
 
-			$peca_editar = $peca->selectPeca($id_peca);
+			$peca_editar = $model_peca->selectPeca($id_peca);
 
 			$this->arrayDataToView($peca_editar[0]);
 
@@ -104,7 +104,7 @@ class PecaController extends Action {
 	public function editarPeca()
 	{	
 		try {
-			$peca = Container::getModel('PecasDAO');
+			$model_peca = Container::getModel('PecasDAO');
 
 			$obj = new PecasEntity();
 
@@ -115,7 +115,7 @@ class PecaController extends Action {
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 			$obj->setOldId($_POST['oldId']);
 
-			$resultado_operacao = $peca->editar($obj);
+			$resultado_operacao = $model_peca->editar($obj);
 
 			if($resultado_operacao == 1) {
 
@@ -127,7 +127,6 @@ class PecaController extends Action {
 			}
 
 		} catch (Exception $e) {
-
 			echo json_encode($resposta);
 			$e->getMessage();
 		}
@@ -136,10 +135,10 @@ class PecaController extends Action {
 	public function prepararBaixa()
 	{	
 		try {
-			$peca = Container::getModel('PecasDAO');
+			$model_peca = Container::getModel('PecasDAO');
 
 			foreach($_GET['idPeca'] as $id) {
-				$pecas[] = $peca->selectPeca($id);
+				$pecas[] = $model_peca->selectPeca($id);
 			}
 
 			if(count($pecas) > 0) {
@@ -157,26 +156,39 @@ class PecaController extends Action {
 	{	
 		try {
 			$model_uso = Container::getModel('UsoPecaDAO');
+			$model_peca = Container::getModel('PecasDAO');
 
 			foreach($_POST['idPeca'] as $k => $peca_baixar) {
 
 				$obj = new UsoPecaEntity();
 
 				$obj->setIdPeca($peca_baixar);
-				$obj->setQtdUso($_POST['dataUso'][$k]);
-				$obj->setDataUso($_POST['qtdUso'][$k]);
-				//fzer set datahora e seguir na function abaixo
-				//lembrar de fazer function q abate valor utilizado
+				$obj->setQtdUso($_POST['qtdUso'][$k]);
+				$obj->setDataUso($_POST['dataUso'][$k]);
 
-				$model_uso->insertUso($obj);
+				$baixa = $model_uso->insertUso($obj);
+
+				$abatimento = $model_peca->baixarQtdPeca($obj);
+				
+				if($baixa != '1' || $abatimento != '0') {
+					$resultado_final = false;
+					return;
+				} else {
+					$resultado_final = true;
+				}
+					
+				$ids_sucesso[] = $obj->getIdPeca();
 			};
 
-			if(false) {
-				
+			if($resultado_final == true) {
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $ids_sucesso);
+				echo json_encode($resposta);
 			} else {
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $ids_sucesso);
 				throw new Exception('Erro no precesso de baixar Peça(s).');
 			}
 		} catch (Exception $e) {
+			echo json_encode($resposta);
 			$e->getMessage();
 		}
 	}
