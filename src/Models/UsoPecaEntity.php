@@ -7,6 +7,7 @@ class UsoPecaEntity {
     protected $idUso;
     protected $idPeca;
     protected $qtdUso;
+    protected $motivoUso;
     protected $dataUso;
     protected $dataHora;
 
@@ -108,5 +109,25 @@ class UsoPecaEntity {
             $this->dataHora = $dataHora;
 
             return $this;
+    }
+
+    /**
+     * Get the value of motivoUso
+     */ 
+    public function getMotivoUso()
+    {
+        return $this->motivoUso;
+    }
+
+    /**
+     * Set the value of motivoUso
+     *
+     * @return  self
+     */ 
+    public function setMotivoUso($motivoUso)
+    {
+        $this->motivoUso = $motivoUso;
+
+        return $this;
     }
 }

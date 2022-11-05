@@ -28,12 +28,10 @@ $('#form-index').submit((e) => {
                     window.location.href = "/";
                 } else {
     
-                    alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+                    alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.');
                 }
             }
         })
-    } else {
-        window.location.href = "/";
     }
 })
 //CAIXAS
@@ -66,12 +64,10 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
                     window.location.href = "/";
                 } else {
     
-                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Provavelmente essas caixas estão sendo usadas por outra tabela.');
                 }
             }
         });
-    } else {
-        window.location.href = "/";
     }
 });
 

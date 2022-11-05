@@ -164,15 +164,15 @@ class PecaController extends Action {
 
 				$obj->setIdPeca($peca_baixar);
 				$obj->setQtdUso($_POST['qtdUso'][$k]);
+				$obj->setMotivoUso($_POST['motivoUso'][$k]);
 				$obj->setDataUso($_POST['dataUso'][$k]);
 
 				$baixa = $model_uso->insertUso($obj);
 
 				$abatimento = $model_peca->baixarQtdPeca($obj);
 				
-				if($baixa != '1' || $abatimento != '0') {
+				if($baixa != '1' || $abatimento == false) {
 					$resultado_final = false;
-					return;
 				} else {
 					$resultado_final = true;
 				}

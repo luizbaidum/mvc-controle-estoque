@@ -23,19 +23,27 @@
         <div class="form-group col-12 col-sm-3">
 
           <label for="dataUso[]">Data baixa</label>
-          <input type="text" class="form-control input-data" id="idDataBaixa-<?= $attr[0]['nomePeca']; ?>" value="" name="dataUso[]" required>
+          <input type="text" class="form-control input-data" id="idDataBaixa-<?= $attr[0]['idPeca']; ?>" value="" name="dataUso[]" required>
         </div>
 
         <div class="form-group col-12 col-sm-3">
 
           <label for="qtdUso[]">Quantidade baixa</label>
           <select class="form-control" id="idQtdPeca-<?= $attr[0]['idPeca']; ?>" value="" name="qtdUso[]" required>
-            <option>Escolha</option>
+            <option value="">Escolha</option>
             <?php for($i = 0; $i <= $attr[0]['qtdPeca']; $i++): ?>
               <option><?= $i ?></option>
             <?php endfor; ?>  
           </select>
         </div>
       </div>
+
+      <div class="form-group col-12 col-sm-12">
+
+        <label for="motivoUso[]">Breve motivo da baixa</label>
+        <input type="text" class="form-control" id="idMotivoUso-<?= $attr[0]['idPeca']; ?>" value="" name="motivoUso[]" required>
+      </div>
+
+      <hr>
     <?php endforeach; ?>    
 </form>

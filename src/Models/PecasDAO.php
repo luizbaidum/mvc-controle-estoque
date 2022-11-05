@@ -103,10 +103,10 @@ class PecasDAO extends Model {
 
 	function baixarQtdPeca($obj)
 	{
-		$query = "SELECT `qtdPeca` AS qtdPeca FROM `pecas` WHERE `idPeca` = ".$obj->getIdPeca()."; ".
-				"UPDATE `pecas` SET `qtdPeca` = qtdPeca - ".$obj->getQtdUso()." WHERE `idPeca` = ".$obj->getIdPeca()."";
+		$query = "SELECT `qtdPeca` FROM `pecas` WHERE `idPeca` = ".$obj->getIdPeca()."; ".
+				"UPDATE `pecas` SET `qtdPeca` = qtdPeca - ".$obj->getQtdUso()." WHERE `idPeca` = ".$obj->getIdPeca().";";
 	
-		$result = $this->db->exec($query);
+		$result = $this->db->query($query)->fetch(\PDO::FETCH_OBJ);
 		
 		return $result;
 	}

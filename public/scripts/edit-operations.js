@@ -22,8 +22,8 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
         dataType: "json",
         data: dados,
         complete: function(response) {
-            tratarDadosModal(response)
-        }
+                tratarDadosModal(response)
+            }
         });
     }      
 });
@@ -86,12 +86,13 @@ function editarPeca(dados)
         dataType: "json",
         data: dados,
         complete: function(response) {
-            if(response.resultado_operacao == true) {
+            let resposta = response.responseJSON;
+            if(resposta.resultado_operacao == true) {
 
-                alert("Peça ID " + response.id_operacao + " editada com sucesso!");
+                alert("Peça ID " + resposta.id_operacao + " editada com sucesso!");
                 window.location.href = "/";
             } else {
-                alert("Erro no processo de editar Peça ID " + response.id_operacao + ".");
+                alert("Erro no processo de editar Peça ID " + resposta.id_operacao + ".");
             }
         }
     })
