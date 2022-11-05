@@ -15,7 +15,7 @@ $('#form-index').submit((e) => {
 
     e.preventDefault();
 
-    if(operacao == 'deletar_peca') {
+    if(operacao == 'deletar_peca' && confirmarExclusao() == true) {
         $.ajax({
             method: "POST",
             url: "/delete_peca",
@@ -28,7 +28,7 @@ $('#form-index').submit((e) => {
                     window.location.href = "/";
                 } else {
     
-                    alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+                    alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.');
                 }
             }
         })
@@ -50,7 +50,7 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
 
     e.preventDefault();
 
-    if($('#operacao').val() == 'apagar') {
+    if($('#operacao').val() == 'apagar' && confirmarExclusao() == true) {
 
         $.ajax({
             method: "POST",
@@ -64,9 +64,16 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
                     window.location.href = "/";
                 } else {
     
-                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Por favor, tente novamente');
+                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Provavelmente essas caixas estão sendo usadas por outra tabela.');
                 }
             }
         });
     }
 });
+
+function confirmarExclusao()
+{
+    let confirmacao = confirm('Confirma exclusão?');
+
+    return confirmacao;
+}

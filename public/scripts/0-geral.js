@@ -49,6 +49,8 @@ function scriptDeSalvar()
         apagarCaixa(dados);
     } else if($('#operation').val() == 'editar_peca') {
         editarPeca(dados);
+    } else if($('#operation').val() == 'baixar_peca') {
+        baixarPeca(dados);
     }
 }
 /****************************************************/
@@ -169,4 +171,39 @@ $('.ordenar').click((e) => {
             tratarDadosTable(response);
         }
     })
+})
+/****************************************************/
+$('#baixar').click(() => {
+
+    dados = $('#form-index').serialize();
+
+    if($("[type='checkbox']:checked").length < 1) {
+        alert('Por favor, selecione pelo menos uma peça para baixar.');
+    } else {
+        prepararBaixa(dados);
+    }
+});
+
+function prepararBaixa(pecas)
+{
+    $.ajax({
+        method: "GET",
+        url: "/preparar_baixa",
+        dataType: "json",
+        data: dados,
+        complete: function(response) {
+            tratarDadosPagina(response)
+        }
+    })
+}
+/****************************************************/
+$('.input-data').keyup((e) => {
+    
+    var v=e.target.value.replace(/\D/g,"");
+
+    v=v.replace(/(\d{2})(\d)/,"$1/$2") 
+    
+    v=v.replace(/(\d{2})(\d)/,"$1/$2") 
+    
+    e.target.value = v;
 })

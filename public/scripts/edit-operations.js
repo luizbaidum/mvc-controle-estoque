@@ -22,8 +22,8 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
         dataType: "json",
         data: dados,
         complete: function(response) {
-            tratarDadosModal(response)
-        }
+                tratarDadosModal(response)
+            }
         });
     }      
 });
@@ -85,13 +85,33 @@ function editarPeca(dados)
         url: "/editar_peca",
         dataType: "json",
         data: dados,
-        success: function(response) {
-            if(response.resultado_operacao == true) {
+        complete: function(response) {
+            let resposta = response.responseJSON;
+            if(resposta.resultado_operacao == true) {
 
-                alert("Peça ID " + response.id_operacao + " editada com sucesso!");
+                alert("Peça ID " + resposta.id_operacao + " editada com sucesso!");
                 window.location.href = "/";
             } else {
-                alert("Erro no processo de editar Peça ID " + response.id_operacao + ".");
+                alert("Erro no processo de editar Peça ID " + resposta.id_operacao + ".");
+            }
+        }
+    })
+}
+
+function baixarPeca(dados)
+{
+    $.ajax({
+        method: "POST",
+        url: "/baixar_peca",
+        dataType: "json",
+        data: dados,
+        complete: function(response) {
+            let ids = response.responseJSON.id_operacao.toString();
+            if(response.responseJSON.resultado_operacao == true) {
+                alert("Peça(s) ID " + ids + " baixada(s) com sucesso!");
+                window.location.href = "/";
+            } else {
+                alert("Erro no processo de baixar Peça(s) ID " + ids + ".");
             }
         }
     })
