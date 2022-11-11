@@ -27,6 +27,12 @@ class PecaController extends Action {
 		try {
 			$model_peca = Container::getModel('PecasDAO');
 
+			/*echo '<pre>';
+			print_r($_FILES);
+			print_r($_POST);
+			
+			exit;*/
+
 			$obj = new PecasEntity();
 
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
@@ -82,11 +88,15 @@ class PecaController extends Action {
 		try {	
 			$model_peca = Container::getModel('PecasDAO');
 			$model_caixa = Container::getModel('CaixasDAO');
+			$model_uso = Container::getModel('UsoPecaDAO');
 
 			$id_peca = $_POST['idPeca'][0];
 			$lista_caixas = $model_caixa->selectCaixas();
 
 			$peca_editar = $model_peca->selectPeca($id_peca);
+
+			$this->view->disabled = false;
+			if($model_uso->vericarPecaEmUso($id_peca)) $this->view->disabled = true;
 
 			$this->arrayDataToView($peca_editar[0]);
 

@@ -3,6 +3,8 @@ function novaCaixa(dados)
     $.ajax({
         method: "POST",
         url: "nova_caixa/insert",
+        processData: false,
+        contentType: false,
         dataType: "json",
         data: dados,
         success: function(response) {
@@ -17,11 +19,13 @@ function novaCaixa(dados)
     })
 }     
 
-function novaPeca(dados)
+function novaPeca()
 {
     $.ajax({
         method: "POST",
         url: "nova_peca/insert",
+        processData: false,
+        contentType: false,
         dataType: "json",
         data: dados,
         success: function(response) {

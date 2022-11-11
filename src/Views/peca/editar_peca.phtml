@@ -7,7 +7,13 @@
 
     <label for="idPeca">ID da peça* (apenas números)</label>
 
-    <input type="number" class="form-control" id="idPeca" name="idPeca" value="<?= $idPeca ?>" required>
+    <input  type="number" 
+            class="form-control" 
+            id="idPeca" 
+            name="idPeca" 
+            value="<?= $idPeca ?>" 
+            required 
+            <?php if($this->view->disabled) echo 'disabled' ?>>
   </div>
 
   <div class="form-group">

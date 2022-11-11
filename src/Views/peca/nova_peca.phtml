@@ -1,4 +1,4 @@
-<form method="post" action="/nova_peca/insert">
+<form method="post" action="/nova_peca/insert" enctype="multipart/form-data">
 
   <div class="form-group">
 
@@ -43,5 +43,12 @@
         echo '<option id="'.$value["idCaixa"].'" value="'.$value["idCaixa"].'">'.$value["nomeCaixa"].'</option>';
       } ?>
     </select>
+  </div>
+
+  <div class="form-group">
+
+    <label for="fotoPeca">Foto .JPG</label>
+
+    <input type="file" class="form-control" id="fotoPeca" name="fotoPeca" accept="image/jpeg">
   </div>
 </form>

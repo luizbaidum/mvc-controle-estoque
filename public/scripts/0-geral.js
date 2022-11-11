@@ -10,14 +10,24 @@ $('#salvar').on('click', (e) => {
 
 $(document).on('click','#salvar-do-modal', (e) => {    
     e.preventDefault();
-    scriptDeSalvar();
+    let modal = $('#form-editar-caixa');
+    scriptDeSalvar(modal);
 })    
 /****************************************************/
-function scriptDeSalvar() 
+function scriptDeSalvar(modal) 
 {
-    //VALIDAÇÃO DE CAMPOS REQUIRED----------
-    let elementos = $('form').find('*');
+    let elementos = null;
+    let formulario = null;
 
+    elementos = $('form').find('*');
+    formulario = document.querySelector('form');
+
+    if(modal != undefined) {
+        elementos = modal.find('*');
+        formulario = document.getElementById('form-editar-caixa');
+    }
+
+    //VALIDAÇÃO DE CAMPOS REQUIRED----------
     let requeridos = [];
 
     elementos.each(function(key, elemento) {
@@ -35,9 +45,9 @@ function scriptDeSalvar()
 
         alert('Existem campos obrigatórios NÃO preenchidos.');
         return;
-    }    
-
-    let dados = $('form').serialize();
+    }   
+    
+    dados = new FormData(formulario);
 
     if($('#operation').val() == 'nova_caixa') {
         novaCaixa(dados);
@@ -45,8 +55,6 @@ function scriptDeSalvar()
         novaPeca(dados);
     } else if($('#operation').val() == 'editar_caixa') {
         editarCaixa(dados);
-    } else if($('#operation').val() == 'apagar_caixa') {
-        apagarCaixa(dados);
     } else if($('#operation').val() == 'editar_peca') {
         editarPeca(dados);
     } else if($('#operation').val() == 'baixar_peca') {
@@ -184,7 +192,7 @@ $('#baixar').click(() => {
     }
 });
 
-function prepararBaixa(pecas)
+function prepararBaixa()
 {
     $.ajax({
         method: "GET",
