@@ -16,8 +16,8 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] registro do valor cobrado pela peça
 - [ ] registro de NF da peça (data, cnpj)
 - [ ] alinhar infos relevantes das peças e caixas c/ cliente
-- [ ] script de upload de imagens
-- [ ] table e tratamento p/ imagens
+- [x] script de upload de imagens
+- [x] table e tratamento p/ imagens
 - [ ] alterar alert de confirm de crud p/ modalzinho
 - [x] tentar dinamizar o form submetido
 - [x] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
