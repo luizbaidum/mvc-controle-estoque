@@ -13,7 +13,7 @@ class PecasDAO extends Model {
 
 	public function getPecas()
 	{
-		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
+		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 
@@ -22,7 +22,7 @@ class PecasDAO extends Model {
 
 	public function getPecasPesquisa($coluna, $item)
 	{
-		$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna.' LIKE "%'.$item.'%"';
+		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna.' LIKE "%'.$item.'%"';
 
 	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
 
@@ -31,7 +31,7 @@ class PecasDAO extends Model {
 
 	function selectPeca($id)
 	{
-		$query = 'SELECT '.$this->select.' FROM `pecas` WHERE `idPeca` = '.$id;
+		$query = 'SELECT '.$this->select.',fotoPeca FROM `pecas` WHERE `idPeca` = '.$id;
 
 		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -40,7 +40,7 @@ class PecasDAO extends Model {
 
 	function insert($obj)
 	{
-		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`, `dataHora`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getQtdPeca()."','".$obj->getCaixaPeca()."', '".$this->getTime()."')";
+		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`, `fotoPeca`, `dataHora`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getQtdPeca()."','".$obj->getCaixaPeca()."', '".$obj->getFotoPeca()."', '".$this->getTime()."')";
 
 		$result = $this->db->exec($query);
 
@@ -88,10 +88,10 @@ class PecasDAO extends Model {
 			$coluna = explode("-", $variaveis['pesquisa_item']);
 			$item = $variaveis['pesquisa_obj'];
 
-			$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna[1].' LIKE "%'.$item.'%"';
+			$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna[1].' LIKE "%'.$item.'%"';
 		} else {
 
-			$query = 'SELECT '.$this->select.', '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
+			$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
 		}
 
 		$query .= ' ORDER BY '.$order_by.' ASC';
@@ -109,5 +109,17 @@ class PecasDAO extends Model {
 		$result = $this->db->query($query)->fetch(\PDO::FETCH_OBJ);
 		
 		return $result;
+	}
+
+	public function upload_img($obj)
+	{
+		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$obj->getIdPeca()."\\";
+
+		mkdir($diretorio, 0755);
+	
+		if(move_uploaded_file($_FILES['fotoPeca']['tmp_name'], $diretorio . $obj->getFotoPeca()));
+			return true;
+
+		return false;
 	}
 };

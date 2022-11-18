@@ -26,12 +26,13 @@
               <input type="checkbox" class="pecas" name="idPeca[]" value="<?= $valor->idPeca ?>">
             </td>
             <td>
-              <?= $valor->idPeca ?>
+              <input type="button" class="carregar-foto" value="<?= $valor->idPeca ?>">
+              <input type="hidden" class="foto-peca" name="fotoPeca[]" value="<?= $valor->fotoPeca ?>">
             </td>
             <td>
               <?= $valor->nomePeca ?>
             </td>
-            <td>
+            <td class="vlr-compra-peca">
               <?= $valor->vlrCompraPeca ?>
             </td>
             <td>

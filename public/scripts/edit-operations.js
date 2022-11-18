@@ -33,6 +33,8 @@ function editarCaixa(dados)
     $.ajax({
         method: "POST",
         url: "/editar_caixa",
+        processData: false,
+        contentType: false,
         dataType: "json",
         data: dados,
         success: function(response) {
@@ -83,6 +85,8 @@ function editarPeca(dados)
     $.ajax({
         method: "POST",
         url: "/editar_peca",
+        processData: false,
+        contentType: false,
         dataType: "json",
         data: dados,
         complete: function(response) {
@@ -103,6 +107,8 @@ function baixarPeca(dados)
     $.ajax({
         method: "POST",
         url: "/baixar_peca",
+        processData: false,
+        contentType: false,
         dataType: "json",
         data: dados,
         complete: function(response) {
