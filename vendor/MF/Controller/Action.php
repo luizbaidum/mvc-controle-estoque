@@ -70,4 +70,9 @@ abstract class Action {
 		include "../vendor/MF/ViewHelper/DataExtract.php";
 		require_once "../src/Views/".$classe_atual."/".$this->view->pagina.".phtml";
 	}
+
+	protected function limparCaracteres($string)
+	{
+		return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+	}
 }

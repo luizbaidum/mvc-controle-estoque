@@ -27,12 +27,6 @@ class PecaController extends Action {
 		try {
 			$model_peca = Container::getModel('PecasDAO');
 
-			/*echo '<pre>';
-			print_r($_FILES);
-			print_r($_POST);
-			
-			exit;*/
-
 			$obj = new PecasEntity();
 
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
@@ -42,15 +36,28 @@ class PecaController extends Action {
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
+			$foto_peca = NULL;
+			if($_FILES['fotoPeca']['name'] != '')
+				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
+				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
+
+			$obj->setFotoPeca($foto_peca);
+
 			$resultado_operacao = $model_peca->insert($obj);
 
-			if($resultado_operacao == 1) {
+			$resultado_upload = 1;
 
-				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
-				echo json_encode($resposta);
-			} else {
+			if($resultado_operacao == 1 && $foto_peca != NULL)
+				$resultado_upload = $model_peca->upload_img($obj);
+
+			if($resultado_operacao != 1 || $resultado_upload != 1) {
+
 				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
 				throw new Exception('Erro ao lançar nova Peça. Verifique se o ID da Peça já está cadastrado.');
+			} else {
+				
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
+				echo json_encode($resposta);
 			}
 
 		} catch (Exception $e) {
@@ -199,6 +206,19 @@ class PecaController extends Action {
 			}
 		} catch (Exception $e) {
 			echo json_encode($resposta);
+			$e->getMessage();
+		}
+	}
+
+	public function carregarFotoPeca()
+	{
+		try {
+			$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$_POST['peca']."\\";
+
+			$abrir_foto = $diretorio . $_POST['foto'];
+
+			$this->renderModal('foto_peca', $_POST["peca"], $abrir_foto);
+		} catch (Exception $e) {
 			$e->getMessage();
 		}
 	}

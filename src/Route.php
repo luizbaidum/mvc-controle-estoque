@@ -104,6 +104,12 @@ class Route extends Bootstrap {
 			'action' => 'baixarPeca'
 		);
 
+		$routes['carregar_foto_peca'] = array(
+			'route' => '/carregar_foto_peca',
+			'controller' => 'PecaController',
+			'action' => 'carregarFotoPeca'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

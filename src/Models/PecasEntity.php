@@ -9,6 +9,7 @@
         protected $vlrCompraPeca;
         protected $qtdPeca;
         protected $caixaPeca;
+        protected $fotoPeca;
         protected $oldId;
 
         /**
@@ -124,6 +125,26 @@
         public function setOldId($oldId)
         {
                 $this->oldId = $oldId;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of fotoPeca
+         */ 
+        public function getFotoPeca()
+        {
+                return $this->fotoPeca;
+        }
+
+        /**
+         * Set the value of fotoPeca
+         *
+         * @return  self
+         */ 
+        public function setFotoPeca($fotoPeca)
+        {
+                $this->fotoPeca = $fotoPeca;
 
                 return $this;
         }

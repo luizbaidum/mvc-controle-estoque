@@ -6,7 +6,6 @@ use Exception;
 use MF\Controller\Action;
 use MF\Model\Container;
 use src\Models\CaixasEntity;
-use src\Models\PecasDAO;
 
 class CaixaController extends Action {
 

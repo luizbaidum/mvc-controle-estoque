@@ -215,3 +215,33 @@ $('.input-data').keyup((e) => {
     
     e.target.value = v;
 })
+/****************************************************/
+$(document).on('click', '.carregar-foto', (e) => {
+
+    let id_peca = $(e.target).closest('tr').find('.pecas').val();
+
+    let nome_foto = $(e.target).closest('tr').find('.foto-peca').val();
+
+    $.ajax({
+        method: "POST",
+        url: "/carregar_foto_peca",
+        dataType: "json",
+        data: {
+            peca: id_peca,
+            foto: nome_foto
+        },
+        complete: function(response) {
+            tratarDadosModal(response);
+        }
+    })
+})
+/****************************************************/
+$(document).ready(function() {
+    $(document).find('.vlr-compra-peca').each((index, item) => {
+
+        let vlr1 = $(item).text();
+        let vlr2 = vlr1.replace('.',',');
+        $(item).text('R$ '+vlr2);
+    });
+})
+/****************************************************/
