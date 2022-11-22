@@ -40,7 +40,12 @@ class PecasDAO extends Model {
 
 	function insert($obj)
 	{
-		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`, `fotoPeca`, `dataHora`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getQtdPeca()."','".$obj->getCaixaPeca()."', '".$obj->getFotoPeca()."', '".$this->getTime()."')";
+		$script_imagem = NULL;
+		if ($obj->getFotoPeca() != NULL) {
+			$script_imagem = ", `fotoPeca` = '".$obj->getFotoPeca()."',";
+		}
+
+		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`, `fotoPeca`, `dataHora`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getQtdPeca()."','".$obj->getCaixaPeca()."', ".$script_imagem.", '".$this->getTime()."')";
 
 		$result = $this->db->exec($query);
 
@@ -51,7 +56,7 @@ class PecasDAO extends Model {
 	{
 		$id_peca = implode(" ", $pecas_excluir);
 
-		$query = "DELETE FROM `pecas` WHERE `pecas`.`idPeca` IN (".str_replace(' ', ', ', $id_peca).");";
+		$query = "DELETE `pecas`.* FROM `pecas` WHERE `pecas`.`idPeca` IN (".str_replace(' ', ', ', $id_peca).");";
 
 		$result = $this->db->exec($query);
 
@@ -72,7 +77,12 @@ class PecasDAO extends Model {
 
 	function editar($obj)
 	{
-		$query = "UPDATE `pecas` SET `idPeca` = ".$obj->getIdPeca().", `nomePeca` = '".$obj->getNomePeca()."', `vlrCompraPeca` = ".$obj->getVlrCompraPeca().",  `qtdPeca` = ".$obj->getQtdPeca().", `caixaPeca` = ".$obj->getCaixaPeca().", `dataHora` = '".$this->getTime()."' WHERE `idPeca` = ".$obj->getOldId()."";
+		$script_imagem = ',';
+		if ($obj->getFotoPeca() != NULL) {
+			$script_imagem = ", `fotoPeca` = '".$obj->getFotoPeca()."',";
+		}
+
+		$query = "UPDATE `pecas` SET `idPeca` = ".$obj->getIdPeca().", `nomePeca` = '".$obj->getNomePeca()."', `vlrCompraPeca` = ".$obj->getVlrCompraPeca().",  `qtdPeca` = ".$obj->getQtdPeca().", `caixaPeca` = ".$obj->getCaixaPeca()." ".$script_imagem." `dataHora` = '".$this->getTime()."' WHERE `idPeca` = ".$obj->getOldId()."";
 
 		$result = $this->db->exec($query);
 		
@@ -115,11 +125,31 @@ class PecasDAO extends Model {
 	{
 		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$obj->getIdPeca()."\\";
 
-		mkdir($diretorio, 0755);
+		if (!file_exists($diretorio)) {
+			mkdir($diretorio, 0755);
+		}
 	
 		if(move_uploaded_file($_FILES['fotoPeca']['tmp_name'], $diretorio . $obj->getFotoPeca()));
 			return true;
 
 		return false;
+	}
+
+	public function load_img($id_peca, $foto)
+	{
+		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$id_peca."\\";
+
+		$carregar = $diretorio . $foto;
+
+		return $carregar;
+	}
+
+	public function delete_img_bd($id_peca)
+	{
+		$query = "UPDATE `pecas` SET `fotoPeca` = NULL WHERE `idPeca` = ".$id_peca.";";
+				
+		$result = $this->db->exec($query);
+		
+		return $result;
 	}
 };
