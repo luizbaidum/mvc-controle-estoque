@@ -56,4 +56,16 @@
       } ?>
     </select>
   </div>
+
+  <div class="form-group" id="fotoPeca">
+
+    <label for="fotoPeca">Foto .JPG</label>
+    <input type="file" class="form-control" id="fotoPeca" name="fotoPeca" accept="image/jpeg">
+
+    <span class="h6">Imagem atual: <?= $fotoPeca ? $fotoPeca : 'Nenhuma imagem' ?></span>
+
+    <?php if(isset($fotoPeca) && $fotoPeca != ''): ?>
+      <hr><button type="button" id="excluir-img-atual">Excluir imagem atual</button>
+    <?php endif; ?>  
+  </div>
 </form>

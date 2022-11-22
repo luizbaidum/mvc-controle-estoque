@@ -115,6 +115,7 @@ function abrirModal(conteudo)
 {
     $(".modal-content").html(conteudo);
     $('#id-modal-form').modal('show');
+    aplicarR$();
 }
 
 function tratarDadosPagina(response)
@@ -126,6 +127,7 @@ function tratarDadosPagina(response)
 function carregarPagina(conteudo) 
 {
     $('body').html(conteudo);
+    aplicarR$();
 }
 
 function tratarDadosTable(response)
@@ -137,6 +139,7 @@ function tratarDadosTable(response)
 function carregarTable(conteudo) 
 {
     $('tbody').html(conteudo);
+    aplicarR$();
 }
 /****************************************************/
 $('#form-pesquisar').on('submit', (e) => {
@@ -237,11 +240,16 @@ $(document).on('click', '.carregar-foto', (e) => {
 })
 /****************************************************/
 $(document).ready(function() {
+    aplicarR$();
+})
+
+function aplicarR$()
+{
     $(document).find('.vlr-compra-peca').each((index, item) => {
 
         let vlr1 = $(item).text();
-        let vlr2 = vlr1.replace('.',',');
+        let vlr2 = vlr1.replace('.',',').replace('R$ ', '');
         $(item).text('R$ '+vlr2);
     });
-})
+}
 /****************************************************/

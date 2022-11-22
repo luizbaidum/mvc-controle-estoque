@@ -110,6 +110,12 @@ class Route extends Bootstrap {
 			'action' => 'carregarFotoPeca'
 		);
 
+		$routes['delete_img'] = array(
+			'route' => '/delete_img',
+			'controller' => 'PecaController',
+			'action' => 'deletarImagem'
+		);
+
 		$this->setRoutes($routes);
 	}
 }

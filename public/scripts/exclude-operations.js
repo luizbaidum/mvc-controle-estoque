@@ -77,3 +77,32 @@ function confirmarExclusao()
 
     return confirmacao;
 }
+
+$(document).on('click', '#excluir-img-atual', (e) => {
+
+    let id_peca = $('#oldId').val();
+
+    if (confirmarExclusao() == true) {
+        
+        let dados = new FormData;
+        dados.append('id_img', id_peca);
+    
+        $.ajax({
+            method: "POST",
+            url: "/delete_img",
+            dataType: "json",
+            data: dados,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if(response.resultado_operacao == true) {
+                    alert('Imagem excluída com sucesso!');
+                    $('#fotoPeca span').text('Imagem atual: Nenhuma imagem');
+                    $('#excluir-img-atual').prop('disabled', 'true');
+                } else {
+                    alert('Erro ao excluir imagem.');
+                }
+            }
+        });
+    }
+})

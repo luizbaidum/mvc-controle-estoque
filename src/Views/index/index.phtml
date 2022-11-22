@@ -2,7 +2,7 @@
 
   <form method="POST" id="form-index">
 
-    <table>
+    <table id="tabela-principal">
 
       <thead>
 
@@ -26,8 +26,12 @@
               <input type="checkbox" class="pecas" name="idPeca[]" value="<?= $valor->idPeca ?>">
             </td>
             <td>
-              <input type="button" class="carregar-foto" value="<?= $valor->idPeca ?>">
-              <input type="hidden" class="foto-peca" name="fotoPeca[]" value="<?= $valor->fotoPeca ?>">
+              <?php if($valor->fotoPeca != '' || $valor->fotoPeca != NULL): ?>
+                <input type="button" class="carregar-foto" value="<?= $valor->idPeca ?>">
+                <input type="hidden" class="foto-peca" name="fotoPeca[]" value="<?= $valor->fotoPeca ?>">
+              <?php else: ?>
+                <?= $valor->idPeca ?>
+              <?php endif; ?>
             </td>
             <td>
               <?= $valor->nomePeca ?>

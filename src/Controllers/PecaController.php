@@ -37,9 +37,10 @@ class PecaController extends Action {
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
 			$foto_peca = NULL;
-			if($_FILES['fotoPeca']['name'] != '')
+			if($_FILES['fotoPeca']['name'] != '') {
 				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
 				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
+			}
 
 			$obj->setFotoPeca($foto_peca);
 
@@ -130,19 +131,30 @@ class PecaController extends Action {
 			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
+
+			if($_FILES['fotoPeca']['name'] != '') {
+				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
+				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
+				$obj->setFotoPeca($foto_peca);
+			}
 			$obj->setOldId($_POST['oldId']);
 
 			$resultado_operacao = $model_peca->editar($obj);
 
-			if($resultado_operacao == 1) {
+			$resultado_upload = 1;
+
+			if($resultado_operacao == 1 && isset($foto_peca))
+				$resultado_upload = $model_peca->upload_img($obj);
+
+			if($resultado_operacao != 1 || $resultado_upload != 1) {
+				
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
+				throw new Exception('Erro ao editar Peça.');
+			} else {
 
 				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
 				echo json_encode($resposta);
-			} else {
-				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
-				throw new Exception('Erro ao editar Peça.');
 			}
-
 		} catch (Exception $e) {
 			echo json_encode($resposta);
 			$e->getMessage();
@@ -213,12 +225,36 @@ class PecaController extends Action {
 	public function carregarFotoPeca()
 	{
 		try {
-			$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$_POST['peca']."\\";
+			$model_peca = Container::getModel('PecasDAO');
 
-			$abrir_foto = $diretorio . $_POST['foto'];
+			$abrir_foto = $model_peca->load_img($_POST['peca'], $_POST['foto']);
 
-			$this->renderModal('foto_peca', $_POST["peca"], $abrir_foto);
+			if($abrir_foto == '' || $abrir_foto == NULL) {
+				throw new Exception('Erro no precesso de carregar imagem.');
+			} else {
+				$this->renderModal('foto_peca', $_POST["peca"], $abrir_foto);
+			}
 		} catch (Exception $e) {
+			$e->getMessage();
+		}
+	}
+
+	public function deletarImagem()
+	{
+		try {
+			$model_peca = Container::getModel('PecasDAO');
+
+			$img_deleted = $model_peca->delete_img_bd($_POST['id_img']);
+
+			if($img_deleted) {
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => '');
+				echo json_encode($resposta);
+			} else {
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => '');
+				throw new Exception('Erro no precesso de deletar imagem.');
+			}
+		} catch (Exception $e) {
+			echo json_encode($resposta);
 			$e->getMessage();
 		}
 	}
