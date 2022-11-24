@@ -1,0 +1,71 @@
+<form method="post">
+
+  <div class="form-group">
+
+    <input name="operation" id="operation" value="editar_peca" type="hidden">
+    <input id="oldId" name="oldId" value="<?= $idPeca ?>" type="hidden">
+
+    <label for="idPeca">ID da peça* (apenas números)</label>
+
+    <input  type="number" 
+            class="form-control" 
+            id="idPeca" 
+            name="idPeca" 
+            value="<?= $idPeca ?>" 
+            required 
+            <?php if($this->view->disabled) echo 'disabled' ?>>
+  </div>
+
+  <div class="form-group">
+
+    <label for="nomePeca">Nome da peça* (números/letras)</label>
+
+    <input type="text" class="form-control" id="nomePeca" name="nomePeca" value="<?= $nomePeca ?>" required>
+  </div>
+
+  <div class="form-group">
+
+    <label for="vlrCompraPeca">Valor pago pela peça* (apenas números)</label>
+
+    <input type="text" class="form-control" maxlength="9" id="vlrCompraPeca" name="vlrCompraPeca" value="<?= $vlrCompraPeca ?>" required>
+  </div>
+
+  <div class="form-group">
+
+    <label for="qtdPeca">Qtd de peças compradas* (apenas números)</label>
+
+    <input type="text" class="form-control" id="qtdPeca" name="qtdPeca" value="<?= $qtdPeca ?>" required>
+  </div>
+
+  <div class="form-group">
+
+    <label for="caixaPeca">Caixa onde está a peça *</label>
+      
+    <select class="form-control" id="caixaPeca" name="caixaPeca" required>
+    
+      <option value="">Selecione</option>
+
+      <?php 
+        
+        foreach($this->matriz_data as $key => $value) {
+
+          $selected = '';
+          if($value["idCaixa"] == $caixaPeca) $selected = 'selected';  
+
+          echo '<option id="'.$value["idCaixa"].'" value="'.$value["idCaixa"].'" '.$selected.'>'.$value["nomeCaixa"].'</option>';
+      } ?>
+    </select>
+  </div>
+
+  <div class="form-group" id="fotoPeca">
+
+    <label for="fotoPeca">Foto .JPG</label>
+    <input type="file" class="form-control" id="fotoPeca" name="fotoPeca" accept="image/jpeg">
+
+    <span class="h6">Imagem atual: <?= $fotoPeca ? $fotoPeca : 'Nenhuma imagem' ?></span>
+
+    <?php if(isset($fotoPeca) && $fotoPeca != ''): ?>
+      <hr><button type="button" id="excluir-img-atual">Excluir imagem atual</button>
+    <?php endif; ?>  
+  </div>
+</form>

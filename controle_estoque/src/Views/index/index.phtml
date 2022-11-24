@@ -1,0 +1,56 @@
+<main class="conteudo_principal">
+
+  <form method="POST" id="form-index">
+
+    <table id="tabela-principal">
+
+      <thead>
+
+        <tr>
+          <?php 
+            if(isset($this->view->atributos) && gettype($this->view->atributos) == 'array'):
+              echo '<td>Selecionar</td>';
+              foreach($this->view->atributos as $index => $valor) { ?>
+                <td>
+                  <?= $valor ?>
+                </td>
+            <?php } 
+            endif; ?>
+        </tr>    
+      </thead>
+      
+      <tbody>
+        <?php foreach($this->view->dados as $index => $valor) { ?>
+          <tr>
+            <td class="selects">
+              <input type="checkbox" class="pecas" name="idPeca[]" value="<?= $valor->idPeca ?>">
+            </td>
+            <td>
+              <?php if($valor->fotoPeca != '' || $valor->fotoPeca != NULL): ?>
+                <input type="button" class="carregar-foto" value="<?= $valor->idPeca ?>">
+                <input type="hidden" class="foto-peca" name="fotoPeca[]" value="<?= $valor->fotoPeca ?>">
+              <?php else: ?>
+                <?= $valor->idPeca ?>
+              <?php endif; ?>
+            </td>
+            <td>
+              <?= $valor->nomePeca ?>
+            </td>
+            <td class="vlr-compra-peca">
+              <?= $valor->vlrCompraPeca ?>
+            </td>
+            <td>
+              <?= $valor->qtdPeca ?>
+            </td>
+            <td>
+              <?= $valor->caixaPeca ?>
+            </td>
+            <td>
+              <?= $valor->nomeCaixa ?>
+            </td>
+          </tr>        
+        <?php } ?>
+      </tbody>
+    </table>
+  </form>  
+</main>
