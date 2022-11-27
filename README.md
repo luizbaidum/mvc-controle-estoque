@@ -23,3 +23,6 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [x] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
 - [x] coluna qtd de peças.
 - [ ] repassar codigo e buscar mais padronização
+- [ ] adicionar letras p/ ID de caixas e pecas
+- [ ] exibir caixas cadastradas
+- [ ] remover obrigatoriedade de lançar valor pago
