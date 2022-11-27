@@ -67,7 +67,6 @@ $('#form-index').submit((e) => {
     e.preventDefault();
 
     if(operacao == 'editar_peca') {
-
         $.ajax({
             method: "POST",
             url: "/prepara_edit_peca",
