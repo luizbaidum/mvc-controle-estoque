@@ -43,7 +43,7 @@ class PecasDAO extends Model {
 		$script_imagem = ', ';
 		$foto_peca = ', ';
 		if ($obj->getFotoPeca() != NULL) {
-			$script_imagem = ", `fotoPeca` = '".$obj->getFotoPeca()."',";
+			$script_imagem = ",'".$obj->getFotoPeca()."',";
 			$foto_peca = ", `fotoPeca`,";
 		}
 
@@ -125,13 +125,14 @@ class PecasDAO extends Model {
 
 	public function upload_img($obj)
 	{
-		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$obj->getIdPeca()."\\";
+		$diretorio = "/home/vol19_2/epizy.com/epiz_33064120/htdocs/IMG/".$obj->getIdPeca()."/";
 
-		if (!file_exists($diretorio)) {
+		if (!file_exists($diretorio))
 			mkdir($diretorio, 0755);
-		}
+
+		$destino = $diretorio.$obj->getFotoPeca();
 	
-		if(move_uploaded_file($_FILES['fotoPeca']['tmp_name'], $diretorio . $obj->getFotoPeca()));
+		if(move_uploaded_file($_FILES['fotoPeca']['tmp_name'], $destino))
 			return true;
 
 		return false;
@@ -139,9 +140,9 @@ class PecasDAO extends Model {
 
 	public function load_img($id_peca, $foto)
 	{
-		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\src\Imagens\\".$id_peca."\\";
+		$diretorio = "IMG/".$id_peca."/";
 
-		$carregar = $diretorio . $foto;
+		$carregar = $diretorio.$foto;
 
 		return $carregar;
 	}
