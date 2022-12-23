@@ -13,33 +13,52 @@ class PecasDAO extends Model {
 
 	public function getPecas()
 	{
-		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
+		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' 
+				FROM pecas 
+				INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
 
-	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+		$stmt = $this->db->prepare($query);
 
+		$stmt->execute();
+		$result = $stmt->fetchAll(\PDO::FETCH_OBJ);
 		return $result;
 	}
 
 	public function getPecasPesquisa($coluna, $item)
 	{
-		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna.' LIKE "%'.$item.'%"';
+		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' 
+				FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa 
+				WHERE :coluna LIKE :item';
 
-	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':coluna', $coluna);
+		$stmt->bindValue(':item', "%".$item."%");
 
+		$stmt->execute();
+
+		echo '<pre>';
+		$stmt->debugDumpParams();
+
+	 	$result = $stmt->fetchAll(\PDO::FETCH_OBJ);
 		return $result;
 	}
 
 	function selectPeca($id)
 	{
-		$query = 'SELECT '.$this->select.',fotoPeca FROM `pecas` WHERE `idPeca` = '.$id;
+		$query = 'SELECT '.$this->select.',fotoPeca 
+					FROM `pecas` 
+					WHERE `idPeca` = :id';
 
-		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id', $id);
 
+		$stmt->execute();
+	 	$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		return $result;
 	}
 
 	function insert($obj)
-	{
+	{//pensar neste e testar os acima
 		$script_imagem = ', ';
 		$foto_peca = ', ';
 		if ($obj->getFotoPeca() != NULL) {
