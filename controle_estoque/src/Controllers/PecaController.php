@@ -61,9 +61,8 @@ class PecaController extends Action {
 			}
 
 		} catch (Exception $e) {
-
+			echo $e->getMessage();
 			echo json_encode($resposta);
-			$e->getMessage();
 		}
 	}
 
@@ -73,20 +72,21 @@ class PecaController extends Action {
 			$pecas_excluir = $_POST['idPeca'];
 	
 			$model_peca = Container::getModel('PecasDAO');
-	
+
 			$resultado_operacao = $model_peca->deletar($pecas_excluir);
 
 			if($resultado_operacao == count($pecas_excluir)) {
+
 				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
 				echo json_encode($resposta);
 			} else {
+				
 				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $pecas_excluir);
 				throw new Exception('Erro ao deletar peça(s).');
 			}
 		} catch (Exception $e) {
-
+			echo $e->getMessage();
 			echo json_encode($resposta);
-			$e->getMessage();
 		}
 	}
 
@@ -114,7 +114,7 @@ class PecaController extends Action {
 			if(!$peca_editar || !$lista_caixas) throw new Exception('Erro ao carregar peça para edição.');
 
 		} catch (Exception $e) {
-			$e->getMessage();
+			echo $e->getMessage();
 		}
 	}
 
@@ -155,8 +155,8 @@ class PecaController extends Action {
 				echo json_encode($resposta);
 			}
 		} catch (Exception $e) {
+			echo $e->getMessage();
 			echo json_encode($resposta);
-			$e->getMessage();
 		}
 	}
 
@@ -176,7 +176,7 @@ class PecaController extends Action {
 				throw new Exception('Erro ao selecionar peça(s) para baixa.');
 			}
 		} catch (Exception $e) {
-			$e->getMessage();
+			echo $e->getMessage();
 		}
 	}
 
@@ -216,8 +216,8 @@ class PecaController extends Action {
 				throw new Exception('Erro no precesso de baixar Peça(s).');
 			}
 		} catch (Exception $e) {
+			echo $e->getMessage();
 			echo json_encode($resposta);
-			$e->getMessage();
 		}
 	}
 
@@ -234,7 +234,7 @@ class PecaController extends Action {
 				$this->renderModal('foto_peca', $_POST["peca"], $abrir_foto);
 			}
 		} catch (Exception $e) {
-			$e->getMessage();
+			echo $e->getMessage();
 		}
 	}
 
@@ -253,8 +253,8 @@ class PecaController extends Action {
 				throw new Exception('Erro no precesso de deletar imagem.');
 			}
 		} catch (Exception $e) {
+			echo $e->getMessage();
 			echo json_encode($resposta);
-			$e->getMessage();
 		}
 	}
 }

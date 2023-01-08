@@ -19,7 +19,7 @@ class UsoPecaDAO extends Model {
 	{
 		$query = 'SELECT `idUso` FROM `uso_pecas` WHERE `idPeca` = '.$id_peca.'';
 
-		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);;
+		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
 
 		if($result)
 			return true;

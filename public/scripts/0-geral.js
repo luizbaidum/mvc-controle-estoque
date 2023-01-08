@@ -240,7 +240,7 @@ $('#form-pesquisar').on('submit', (e) => {
 
     pesquisa_item = $('select[name="base-pesquisa"]').prop('value');
 
-    pesquisa_obj = $('input[name="item-pesquisa"]').prop('value');;
+    pesquisa_obj = $('input[name="item-pesquisa"]').prop('value');
 
 
 

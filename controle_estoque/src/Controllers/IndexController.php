@@ -26,7 +26,7 @@ class IndexController extends Action {
 			if(!$pecas || !$atributos) throw new Exception('Erro ao carregar INDEX.');
 
 		} catch (Exception $e) {
-			$e->getMessage();
+			echo $e->getMessage();
 		}
 	}
 
@@ -45,7 +45,7 @@ class IndexController extends Action {
 			$this->renderPesquisa('index');
 			
 		} catch (Exception $e) {
-			$e->getMessage();
+			echo $e->getMessage();
 		}
 	}
 
@@ -61,7 +61,7 @@ class IndexController extends Action {
 			$this->renderPesquisa('index');
 
 		} catch (Exception $e) {
-			$e->getMessage();
+			echo $e->getMessage();
 		}
 	}
 }

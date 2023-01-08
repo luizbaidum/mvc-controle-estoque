@@ -26,19 +26,14 @@ class PecasDAO extends Model {
 
 	public function getPecasPesquisa($coluna, $item)
 	{
-		$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' 
+		$query = "SELECT $this->select,fotoPeca, $this->join 
 				FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa 
-				WHERE :coluna LIKE :item';
+				WHERE $coluna LIKE :item";
 
 		$stmt = $this->db->prepare($query);
-		$stmt->bindValue(':coluna', $coluna);
 		$stmt->bindValue(':item', "%".$item."%");
 
 		$stmt->execute();
-
-		echo '<pre>';
-		$stmt->debugDumpParams();
-
 	 	$result = $stmt->fetchAll(\PDO::FETCH_OBJ);
 		return $result;
 	}
@@ -58,7 +53,7 @@ class PecasDAO extends Model {
 	}
 
 	function insert($obj)
-	{//pensar neste e testar os acima
+	{
 		$script_imagem = ', ';
 		$foto_peca = ', ';
 		if ($obj->getFotoPeca() != NULL) {
@@ -66,29 +61,43 @@ class PecasDAO extends Model {
 			$foto_peca = ", `fotoPeca`,";
 		}
 
-		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`".$foto_peca." `dataHora`) VALUES (".$obj->getIdPeca().", '".$obj->getNomePeca()."', '".$obj->getVlrCompraPeca()."', '".$obj->getQtdPeca()."','".$obj->getCaixaPeca()."'".$script_imagem."'".$this->getTime()."')";
+		$query = "INSERT INTO `pecas` (`idPeca`, `nomePeca`, `vlrCompraPeca`, `qtdPeca`,`caixaPeca`".$foto_peca." `dataHora`) 
+			VALUES (:id, :nome, :valor, :qtd,:caixa".$script_imagem.":data_hora)";
 
-		$result = $this->db->exec($query);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id', $obj->getIdPeca());
+		$stmt->bindValue(':nome', $obj->getNomePeca());
+		$stmt->bindValue(':valor', $obj->getVlrCompraPeca());
+		$stmt->bindValue(':qtd', $obj->getQtdPeca());
+		$stmt->bindValue(':caixa', $obj->getCaixaPeca());
+		$stmt->bindValue(':data_hora', $this->getTime());
 
+		$result = $stmt->execute();
 		return $result;
 	}
 
 	function deletar($pecas_excluir)
 	{
-		$id_peca = implode(" ", $pecas_excluir);
+		$id_peca = implode(", ", $pecas_excluir);
 
-		$query = "DELETE `pecas`.* FROM `pecas` WHERE `pecas`.`idPeca` IN (".str_replace(' ', ', ', $id_peca).");";
+		$query = "DELETE `pecas`.* FROM `pecas` WHERE `pecas`.`idPeca` IN (:id_peca);";
 
-		$result = $this->db->exec($query);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id_peca', $id_peca);
 
+		$result = $stmt->execute();
 		return $result;
 	}
 
 	function vericarCaixaEmUso($id_caixa)
 	{
-		$query = 'SELECT `idPeca` FROM `pecas` WHERE `caixaPeca` = '.$id_caixa.'';
+		$query = 'SELECT `idPeca` FROM `pecas` WHERE `caixaPeca` = :id_caixa';
 
-		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);;
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id_caixa', $id_caixa);
+
+		$result = $stmt->execute();
+		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		if($result)
 			return true;
@@ -103,13 +112,29 @@ class PecasDAO extends Model {
 			$script_imagem = ", `fotoPeca` = '".$obj->getFotoPeca()."',";
 		}
 
-		$query = "UPDATE `pecas` SET `idPeca` = ".$obj->getIdPeca().", `nomePeca` = '".$obj->getNomePeca()."', `vlrCompraPeca` = ".$obj->getVlrCompraPeca().",  `qtdPeca` = ".$obj->getQtdPeca().", `caixaPeca` = ".$obj->getCaixaPeca()." ".$script_imagem." `dataHora` = '".$this->getTime()."' WHERE `idPeca` = ".$obj->getOldId()."";
+		$query = "UPDATE `pecas` SET 
+			`idPeca` = :id, 
+			`nomePeca` = :nome, 
+			`vlrCompraPeca` = :valor, 
+			`qtdPeca` = :qtd, 
+			`caixaPeca` = :caixa 
+			".$script_imagem." 
+			`dataHora` = :data_hora 
+			WHERE `idPeca` = :old_id";
 
-		$result = $this->db->exec($query);
-		
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':old_id', $obj->getOldId());
+		$stmt->bindValue(':id', $obj->getIdPeca());
+		$stmt->bindValue(':nome', $obj->getNomePeca());
+		$stmt->bindValue(':valor', $obj->getVlrCompraPeca());
+		$stmt->bindValue(':qtd', $obj->getQtdPeca());
+		$stmt->bindValue(':caixa', $obj->getCaixaPeca());
+		$stmt->bindValue(':data_hora', $this->getTime());
+
+		$result = $stmt->execute();	
 		return $result;
 	}
-
+//continuar a partir daqui
 	function selectWithOrdenation($variaveis)
 	{
 		$order_by = $variaveis["order_by"];
@@ -144,8 +169,8 @@ class PecasDAO extends Model {
 
 	public function upload_img($obj)
 	{
-		$diretorio = "/home/vol19_2/epizy.com/epiz_33064120/htdocs/IMG/".$obj->getIdPeca()."/";
-
+		$diretorio = "C:\Users\Acer\Desktop\GITHUB\mvc-controle-estoque\public\img/".$obj->getIdPeca()."/";
+		
 		if (!file_exists($diretorio))
 			mkdir($diretorio, 0755);
 
