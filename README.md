@@ -26,3 +26,5 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] adicionar letras p/ ID de caixas e pecas
 - [ ] exibir caixas cadastradas
 - [ ] remover obrigatoriedade de lançar valor pago
+- [ ] transformar echo $e->getMessage() em um arquivo de log??
+- [ ] revisar todo o sistema p/ melhoria de distribuição de arquivos e classes
