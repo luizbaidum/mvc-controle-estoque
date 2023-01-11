@@ -2,7 +2,6 @@ var dados = null;
 var operacao = null;
 var pesquisa_item = null;
 var pesquisa_obj = null; 
-
 /****************************************************/
 $('#salvar').on('click', (e) => {    
     e.preventDefault();
@@ -64,15 +63,11 @@ function scriptDeSalvar(modal)
     }
 }
 /****************************************************/
-
 $('#cancelar').on('click', () => {
     window.location.href = "/";
 })
-
 /****************************************************/
-
 //Formata valores para br_R$
-
 $('#vlrCompraPeca').on('keyup', () => {
 
     let valor = $('#vlrCompraPeca').val();
@@ -88,9 +83,7 @@ $('#vlrCompraPeca').on('keyup', () => {
 
     if(valor == 'NaN') $('#vlrCompraPeca').val('');
 })
-
 /****************************************************/
-
 $('.listar-caixas').on('click', (e) => {
 
     //operação p/ capturar o innerText do botão que o usuário clica e transformar isso no modal que se quer abrir
@@ -151,9 +144,7 @@ function carregarTable(conteudo)
     $('tbody').html(conteudo);
     aplicarR$();
 }
-
 /****************************************************/
-
 $('#form-pesquisar').on('submit', (e) => {
 
     e.preventDefault();

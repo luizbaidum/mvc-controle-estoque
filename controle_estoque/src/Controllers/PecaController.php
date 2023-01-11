@@ -61,7 +61,7 @@ class PecaController extends Action {
 			}
 
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
@@ -85,7 +85,7 @@ class PecaController extends Action {
 				throw new Exception('Erro ao deletar peça(s).');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
@@ -114,7 +114,7 @@ class PecaController extends Action {
 			if(!$peca_editar || !$lista_caixas) throw new Exception('Erro ao carregar peça para edição.');
 
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 		}
 	}
 
@@ -155,7 +155,7 @@ class PecaController extends Action {
 				echo json_encode($resposta);
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
@@ -176,7 +176,7 @@ class PecaController extends Action {
 				throw new Exception('Erro ao selecionar peça(s) para baixa.');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 		}
 	}
 
@@ -216,7 +216,7 @@ class PecaController extends Action {
 				throw new Exception('Erro no precesso de baixar Peça(s).');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
@@ -234,7 +234,7 @@ class PecaController extends Action {
 				$this->renderModal('foto_peca', $_POST["peca"], $abrir_foto);
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 		}
 	}
 
@@ -253,7 +253,7 @@ class PecaController extends Action {
 				throw new Exception('Erro no precesso de deletar imagem.');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}

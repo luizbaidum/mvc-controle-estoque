@@ -16,25 +16,22 @@ $('#form-index').submit((e) => {
     e.preventDefault();
 
     if(operacao == 'deletar_peca' && confirmarExclusao() == true) {
-
         $.ajax({
             method: "POST",
             url: "/delete_peca",
             dataType: "json",
             data: dados,
-            success: function(response) {
+            complete: function(response) {
+                if(response.responseJSON.resultado_operacao == true) {
 
-                if(response.resultado_operacao == true) {
-
-                    alert('Peça(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
+                    alert('Peça(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!')
                     window.location.href = "/";
                 } else {
-                    alert('Erro ao excluir Peça(s) ID(s) '+ response.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.');
+                    alert('Erro ao excluir Peça(s) ID(s) '+ response.responseJSON.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.');
                 }
             }
         })
     }
-
 })
 
 //CAIXAS
@@ -60,14 +57,14 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
             url: "/delete_caixa",
             dataType: "json",
             data: dados,
-            success: function(response) {
-                if(response.resultado_operacao == true) {
+            complete: function(response) {
+                if(response.responseJSON.resultado_operacao == true) {
 
-                    alert('Caixa(s) ID(s) '+ response.ids_operacao +' excluída(s) com sucesso!')
+                    alert('Caixa(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!')
                     window.location.href = "/";
                 } else {
 
-                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.ids_operacao + '. Provavelmente essas caixas estão sendo usadas por outra tabela.');
+                    alert('Erro ao excluir Caixas(s) ID(s) '+ response.responseJSON.ids_operacao + '. Provavelmente essas caixas estão sendo usadas por outra tabela.');
                 }
             }
         });
@@ -96,9 +93,8 @@ $(document).on('click', '#excluir-img-atual', (e) => {
             data: dados,
             processData: false,
             contentType: false,
-            success: function(response) {
-
-                if(response.resultado_operacao == true) {
+            complete: function(response) {
+                if(response.responseJSON.resultado_operacao == true) {
 
                     alert('Imagem excluída com sucesso!');
                     $('#fotoPeca span').text('Imagem atual: Nenhuma imagem');

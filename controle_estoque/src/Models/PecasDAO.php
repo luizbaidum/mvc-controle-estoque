@@ -78,12 +78,15 @@ class PecasDAO extends Model {
 
 	function deletar($pecas_excluir)
 	{
-		$id_peca = implode(", ", $pecas_excluir);
+		$ids_where = "";
+		foreach($pecas_excluir as $v) {
+			$ids_where .= " $v,";
+		}
+		$ids_where = rtrim($ids_where, ",");
 
-		$query = "DELETE `pecas`.* FROM `pecas` WHERE `pecas`.`idPeca` IN (:id_peca);";
+		$query = "DELETE `pecas`.* FROM `pecas` WHERE `pecas`.`idPeca` IN ($ids_where);";
 
 		$stmt = $this->db->prepare($query);
-		$stmt->bindValue(':id_peca', $id_peca);
 
 		$result = $stmt->execute();
 		return $result;
@@ -134,7 +137,7 @@ class PecasDAO extends Model {
 		$result = $stmt->execute();	
 		return $result;
 	}
-//continuar a partir daqui
+
 	function selectWithOrdenation($variaveis)
 	{
 		$order_by = $variaveis["order_by"];
@@ -142,34 +145,40 @@ class PecasDAO extends Model {
 		if($variaveis['pesquisa_item'] != '' && $variaveis['pesquisa_obj'] != '') {
 			
 			$coluna = explode("-", $variaveis['pesquisa_item']);
-			$item = $variaveis['pesquisa_obj'];
+			$item = "%".$variaveis['pesquisa_obj']."%";
 
-			$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE '.$coluna[1].' LIKE "%'.$item.'%"';
+			$query = "SELECT ".$this->select.", fotoPeca, ".$this->join." FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa WHERE ".$coluna[1]." LIKE :obj_busca";
 		} else {
 
-			$query = 'SELECT '.$this->select.',fotoPeca, '.$this->join.' FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa';
+			$query = "SELECT ".$this->select.", fotoPeca, ".$this->join." FROM pecas INNER JOIN caixas ON pecas.caixaPeca = caixas.idCaixa";
 		}
 
-		$query .= ' ORDER BY '.$order_by.' ASC';
+		$query .= " ORDER BY $order_by ASC";
 
-	 	$result = $this->db->query($query)->fetchAll(\PDO::FETCH_OBJ);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':obj_busca', $item ?? '');
 
+		$stmt->execute();	
+		$result = $stmt->fetchAll(\PDO::FETCH_OBJ);
 		return $result;
 	}
 
 	function baixarQtdPeca($obj)
 	{
-		$query = "SELECT `qtdPeca` FROM `pecas` WHERE `idPeca` = ".$obj->getIdPeca()."; ".
-				"UPDATE `pecas` SET `qtdPeca` = qtdPeca - ".$obj->getQtdUso()." WHERE `idPeca` = ".$obj->getIdPeca().";";
+		$query = "UPDATE `pecas` SET `qtdPeca` = qtdPeca - :qtd_uso WHERE `idPeca` = :obj_busca";
+
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':obj_busca', $obj->getIdPeca(), \PDO::PARAM_INT);	
+		$stmt->bindValue(':qtd_uso', $obj->getQtdUso(), \PDO::PARAM_INT);	
 	
-		$result = $this->db->query($query)->fetch(\PDO::FETCH_OBJ);
-		
+		$result = $stmt->execute();	
 		return $result;
 	}
 
 	public function upload_img($obj)
 	{
-		$diretorio = "C:\Users\Acer\Desktop\GITHUB\mvc-controle-estoque\public\img/".$obj->getIdPeca()."/";
+		$parte_dir = preg_replace('/[^A-Za-z0-9\-]/', '', $obj->getIdPeca());
+		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\public\IMG/".$parte_dir."/";
 		
 		if (!file_exists($diretorio))
 			mkdir($diretorio, 0755);
@@ -184,6 +193,7 @@ class PecasDAO extends Model {
 
 	public function load_img($id_peca, $foto)
 	{
+		$id_peca = preg_replace('/[^A-Za-z0-9\-]/', '', $id_peca);
 		$diretorio = "IMG/".$id_peca."/";
 
 		$carregar = $diretorio.$foto;
@@ -193,10 +203,12 @@ class PecasDAO extends Model {
 
 	public function delete_img_bd($id_peca)
 	{
-		$query = "UPDATE `pecas` SET `fotoPeca` = NULL WHERE `idPeca` = ".$id_peca.";";
+		$query = "UPDATE `pecas` SET `fotoPeca` = NULL WHERE `idPeca` = :id_peca";
 				
-		$result = $this->db->exec($query);
-		
+		$stmt = $this->db->prepare($query);
+
+		$stmt->bindValue(':id_peca', $id_peca, \PDO::PARAM_INT);	
+		$result = $stmt->execute();	
 		return $result;
 	}
 };

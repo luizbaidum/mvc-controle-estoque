@@ -39,7 +39,7 @@ class CaixaController extends Action {
 				throw new Exception('Erro ao lançar nova Caixa. Verifique se o ID da Caixa já está cadastrado.');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
@@ -75,7 +75,7 @@ class CaixaController extends Action {
 				throw new Exception('Erro ao deletar peça(s).');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
@@ -102,7 +102,7 @@ class CaixaController extends Action {
 	
 			if(!$caixa_editar) throw new Exception('Erro ao deletar caixa(s).');
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 		}
 	}
 
@@ -132,7 +132,7 @@ class CaixaController extends Action {
 				throw new Exception('Erro ao editar Caixa.');
 			}
 		} catch (Exception $e) {
-			echo $e->getMessage();
+			$e->getMessage();
 			echo json_encode($resposta);
 		}
 	}
