@@ -37,13 +37,13 @@ function editarCaixa(dados)
         contentType: false,
         dataType: "json",
         data: dados,
-        success: function(response) {
-            if(response.resultado_operacao == true) {
+        complete: function(response) {
+            if(response.responseJSON.resultado_operacao == true) {
 
-                alert("Caixa ID " + response.id_operacao + " editada com sucesso!");
+                alert("Caixa ID " + response.responseJSON.id_operacao + " editada com sucesso!");
                 window.location.href = "/";
             } else {
-                alert("Erro no processo de editar Caixa ID " + response.id_operacao + ".");
+                alert("Erro no processo de editar Caixa ID " + response.responseJSON.id_operacao + ".");
             }
         }
     })

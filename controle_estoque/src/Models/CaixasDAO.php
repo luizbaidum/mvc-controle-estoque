@@ -8,19 +8,31 @@ class CaixasDAO extends Model {
 
 	function insert($obj)
 	{
-		$query = "INSERT INTO `caixas` (`idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa`, `dataHora`) VALUES (".$obj->getIdCaixa().", '".$obj->getNomeCaixa()."', '".$obj->getCorCaixa()."', '".$obj->getDescricaoCaixa()."', '".$this->getTime()."')";
+		$query = "INSERT INTO `caixas` (`idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa`, `dataHora`) 
+								VALUES (:id, :nome, :cor, :descricao, :data_insert)";
 
-		$result = $this->db->exec($query);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id', $obj->getIdCaixa());
+		$stmt->bindValue(':nome', $obj->getNomeCaixa());
+		$stmt->bindValue(':cor', $obj->getCorCaixa());
+		$stmt->bindValue(':descricao', $obj->getDescricaoCaixa());
+		$stmt->bindValue(':data_insert', $this->getTime());
 
+		$result = $stmt->execute();
 		return $result;
 	}
 
 	function selectCaixa($id)
 	{
-		$query = "SELECT `idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa` FROM `caixas` WHERE `idCaixa` = $id";
+		$query = "SELECT `idCaixa`, `nomeCaixa`, `corCaixa`, `descricaoCaixa` 
+					FROM `caixas` 
+					WHERE `idCaixa` = :id";
+		
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id', $id);
 
-		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
-
+		$stmt->execute();
+		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		return $result;
 	}
 
@@ -28,8 +40,10 @@ class CaixasDAO extends Model {
 	{
 		$query = "SELECT `idCaixa`, `nomeCaixa` FROM `caixas`";
 
-		$result = $this->db->query($query)->fetchAll(\PDO::FETCH_ASSOC);
+		$stmt = $this->db->prepare($query);
 
+		$stmt->execute();
+		$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		return $result;
 	}
 
@@ -37,19 +51,35 @@ class CaixasDAO extends Model {
 	{
 		$id_caixa = implode(" ", $caixas_excluir);
 
-		$query = "DELETE FROM `caixas` WHERE `caixas`.`idCaixa` IN (".str_replace(' ', ', ', $id_caixa).");";
+		$query = "DELETE FROM `caixas` 
+					WHERE `caixas`.`idCaixa` IN (:ids_caixas);";
 
-		$result = $this->db->exec($query);
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':ids_caixas', str_replace(' ', ', ', $id_caixa));			
 
+		$result = $stmt->execute();
 		return $result;
 	}
 
 	function editar($obj)
-	{
-		$query = "UPDATE `caixas` SET `idCaixa` = ".$obj->getIdCaixa().", `nomeCaixa` = '".$obj->getNomeCaixa()."', `corCaixa` = '".$obj->getCorCaixa()."', `descricaoCaixa` = '".$obj->getDescricaoCaixa()."', `dataHora` = '".$this->getTime()."' WHERE `idCaixa` = ".$obj->getOldId()."";
+	{		
+		$query = "UPDATE `caixas` SET 
+			`idCaixa` = :new_id, 
+			`nomeCaixa` = :nome, 
+			`corCaixa` = :cor, 
+			`descricaoCaixa` = :descricao, 
+			`dataHora` = :data_insert 
+			WHERE `idCaixa` = :old_id";
 
-		$result = $this->db->exec($query);
-		
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':new_id', $obj->getIdCaixa(), \PDO::PARAM_INT);
+		$stmt->bindValue(':nome', $obj->getNomeCaixa(), \PDO::PARAM_STR);
+		$stmt->bindValue(':cor', $obj->getCorCaixa(), \PDO::PARAM_STR);
+		$stmt->bindValue(':descricao', $obj->getDescricaoCaixa(), \PDO::PARAM_STR);
+		$stmt->bindValue(':data_insert', $this->getTime(), \PDO::PARAM_STR);
+		$stmt->bindValue(':old_id', $obj->getOldId(), \PDO::PARAM_INT);
+
+		$result = $stmt->execute();
 		return $result;
 	}
 }

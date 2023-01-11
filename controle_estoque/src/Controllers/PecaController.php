@@ -61,9 +61,8 @@ class PecaController extends Action {
 			}
 
 		} catch (Exception $e) {
-
-			echo json_encode($resposta);
 			$e->getMessage();
+			echo json_encode($resposta);
 		}
 	}
 
@@ -73,20 +72,21 @@ class PecaController extends Action {
 			$pecas_excluir = $_POST['idPeca'];
 	
 			$model_peca = Container::getModel('PecasDAO');
-	
+
 			$resultado_operacao = $model_peca->deletar($pecas_excluir);
 
 			if($resultado_operacao == count($pecas_excluir)) {
+
 				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
 				echo json_encode($resposta);
 			} else {
+				
 				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $pecas_excluir);
 				throw new Exception('Erro ao deletar peça(s).');
 			}
 		} catch (Exception $e) {
-
-			echo json_encode($resposta);
 			$e->getMessage();
+			echo json_encode($resposta);
 		}
 	}
 
@@ -155,8 +155,8 @@ class PecaController extends Action {
 				echo json_encode($resposta);
 			}
 		} catch (Exception $e) {
-			echo json_encode($resposta);
 			$e->getMessage();
+			echo json_encode($resposta);
 		}
 	}
 
@@ -216,8 +216,8 @@ class PecaController extends Action {
 				throw new Exception('Erro no precesso de baixar Peça(s).');
 			}
 		} catch (Exception $e) {
-			echo json_encode($resposta);
 			$e->getMessage();
+			echo json_encode($resposta);
 		}
 	}
 
@@ -253,8 +253,8 @@ class PecaController extends Action {
 				throw new Exception('Erro no precesso de deletar imagem.');
 			}
 		} catch (Exception $e) {
-			echo json_encode($resposta);
 			$e->getMessage();
+			echo json_encode($resposta);
 		}
 	}
 }
