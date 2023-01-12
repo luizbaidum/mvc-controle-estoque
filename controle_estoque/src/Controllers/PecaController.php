@@ -30,7 +30,7 @@ class PecaController extends Action {
 			$obj = new PecasEntity();
 
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
-			$obj->setIdPeca($_POST['idPeca']);
+			$obj->setIdPeca(preg_replace('/[^a-z0-9]/i', '', $_POST['idPeca']));
 			$obj->setNomePeca($_POST['nomePeca']);
 			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
 			$obj->setQtdPeca($_POST['qtdPeca']);
