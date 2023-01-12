@@ -23,7 +23,7 @@ class CaixaController extends Action {
 			$obj = new CaixasEntity();
 
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
-			$obj->setIdCaixa($_POST['idCaixa']);
+			$obj->setIdCaixa(preg_replace('/[^a-z0-9]/i', '', $_POST['idCaixa']));
 			$obj->setNomeCaixa($_POST['nomeCaixa']);
 			$obj->setCorCaixa($_POST['corCaixa']);
 			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
