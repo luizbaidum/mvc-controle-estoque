@@ -11,7 +11,7 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [x] CRUD peças e caixas
 - [x] registro data/hora de insert e update
 - [x] pesquisa e ordenação
-- [ ] busca sql por keydown ao digitar nome de nova peça
+- [x] busca sql por keydown ao digitar nome de nova peça
 - [ ] valor financeiro do estoque
 - [ ] registro do valor cobrado pela peça
 - [ ] registro de NF da peça (data, cnpj)
@@ -23,7 +23,7 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [x] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
 - [x] coluna qtd de peças.
 - [ ] repassar codigo e buscar mais padronização
-- [ ] adicionar letras p/ ID de caixas e pecas
+- [x] adicionar letras p/ ID de caixas e pecas
 - [ ] exibir caixas cadastradas
 - [ ] remover obrigatoriedade de lançar valor pago
 - [ ] transformar echo $e->getMessage() em um arquivo de log?? >> trabalha-las p/ dar retorno mais especifico de erro p/ usuario
