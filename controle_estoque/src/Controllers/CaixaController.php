@@ -11,6 +11,11 @@ class CaixaController extends Action {
 
 	public function index()
 	{	
+		$model_caixa = Container::getModel('CaixasDAO');
+		$caixas = $model_caixa->selectCaixas();
+
+		$this->matrizDataToView($caixas);
+
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_caixa', 'Cadastrar nova caixa', 'layout-base-inserts');
 	}

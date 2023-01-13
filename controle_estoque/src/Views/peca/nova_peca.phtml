@@ -14,6 +14,13 @@
     <label for="nomePeca">Nome da peça* (números/letras)</label>
 
     <input type="text" class="form-control" id="nomePeca" name="nomePeca" required>
+    <br>
+    <select class="form-control select2">
+      <option value=""> Pesquise aqui se uma peça já existe </option>
+      <?php foreach($this->view->dados as $key => $value): ?>
+        <option value=""> <?= 'id: ' . $value->idPeca . ' - nome: ' . $value->nomePeca ?> </option>
+      <?php endforeach; ?>
+    </select>     
   </div>
 
   <div class="form-group">

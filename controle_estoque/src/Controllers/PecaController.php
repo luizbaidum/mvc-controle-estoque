@@ -16,7 +16,11 @@ class PecaController extends Action {
 		$model_caixa = Container::getModel('CaixasDAO');
 		$lista_caixas = $model_caixa->selectCaixas();
 
+		$model_peca = Container::getModel('PecasDAO');
+		$todas_pecas = $model_peca->getPecas();
+
 		$this->matrizDataToView($lista_caixas);
+		$this->view->dados = $todas_pecas;
 
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-inserts');
