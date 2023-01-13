@@ -5,6 +5,10 @@ namespace MF\Controller;
 abstract class Action {
 
 	protected $view;
+	protected $array_data;
+	protected $title;
+	protected $titulo;
+	protected $matriz_data;
 
 	public function __construct()
 	{
