@@ -48,7 +48,8 @@ class PecasDAO extends Model {
 		$stmt->bindValue(':id', $id);
 
 		$stmt->execute();
-	 	$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+	 	$result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
 		return $result;
 	}
 

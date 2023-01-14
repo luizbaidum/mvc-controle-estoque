@@ -13,14 +13,11 @@ class PecaController extends Action {
 
 	public function index()
 	{	
-		$model_caixa = Container::getModel('CaixasDAO');
-		$lista_caixas = $model_caixa->selectCaixas();
-
 		$model_peca = Container::getModel('PecasDAO');
-		$todas_pecas = $model_peca->getPecas();
+		$model_caixa = Container::getModel('CaixasDAO');
 
-		$this->matrizDataToView($lista_caixas);
-		$this->view->dados = $todas_pecas;
+		$this->view->dados['lista_pecas'] = $model_peca->getPecas();
+		$this->view->dados['lista_caixas'] = $model_caixa->selectCaixas();
 
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-inserts');
@@ -104,7 +101,9 @@ class PecaController extends Action {
 			$id_peca = $_POST['idPeca'][0];
 			$lista_caixas = $model_caixa->selectCaixas();
 
-			$peca_editar = $model_peca->selectPeca($id_peca);
+			$this->view->dados['peca_editar'] = $model_peca->selectPeca($id_peca);
+//continuar daqui
+			exit;
 
 			$this->view->disabled = false;
 			if($model_uso->vericarPecaEmUso($id_peca)) $this->view->disabled = true;
