@@ -99,18 +99,14 @@ class PecaController extends Action {
 			$model_uso = Container::getModel('UsoPecaDAO');
 
 			$id_peca = $_POST['idPeca'][0];
+			$peca_editar = $model_peca->selectPeca($id_peca);
 			$lista_caixas = $model_caixa->selectCaixas();
 
-			$this->view->dados['peca_editar'] = $model_peca->selectPeca($id_peca);
-//continuar daqui
-			exit;
+			$this->view->opcoes['disabled'] = false;
+			if($model_uso->vericarPecaEmUso($id_peca)) $this->view->opcoes['disabled'] = true;
 
-			$this->view->disabled = false;
-			if($model_uso->vericarPecaEmUso($id_peca)) $this->view->disabled = true;
-
-			$this->arrayDataToView($peca_editar[0]);
-
-			$this->matrizDataToView($lista_caixas);
+			$this->view->dados['peca_editar'] = $peca_editar;
+			$this->view->dados['lista_caixas'] = $lista_caixas;
 			
 			$this->render('editar_peca', 'Editar peça ID: '.$id_peca, 'layout-base-inserts');
 
