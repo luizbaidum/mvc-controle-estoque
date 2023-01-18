@@ -179,7 +179,7 @@ class PecasDAO extends Model {
 	public function upload_img($obj)
 	{
 		$parte_dir = preg_replace('/[^A-Za-z0-9\-]/', '', $obj->getIdPeca());
-		$diretorio = "C:\Users\Luiz\Desktop\miniframework-2\mvc-controle-estoque\public\IMG/".$parte_dir."/";
+		$diretorio = "C:\Users\Luiz\Desktop\GITHUB\mvc-controle-estoque\public\img/".$parte_dir."/";
 		
 		if (!file_exists($diretorio))
 			mkdir($diretorio, 0755);

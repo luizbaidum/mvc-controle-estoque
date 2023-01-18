@@ -15,7 +15,7 @@
     <div class="form-group">
 
         <input name="operation" id="operation" value="editar_caixa" type="hidden">
-        <input id="oldId" name="oldId" value="<?= $idCaixa ?>" type="hidden">
+        <input id="oldId" name="oldId" value="<?= $caixa['idCaixa'] ?>" type="hidden">
 
         <label for="idCaixa">ID da caixa* (números ou letras)</label>
 
@@ -24,9 +24,9 @@
           class="form-control" 
           id="idCaixa" 
           name="idCaixa" 
-          value="<?= $idCaixa ?>" 
+          value="<?= $caixa['idCaixa'] ?>" 
           required
-          <?php if($this->view->disabled) echo 'disabled' ?>
+          <?php if ($this->view->opcoes['disabled']) echo 'disabled' ?>
         >
     </div>
 
@@ -34,21 +34,21 @@
 
         <label for="nomeCaixa">Nome da caixa* (números/letras)</label>
 
-        <input type="text" class="form-control" id="nomeCaixa" name="nomeCaixa" value="<?= $nomeCaixa ?>"required>
+        <input type="text" class="form-control" id="nomeCaixa" name="nomeCaixa" value="<?= $caixa['nomeCaixa'] ?>"required>
     </div>
 
     <div class="form-group">
 
         <label for="corCaixa">Cor da caixa (números/letras)</label>
 
-        <input type="text" class="form-control" id="corCaixa" name="corCaixa" value="<?= $corCaixa ?>">
+        <input type="text" class="form-control" id="corCaixa" name="corCaixa" value="<?= $caixa['corCaixa'] ?>">
     </div>
 
     <div class="form-group">
 
         <label for="descricaoCaixa">Descrição</label>
           
-        <textarea class="form-control" id="descricaoCaixa" name="descricaoCaixa" rows="1"><?= $descricaoCaixa ?></textarea>
+        <textarea class="form-control" id="descricaoCaixa" name="descricaoCaixa" rows="1"><?= $caixa['descricaoCaixa'] ?></textarea>
     </div>
   </div>  
 </form>   
