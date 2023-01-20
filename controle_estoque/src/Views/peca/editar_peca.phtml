@@ -1,3 +1,5 @@
+<?php use MF\ViewHelper\NumbersHelper; ?>
+
 <form method="post">
 
   <div class="form-group">
@@ -27,7 +29,7 @@
 
     <label for="vlrCompraPeca">Valor pago pela peça* (apenas números)</label>
 
-    <input type="text" class="form-control" maxlength="9" id="vlrCompraPeca" name="vlrCompraPeca" value="<?= $peca_editar['vlrCompraPeca'] ?>" required>
+    <input type="text" class="form-control vlr-compra-peca" maxlength="9" id="vlrCompraPeca" name="vlrCompraPeca" value="<?= NumbersHelper::formatUStoBR($peca_editar['vlrCompraPeca']); ?>" required>
   </div>
 
   <div class="form-group">
