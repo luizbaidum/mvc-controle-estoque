@@ -246,6 +246,7 @@ $(document).on('click', '.carregar-foto', (e) => {
 /****************************************************/
 $(document).ready(function() {
     aplicarR$();
+    $('.select2').select2();
 })
 
 function aplicarR$()
@@ -258,6 +259,3 @@ function aplicarR$()
     });
 }
 /****************************************************/
-$(document).ready(function() {
-    $('.select2').select2();
-});

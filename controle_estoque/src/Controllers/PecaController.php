@@ -13,14 +13,11 @@ class PecaController extends Action {
 
 	public function index()
 	{	
-		$model_caixa = Container::getModel('CaixasDAO');
-		$lista_caixas = $model_caixa->selectCaixas();
-
 		$model_peca = Container::getModel('PecasDAO');
-		$todas_pecas = $model_peca->getPecas();
+		$model_caixa = Container::getModel('CaixasDAO');
 
-		$this->matrizDataToView($lista_caixas);
-		$this->view->dados = $todas_pecas;
+		$this->view->dados['lista_pecas'] = $model_peca->getPecas();
+		$this->view->dados['lista_caixas'] = $model_caixa->selectCaixas();
 
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_peca', 'Cadastrar nova peça', 'layout-base-inserts');
@@ -36,25 +33,23 @@ class PecaController extends Action {
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
 			$obj->setIdPeca(preg_replace('/[^a-z0-9]/i', '', $_POST['idPeca']));
 			$obj->setNomePeca($_POST['nomePeca']);
-			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
+			$obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca']));
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
-			$foto_peca = NULL;
-			if($_FILES['fotoPeca']['name'] != '') {
+			if ($_FILES['fotoPeca']['name'] != '') {
 				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
 				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
 			}
-
 			$obj->setFotoPeca($foto_peca);
 
-			$resultado_operacao = $model_peca->insert($obj);
-
-			$resultado_upload = 1;
-			if($resultado_operacao == 1 && $foto_peca != NULL)
+			if (isset($foto_peca))
 				$resultado_upload = $model_peca->upload_img($obj);
 
-			if($resultado_operacao != 1 || $resultado_upload != 1) {
+			if ((isset($foto_peca) && $resultado_upload === true) || !isset($foto_peca))
+				$resultado_operacao = $model_peca->insert($obj);
+
+			if ($resultado_operacao != 1) {
 
 				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
 				throw new Exception('Erro ao lançar nova Peça. Verifique se o ID da Peça já está cadastrado.');
@@ -102,16 +97,14 @@ class PecaController extends Action {
 			$model_uso = Container::getModel('UsoPecaDAO');
 
 			$id_peca = $_POST['idPeca'][0];
+			$peca_editar = $model_peca->selectPeca($id_peca);
 			$lista_caixas = $model_caixa->selectCaixas();
 
-			$peca_editar = $model_peca->selectPeca($id_peca);
+			$this->view->opcoes['disabled'] = false;
+			if($model_uso->vericarPecaEmUso($id_peca)) $this->view->opcoes['disabled'] = true;
 
-			$this->view->disabled = false;
-			if($model_uso->vericarPecaEmUso($id_peca)) $this->view->disabled = true;
-
-			$this->arrayDataToView($peca_editar[0]);
-
-			$this->matrizDataToView($lista_caixas);
+			$this->view->dados['peca_editar'] = $peca_editar;
+			$this->view->dados['lista_caixas'] = $lista_caixas;
 			
 			$this->render('editar_peca', 'Editar peça ID: '.$id_peca, 'layout-base-inserts');
 
@@ -131,25 +124,26 @@ class PecaController extends Action {
 
 			$obj->setIdPeca($_POST['idPeca']);
 			$obj->setNomePeca($_POST['nomePeca']);
-			$obj->setVlrCompraPeca(NumbersHelper::formatMoney($_POST['vlrCompraPeca']));
+			$obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca']));
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
-			if($_FILES['fotoPeca']['name'] != '') {
+			if ($_FILES['fotoPeca']['name'] != '') {
 				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
 				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
 				$obj->setFotoPeca($foto_peca);
 			}
 			$obj->setOldId($_POST['oldId']);
 
-			$resultado_operacao = $model_peca->editar($obj);
+			$resultado_upload = NULL;
 
-			$resultado_upload = 1;
-
-			if($resultado_operacao == 1 && isset($foto_peca))
+			if (isset($foto_peca))
 				$resultado_upload = $model_peca->upload_img($obj);
+			
+			if ((isset($foto_peca) && $resultado_upload === true) || !isset($foto_peca))	
+				$resultado_operacao = $model_peca->editar($obj);
 
-			if($resultado_operacao != 1 || $resultado_upload != 1) {
+			if ($resultado_operacao != 1) {
 				
 				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
 				throw new Exception('Erro ao editar Peça.');
@@ -173,8 +167,8 @@ class PecaController extends Action {
 				$pecas[] = $model_peca->selectPeca($id);
 			}
 
-			if(count($pecas) > 0) {
-				$this->matrizDataToView($pecas);
+			if (count($pecas) > 0) {
+				$this->view->dados['pecas'] = $pecas;
 				$this->render('baixar_peca', 'Baixar peça(s)', 'layout-base-inserts');
 			} else {
 				throw new Exception('Erro ao selecionar peça(s) para baixa.');
@@ -190,7 +184,7 @@ class PecaController extends Action {
 			$model_uso = Container::getModel('UsoPecaDAO');
 			$model_peca = Container::getModel('PecasDAO');
 
-			foreach($_POST['idPeca'] as $k => $peca_baixar) {
+			foreach ($_POST['idPeca'] as $k => $peca_baixar) {
 
 				$obj = new UsoPecaEntity();
 
@@ -204,15 +198,15 @@ class PecaController extends Action {
 				$abatimento = $model_peca->baixarQtdPeca($obj);
 				
 				if($baixa != '1' || $abatimento == false) {
-					$resultado_final = false;
+					$resultado_operacao = false;
 				} else {
-					$resultado_final = true;
+					$resultado_operacao = true;
 				}
 					
 				$ids_sucesso[] = $obj->getIdPeca();
 			};
 
-			if($resultado_final == true) {
+			if ($resultado_operacao == true) {
 				$resposta = array('resultado_operacao' => true, 'id_operacao' => $ids_sucesso);
 				echo json_encode($resposta);
 			} else {
@@ -247,9 +241,9 @@ class PecaController extends Action {
 		try {
 			$model_peca = Container::getModel('PecasDAO');
 
-			$img_deleted = $model_peca->delete_img_bd($_POST['id_img']);
+			$resultado_operacao = $model_peca->delete_img_bd($_POST['id_img']);
 
-			if($img_deleted) {
+			if($resultado_operacao) {
 				$resposta = array('resultado_operacao' => true, 'id_operacao' => '');
 				echo json_encode($resposta);
 			} else {

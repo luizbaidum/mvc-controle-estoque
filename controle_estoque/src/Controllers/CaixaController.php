@@ -14,7 +14,7 @@ class CaixaController extends Action {
 		$model_caixa = Container::getModel('CaixasDAO');
 		$caixas = $model_caixa->selectCaixas();
 
-		$this->matrizDataToView($caixas);
+		$this->view->dados['caixas'] = $caixas;
 
 		//conteudo da pagina, titulo da pagina, layout base
 		$this->render('nova_caixa', 'Cadastrar nova caixa', 'layout-base-inserts');
@@ -35,7 +35,7 @@ class CaixaController extends Action {
 
 			$resultado_operacao = $caixa->insert($obj);
 
-			if($resultado_operacao == 1) {
+			if ($resultado_operacao == 1) {
 
 				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
 				echo json_encode($resposta);
@@ -57,7 +57,7 @@ class CaixaController extends Action {
 
 		$caixas = $caixa->selectCaixas();
 
-		$this->matrizDataToView($caixas);
+		$this->view->dados['caixas'] = $caixas;
 
 		//página miolo (conteudo do modal), titulo da pagina, tipo dos botões
 		$this->renderModal('todas_caixas', 'Lista Caixas Ativas', $operacao);
@@ -72,7 +72,7 @@ class CaixaController extends Action {
 	
 			$resultado_operacao = $caixa->deletar($caixas_excluir);
 
-			if($resultado_operacao == count($caixas_excluir)) {
+			if ($resultado_operacao == count($caixas_excluir)) {
 				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $caixas_excluir);
 				echo json_encode($resposta);
 			} else {
@@ -98,14 +98,14 @@ class CaixaController extends Action {
 
 			$caixa_editar = $caixa->selectCaixa($id_caixa);
 
-			$this->view->disabled = false;
-			if($peca->vericarCaixaEmUso($id_caixa)) $this->view->disabled = true;
+			$this->view->opcoes['disabled'] = false;
+			if ($peca->vericarCaixaEmUso($id_caixa)) $this->view->opcoes['disabled'] = true;
 
-			$this->arrayDataToView($caixa_editar[0]);
+			$this->view->dados['caixa'] = $caixa_editar[0];
 
 			$this->renderModal('editar_caixa', 'Editar caixa ID '. $id_caixa, $operacao);
 	
-			if(!$caixa_editar) throw new Exception('Erro ao deletar caixa(s).');
+			if (!$caixa_editar) throw new Exception('Erro ao deletar caixa(s).');
 		} catch (Exception $e) {
 			$e->getMessage();
 		}
@@ -128,7 +128,7 @@ class CaixaController extends Action {
 
 			$resultado_operacao = $caixa->editar($obj);
 
-			if($resultado_operacao == 1) {
+			if ($resultado_operacao == 1) {
 
 				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
 				echo json_encode($resposta);

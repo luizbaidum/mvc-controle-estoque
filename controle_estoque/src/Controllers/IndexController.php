@@ -16,14 +16,14 @@ class IndexController extends Action {
 			$atributos = $peca->select;
 			$pecas = $peca->getPecas();
 	
-			$this->view->dados = $pecas;
+			$this->view->dados['pecas'] = $pecas;
 			$this->view->atributos = explode(",", $atributos);
 			$this->view->ordenar = explode(",", $atributos);
 	
 			//conteudo da pagina, titulo da pagina, layout base
 			$this->render('index', 'Controle de Estoque de Peças', 'layout-base-index');
 
-			if(!$pecas || !$atributos) throw new Exception('Erro ao carregar INDEX.');
+			if (!$pecas || !$atributos) throw new Exception('Erro ao carregar INDEX.');
 
 		} catch (Exception $e) {
 			$e->getMessage();
@@ -40,7 +40,7 @@ class IndexController extends Action {
 
 			$pecas = $peca->getPecasPesquisa($coluna_pesquisa[1], $item_pesquisa);
 	
-			$this->view->dados = $pecas;
+			$this->view->dados['pecas'] = $pecas;
 
 			$this->renderPesquisa('index');
 			
@@ -56,7 +56,7 @@ class IndexController extends Action {
 			
 			$ordem = $peca->selectWithOrdenation($_POST);
 
-			$this->view->dados = $ordem;
+			$this->view->dados['pecas'] = $ordem;
 
 			$this->renderPesquisa('index');
 

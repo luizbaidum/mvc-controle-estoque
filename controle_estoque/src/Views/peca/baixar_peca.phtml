@@ -4,34 +4,34 @@
 
     <input name="operation" id="operation" value="baixar_peca" type="hidden">
 
-    <?php foreach($this->matriz_data as $peca => $attr): ?>
+    <?php foreach($pecas as $k => $peca): ?>
     
       <div class="form-row mb-3">
 
         <div class="form-group col-12 col-sm-3">
 
           <label for="idPeca[]">ID Peça</label>
-          <input type="text" class="form-control" id="idPeca-<?= $attr[0]['idPeca']; ?>" value="<?= $attr[0]['idPeca']; ?>" name="idPeca[]" readonly>
+          <input type="text" class="form-control" id="idPeca-<?= $peca['idPeca']; ?>" value="<?= $peca['idPeca']; ?>" name="idPeca[]" readonly>
         </div>
         
         <div class="form-group col-12 col-sm-3">
 
           <label for="nomePeca[]">Nome Peça</label>
-          <input type="text" class="form-control" id="idNomePeca-<?= $attr[0]['idPeca']; ?>" value="<?= $attr[0]['nomePeca']; ?>" name="nomePeca[]" readonly>
+          <input type="text" class="form-control" id="idNomePeca-<?= $peca['idPeca']; ?>" value="<?= $peca['nomePeca']; ?>" name="nomePeca[]" readonly>
         </div>
 
         <div class="form-group col-12 col-sm-3">
 
           <label for="dataUso[]">Data baixa</label>
-          <input type="text" class="form-control input-data" id="idDataBaixa-<?= $attr[0]['idPeca']; ?>" value="" name="dataUso[]" required>
+          <input type="text" class="form-control input-data" id="idDataBaixa-<?= $peca['idPeca']; ?>" value="" name="dataUso[]" required>
         </div>
 
         <div class="form-group col-12 col-sm-3">
 
           <label for="qtdUso[]">Quantidade baixa</label>
-          <select class="form-control" id="idQtdPeca-<?= $attr[0]['idPeca']; ?>" value="" name="qtdUso[]" required>
+          <select class="form-control" id="idQtdPeca-<?= $peca['idPeca']; ?>" value="" name="qtdUso[]" required>
             <option value="">Escolha</option>
-            <?php for($i = 0; $i <= $attr[0]['qtdPeca']; $i++): ?>
+            <?php for($i = 0; $i <= $peca['qtdPeca']; $i++): ?>
               <option><?= $i ?></option>
             <?php endfor; ?>  
           </select>
@@ -41,7 +41,7 @@
       <div class="form-group col-12 col-sm-12">
 
         <label for="motivoUso[]">Breve motivo da baixa</label>
-        <input type="text" class="form-control" id="idMotivoUso-<?= $attr[0]['idPeca']; ?>" value="" name="motivoUso[]" required>
+        <input type="text" class="form-control" id="idMotivoUso-<?= $peca['idPeca']; ?>" value="" name="motivoUso[]" required>
       </div>
 
       <hr>

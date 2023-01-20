@@ -1,3 +1,5 @@
+<?php use MF\ViewHelper\NumbersHelper; ?>
+
 <main class="conteudo_principal">
 
   <form method="POST" id="form-index">
@@ -7,8 +9,7 @@
       <thead>
 
         <tr>
-          <?php 
-            if(isset($this->view->atributos) && gettype($this->view->atributos) == 'array'):
+          <?php if (isset($this->view->atributos) && gettype ($this->view->atributos) == 'array'):
               echo '<td>Selecionar</td>';
               foreach($this->view->atributos as $index => $valor) { ?>
                 <td>
@@ -20,7 +21,7 @@
       </thead>
       
       <tbody>
-        <?php foreach($this->view->dados as $index => $valor) { ?>
+        <?php foreach($pecas as $index => $valor) { ?>
           <tr>
             <td class="selects">
               <input type="checkbox" class="pecas" name="idPeca[]" value="<?= $valor->idPeca ?>">
@@ -37,7 +38,7 @@
               <?= $valor->nomePeca ?>
             </td>
             <td class="vlr-compra-peca">
-              <?= $valor->vlrCompraPeca ?>
+              <?= NumbersHelper::formatUStoBR($valor->vlrCompraPeca); ?>
             </td>
             <td>
               <?= $valor->qtdPeca ?>

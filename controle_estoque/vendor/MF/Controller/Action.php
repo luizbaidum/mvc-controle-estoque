@@ -5,10 +5,8 @@ namespace MF\Controller;
 abstract class Action {
 
 	protected $view;
-	protected $array_data;
 	protected $title;
 	protected $titulo;
-	protected $matriz_data;
 
 	public function __construct()
 	{
@@ -47,17 +45,6 @@ abstract class Action {
 		$this->view->operacao = $operacao;
 
 		$this->content();
-	}
-
-	protected function arrayDataToView($array_data)
-	{	
-		$this->array_data = $array_data;
-	}
-
-	//Dado que vem em matriz (array de arrays)
-	protected function matrizDataToView($matriz_data)
-	{	
-		$this->matriz_data = $matriz_data;
 	}
 	
 	protected function content()

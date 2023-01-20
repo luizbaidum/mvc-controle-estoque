@@ -38,14 +38,14 @@ class Buttons {
         return $buttons_crud;
     }
 
-    public static function ordenar($option_ordenacao) 
+    public static function buttonsOrdenar($option_ordenacao) 
     {
         $buttons_ordenar = '<button type="button" class="dropdown-item ordenar" id="'.$option_ordenacao.'" name="ordenar[]" value="'.$option_ordenacao.'">'.$option_ordenacao.'</button>';
 
         return $buttons_ordenar;
     }
 
-    public static function buttons_modal_crud($operacao) 
+    public static function buttonsModalCrud($operacao) 
     {
         if($operacao == 'apagar') {
             $buttons_crud = [

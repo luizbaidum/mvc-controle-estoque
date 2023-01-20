@@ -5,6 +5,7 @@ namespace MF\Model;
 abstract class Model {
 
 	protected $db;
+	protected $current_time;
 
 	public function __construct(\PDO $db)
 	{
