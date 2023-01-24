@@ -44,7 +44,7 @@ function scriptDeSalvar(modal)
     });
 
     if(requeridos.length>0) {
-        alert('Existem campos obrigatórios NÃO preenchidos.');
+        abrirModalAlerta('Atenção', 'Existem campos obrigatórios NÃO preenchidos', 'alerta')
         return;
     }   
 
@@ -259,3 +259,24 @@ function aplicarR$()
     });
 }
 /****************************************************/
+function abrirModalAlerta(titulo, texto, tipo) //tipo = alerta ou response
+{
+    //$('#id-modal-form').modal('hide');
+
+    $('#id-modal-alerta .modal-title').text(titulo);
+    $('#id-modal-alerta .modal-body').text(texto);
+
+    if (tipo == 'alerta')
+        $('#id-modal-alerta #alerta_response').remove();
+
+    if (tipo == 'response')
+        $('#id-modal-alerta #apenas_alerta').remove();
+
+    $('#id-modal-alerta').modal('show');
+
+    $("#id-modal-alerta").on('show', function (e) {
+        $("#id-modal-form").modal("hide");
+    });
+
+    //fazendo
+}

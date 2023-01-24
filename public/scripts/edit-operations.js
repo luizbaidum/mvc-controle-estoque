@@ -4,7 +4,7 @@ $(document).on('click', '#preparar-editar', () => {
     dados = $('#form-todas-caixas').serialize();
 
     if(dados.indexOf("caixa") <= 0) {
-        alert('Por favor, selecione uma caixa para editar.');
+        abrirModalAlerta('Atenção', 'Por favor, selecione uma caixa para editar', 'alerta')
     } else {
         $('#form-todas-caixas').submit();
     }   
@@ -40,8 +40,8 @@ function editarCaixa(dados)
         complete: function(response) {
             if(response.responseJSON.resultado_operacao == true) {
 
-                alert("Caixa ID " + response.responseJSON.id_operacao + " editada com sucesso!");
-                window.location.href = "/";
+                abrirModalAlerta('Sucesso', "Caixa ID " + response.responseJSON.id_operacao + " editada com sucesso!", 'alerta'); //fazendo
+                //window.location.href = "/";
             } else {
                 alert("Erro no processo de editar Caixa ID " + response.responseJSON.id_operacao + ".");
             }

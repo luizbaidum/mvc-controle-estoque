@@ -4,15 +4,15 @@
 
   <form method="POST" id="form-index">
 
-    <table id="tabela-principal">
+    <table id="tabela-principal" class="table table-striped table-bordered">
 
       <thead>
 
         <tr>
           <?php if (isset($this->view->atributos) && gettype ($this->view->atributos) == 'array'):
-              echo '<td>Selecionar</td>';
+              echo '<td scope="col">Selecionar</td>';
               foreach($this->view->atributos as $index => $valor) { ?>
-                <td>
+                <td scope="col">
                   <?= $valor ?>
                 </td>
             <?php } 
