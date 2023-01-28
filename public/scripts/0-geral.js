@@ -261,22 +261,35 @@ function aplicarR$()
 /****************************************************/
 function abrirModalAlerta(titulo, texto, tipo) //tipo = alerta ou response
 {
-    //$('#id-modal-form').modal('hide');
+    $('#id-modal-form').modal('hide');
 
-    $('#id-modal-alerta .modal-title').text(titulo);
-    $('#id-modal-alerta .modal-body').text(texto);
+    $('#modal-alerta-content .modal-title').text(titulo);
+    $('#modal-alerta-content .modal-body').text(texto);
 
-    if (tipo == 'alerta')
-        $('#id-modal-alerta #alerta_response').remove();
-
-    if (tipo == 'response')
-        $('#id-modal-alerta #apenas_alerta').remove();
+    criarModalFooter(tipo);
 
     $('#id-modal-alerta').modal('show');
+}
 
-    $("#id-modal-alerta").on('show', function (e) {
-        $("#id-modal-form").modal("hide");
-    });
+function criarModalFooter(tipo)
+{
+    let buttons = Array();
+    let modal_footer = $('#modal-alerta-content .modal-footer');
 
-    //fazendo
+    modal_footer.html('');
+
+    if (tipo == 'alerta') {
+        /*buttons.class = 'testeok';
+        buttons.onclick = 'onclickok()';*/
+
+        buttons[0] = ['class''testeok'];
+        //pensar na melhor forma de fazer isso. se array ou objeto
+        console.log(buttons);
+
+        //modal_footer.append(`<button class='btn btn-primary ${buttons['class']}' onclick='aa'>Ok</button>`);
+    }
+
+    /*if (tipo == 'response') {
+
+    }*/
 }
