@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use MF\ViewHelper\Buttons;
+
     $options = [
         'pecas' => ['idPeca', 'nomePeca', 'vlrCompraPeca', 'qtdPeca', 'caixaPeca'],
         'caixas' => ['idCaixa', 'nomeCaixa']
@@ -41,3 +44,16 @@
         </div>
     </div>
 </form>
+
+<span>
+    <button class="buttons_menu dropdown-toggle btn" type="button" id="dropdown-ordenar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Ordenar
+    </button>
+        <div class="dropdown-menu" aria-labelledby="dropdown-ordenar">
+
+            <?php foreach($this->view->ordenar as $option_ordenacao) {
+
+                echo Buttons::buttonsOrdenar($option_ordenacao);
+            } ?>
+        </div>
+</span>

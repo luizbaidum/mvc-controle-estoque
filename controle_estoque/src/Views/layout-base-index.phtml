@@ -13,29 +13,14 @@
 			
 			<div class="menu_index"> 
 				<div class="row m-1">
-					<span>
-						<?php
-							foreach(Buttons::buttonsMenu() as $button) {
-								echo $button;
-							}
-						?>
-					</span>
-
-					<span>
-						<button class="buttons_menu dropdown-toggle" type="button" id="dropdown-ordenar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Ordenar
-						</button>
-							<div class="dropdown-menu" aria-labelledby="dropdown-ordenar">
-							<!-- aprender como fazer a ordenação e ajustar aqui o que for necessário) -->
-								<?php foreach($this->view->ordenar as $option_ordenacao) {
-
-									echo Buttons::buttonsOrdenar($option_ordenacao);
-								} ?>
-							</div>
-					</span>
-
-					<hr>
-					<?php include 'pesquisa.phtml' ?>
+					<?php
+						foreach(Buttons::buttonsMenu() as $button) {
+							echo $button;
+						}
+					?>
+				</div>
+				<div class="row m-1">
+					<?php include 'pesquisa-ordenacao.phtml' ?>
 				</div>
 			</div>
 
@@ -43,6 +28,7 @@
 		</div>
 
 		<?php include 'modal_form.phtml' ?>
+		<?php include 'modal_alerta.phtml' ?>
 
 	</body>
 

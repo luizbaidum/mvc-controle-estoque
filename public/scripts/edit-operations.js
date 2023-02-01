@@ -4,7 +4,7 @@ $(document).on('click', '#preparar-editar', () => {
     dados = $('#form-todas-caixas').serialize();
 
     if(dados.indexOf("caixa") <= 0) {
-        alert('Por favor, selecione uma caixa para editar.');
+        modalAlerta('Atenção', 'Por favor, selecione uma caixa para editar', 'alerta');
     } else {
         $('#form-todas-caixas').submit();
     }   
@@ -14,7 +14,7 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
 
     e.preventDefault();
 
-    if($('#operacao').val() == 'editar') {
+    if($('#operacao').val() == 'preparar-editar') {
 
     $.ajax({
         method: "POST",
@@ -38,13 +38,10 @@ function editarCaixa(dados)
         dataType: "json",
         data: dados,
         complete: function(response) {
-            if(response.responseJSON.resultado_operacao == true) {
-
-                alert("Caixa ID " + response.responseJSON.id_operacao + " editada com sucesso!");
-                window.location.href = "/";
-            } else {
+            if (response.responseJSON.resultado_operacao == true)
+                modalAlerta('Sucesso', "Caixa ID " + response.responseJSON.id_operacao + " editada com sucesso!", 'alerta');
+            else
                 alert("Erro no processo de editar Caixa ID " + response.responseJSON.id_operacao + ".");
-            }
         }
     })
 }
@@ -54,12 +51,10 @@ $('#prepara-edit-peca').click((e) => {
 
     dados = $('#form-index').serialize();
 
-    if($("[type='checkbox']:checked").length != 1) {
-        alert('Por favor, selecione UMA peça para editar.');
-    } else {
-        operacao = 'editar_peca';
-        $('#form-index').submit();
-    }
+    if($("[type='checkbox']:checked").length != 1)
+        modalAlerta('Erro', 'Por favor, selecione UMA peça para editar', 'alerta');
+    else
+        operacao = 'editar_peca'; $('#form-index').submit();
 });
 
 $('#form-index').submit((e) => {

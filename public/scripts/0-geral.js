@@ -8,11 +8,10 @@ $('#salvar').on('click', (e) => {
     scriptDeSalvar();
 })    
 
-$(document).on('click','#salvar-do-modal', (e) => {    
+$(document).on('click','#salvar-editar', (e) => {    
     e.preventDefault();
     let modal = $('#form-editar-caixa');
     scriptDeSalvar(modal);
-
 })    
 /****************************************************/
 function scriptDeSalvar(modal) 
@@ -44,7 +43,7 @@ function scriptDeSalvar(modal)
     });
 
     if(requeridos.length>0) {
-        alert('Existem campos obrigatórios NÃO preenchidos.');
+        modalAlerta('Atenção', 'Existem campos obrigatórios NÃO preenchidos', 'alerta');
         return;
     }   
 
@@ -89,13 +88,11 @@ $('.listar-caixas').on('click', (e) => {
     //operação p/ capturar o innerText do botão que o usuário clica e transformar isso no modal que se quer abrir
     let pai = e.target.parentElement.parentElement.innerText;
 
-    if(pai.indexOf('Apagar') == 0) {
-
+    if(pai.indexOf('Apagar') == 0)
         operacao = 'apagar';
-    } else if(pai.indexOf('Editar') == 0) {
 
-        operacao = 'editar';
-    }
+     else if(pai.indexOf('Editar') == 0) 
+        operacao = 'preparar-editar';
 
     $.ajax({
         method: "GET",
@@ -116,7 +113,7 @@ function tratarDadosModal(response)
 
 function abrirModal(conteudo) 
 {
-    $(".modal-content").html(conteudo);
+    $("#id-modal-form .modal-content").html(conteudo);
     $('#id-modal-form').modal('show');
     aplicarR$();
 }
@@ -192,13 +189,10 @@ $('#baixar').click(() => {
 
     dados = $('#form-index').serialize();
 
-    if($("[type='checkbox']:checked").length < 1) {
-
-        alert('Por favor, selecione pelo menos uma peça para baixar.');
-    } else {
-
+    if($("[type='checkbox']:checked").length < 1)
+        modalAlerta('Erro', 'Por favor, selecione pelo menos uma peça para baixar.', 'alerta');
+    else
         prepararBaixa(dados);
-    }
 });
 
 function prepararBaixa()
@@ -259,3 +253,20 @@ function aplicarR$()
     });
 }
 /****************************************************/
+function modalAlerta(titulo, texto, tipo)
+{
+    $('#id-modal-alerta').modal('show');
+
+    $('#modal-alerta-content .modal-title').text(titulo);
+    $('#modal-alerta-content .modal-body').text(texto);
+
+    if (tipo == "alerta")
+        $('#modal-alerta-content #response').remove();
+
+    if (tipo == "response")
+        $('#modal-alerta-content #alerta').remove();
+}
+
+$("#id-modal-alerta").on('show.bs.modal', function (e) {
+    $("#id-modal-form").modal("hide");
+});
