@@ -75,7 +75,7 @@ class Buttons {
     {
         if ($tipo == 'alerta') {
             $buttons = [
-                "ok" => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>',
+                "ok" => '<button id="recarregar" type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>',
             ];
         }
 

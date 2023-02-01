@@ -41,7 +41,7 @@ function editarCaixa(dados)
             if (response.responseJSON.resultado_operacao == true)
                 modalAlerta('Sucesso', "Caixa ID " + response.responseJSON.id_operacao + " editada com sucesso!", 'alerta');
             else
-                alert("Erro no processo de editar Caixa ID " + response.responseJSON.id_operacao + ".");
+                modalAlerta("Erro", "Erro no processo de editar Caixa ID " + response.responseJSON.id_operacao + ".", "alerta");
         }
     })
 }
@@ -87,10 +87,9 @@ function editarPeca(dados)
             let resposta = response.responseJSON;
             if(resposta.resultado_operacao == true) {
 
-                alert("Peça ID " + resposta.id_operacao + " editada com sucesso!");
-                window.location.href = "/";
+                modalAlerta("Sucesso", "Peça ID " + resposta.id_operacao + " editada com sucesso!", "alerta");
             } else {
-                alert("Erro no processo de editar Peça ID " + resposta.id_operacao + ".");
+                modalAlerta("Erro", "Erro no processo de editar Peça ID " + resposta.id_operacao + ".", "alerta");
             }
         }
     })
@@ -108,10 +107,9 @@ function baixarPeca(dados)
         complete: function(response) {
             let ids = response.responseJSON.id_operacao.toString();
             if(response.responseJSON.resultado_operacao == true) {
-                alert("Peça(s) ID " + ids + " baixada(s) com sucesso!");
-                window.location.href = "/";
+                modalAlerta("Sucesso", "Peça(s) ID " + ids + " baixada(s) com sucesso!", "alerta");
             } else {
-                alert("Erro no processo de baixar Peça(s) ID " + ids + ".");
+                modalAlerta("Erro", "Erro no processo de baixar Peça(s) ID " + ids + ".", "alerta");
             }
         }
     })

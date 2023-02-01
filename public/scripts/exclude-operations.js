@@ -24,8 +24,7 @@ $('#form-index').submit((e) => {
             complete: function(response) {
                 if(response.responseJSON.resultado_operacao == true) {
 
-                    alert('Peça(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!')
-                    window.location.href = "/";
+                    modalAlerta("Sucesso", 'Peça(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!', "alerta")
                 } else {
                     modalAlerta('Erro', 'Erro ao excluir Peça(s) ID(s) '+ response.responseJSON.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.', 'alerta');
                 }
@@ -60,8 +59,7 @@ $(document).on('submit', '#form-todas-caixas', (e) => {
             complete: function(response) {
                 if (response.responseJSON.resultado_operacao == true) {
 
-                    alert('Caixa(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!')
-                    window.location.href = "/";
+                    modalAlerta('Sucesso', 'Caixa(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!', 'alerta')
                 } else {
 
                     modalAlerta('Erro', 'Erro ao excluir Caixas(s) ID(s) '+ response.responseJSON.ids_operacao + '. Provavelmente essas caixas estão sendo usadas por outra tabela.', 'alerta');
@@ -96,7 +94,7 @@ $(document).on('click', '#excluir-img-atual', (e) => {
             complete: function(response) {
                 if(response.responseJSON.resultado_operacao == true) {
 
-                    alert('Imagem excluída com sucesso!');
+                    modalAlerta('Sucesso', 'Imagem excluída com sucesso!', 'alerta');
                     $('#fotoPeca span').text('Imagem atual: Nenhuma imagem');
                     $('#excluir-img-atual').prop('disabled', 'true');
                 } else {

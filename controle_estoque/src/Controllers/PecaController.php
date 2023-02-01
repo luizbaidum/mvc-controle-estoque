@@ -33,7 +33,7 @@ class PecaController extends Action {
 			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
 			$obj->setIdPeca(preg_replace('/[^a-z0-9]/i', '', $_POST['idPeca']));
 			$obj->setNomePeca($_POST['nomePeca']);
-			$obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca']));
+			$_POST['vlrCompraPeca'] != '' ? $obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca'])) : $obj->setVlrCompraPeca('');
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 
@@ -41,11 +41,12 @@ class PecaController extends Action {
 				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
 				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
 			}
-			$obj->setFotoPeca($foto_peca);
-
-			if (isset($foto_peca))
+			
+			if (isset($foto_peca)) {
+				$obj->setFotoPeca($foto_peca);
 				$resultado_upload = $model_peca->upload_img($obj);
-
+			}
+				
 			if ((isset($foto_peca) && $resultado_upload === true) || !isset($foto_peca))
 				$resultado_operacao = $model_peca->insert($obj);
 
