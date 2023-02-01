@@ -18,13 +18,13 @@ Pretendo deixar esta atividade intuitiva, rápida e fácil.
 - [ ] alinhar infos relevantes das peças e caixas c/ cliente
 - [x] script de upload de imagens
 - [x] table e tratamento p/ imagens
-- [ ] alterar alert de confirm de crud p/ modalzinho
+- [x] alterar alert de confirm de crud p/ modalzinho
 - [x] tentar dinamizar o form submetido
 - [x] arrumar o modal de listagem de caixas p/ como sendo listagem de caixas
 - [x] coluna qtd de peças.
 - [ ] repassar codigo e buscar mais padronização
 - [x] adicionar letras p/ ID de caixas e pecas
 - [ ] exibir caixas cadastradas
-- [ ] remover obrigatoriedade de lançar valor pago
+- [x] remover obrigatoriedade de lançar valor pago
 - [ ] transformar echo $e->getMessage() em um arquivo de log?? >> trabalha-las p/ dar retorno mais especifico de erro p/ usuario
 - [ ] revisar todo o sistema p/ melhoria de distribuição de arquivos e classes
