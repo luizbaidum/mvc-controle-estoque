@@ -47,26 +47,45 @@ class Buttons {
 
     public static function buttonsModalCrud($operacao) 
     {
-        if($operacao == 'apagar') {
+        if ($operacao == 'apagar') {
             $buttons_crud = [
                 "salvar" => '<button type="button" class="btn btn-danger" id="salvar-apagar">Excluir selecionadas</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }
 
-        if($operacao == 'editar') {
+        if ($operacao == 'preparar-editar') {
             $buttons_crud = [
                 "salvar" => '<button type="button" class="btn btn-info" id="preparar-editar">Editar selecionada</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }
 
-        if($operacao == 'confirmar-editar') {
+        if ($operacao == 'confirmar-editar') {
             $buttons_crud = [
-                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-do-modal">Confirmar edição</button>',
+                "salvar" => '<button type="button" class="btn btn-danger" id="salvar-editar">Confirmar edição</button>',
                 "fechar" => '<button type="button" class="btn btn-secondary" data-dismiss="modal" id="fechar-modal">Fechar</button>'
             ];
         }
+
         return $buttons_crud;
+    }
+
+    public static function buttonsModalNotCrud($tipo)
+    {
+        if ($tipo == 'alerta') {
+            $buttons = [
+                "ok" => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>',
+            ];
+        }
+
+        if ($tipo == 'response') {
+            $buttons = [
+                "ok" => '<button type="button" class="btn btn-info response" value="true">Ok</button>',
+                "cancelar" => '<button type="button" class="btn btn-warning response" value="false" data-dismiss="modal">Cancelar</button>',
+            ];
+        }
+
+        return $buttons;
     }
 }

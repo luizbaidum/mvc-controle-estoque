@@ -8,11 +8,10 @@ $('#salvar').on('click', (e) => {
     scriptDeSalvar();
 })    
 
-$(document).on('click','#salvar-do-modal', (e) => {    
+$(document).on('click','#salvar-editar', (e) => {    
     e.preventDefault();
     let modal = $('#form-editar-caixa');
     scriptDeSalvar(modal);
-
 })    
 /****************************************************/
 function scriptDeSalvar(modal) 
@@ -44,7 +43,7 @@ function scriptDeSalvar(modal)
     });
 
     if(requeridos.length>0) {
-        abrirModalAlerta('Atenção', 'Existem campos obrigatórios NÃO preenchidos', 'alerta')
+        modalAlerta('Atenção', 'Existem campos obrigatórios NÃO preenchidos', 'alerta');
         return;
     }   
 
@@ -89,13 +88,11 @@ $('.listar-caixas').on('click', (e) => {
     //operação p/ capturar o innerText do botão que o usuário clica e transformar isso no modal que se quer abrir
     let pai = e.target.parentElement.parentElement.innerText;
 
-    if(pai.indexOf('Apagar') == 0) {
-
+    if(pai.indexOf('Apagar') == 0)
         operacao = 'apagar';
-    } else if(pai.indexOf('Editar') == 0) {
 
-        operacao = 'editar';
-    }
+     else if(pai.indexOf('Editar') == 0) 
+        operacao = 'preparar-editar';
 
     $.ajax({
         method: "GET",
@@ -116,7 +113,7 @@ function tratarDadosModal(response)
 
 function abrirModal(conteudo) 
 {
-    $(".modal-content").html(conteudo);
+    $("#id-modal-form .modal-content").html(conteudo);
     $('#id-modal-form').modal('show');
     aplicarR$();
 }
@@ -192,13 +189,10 @@ $('#baixar').click(() => {
 
     dados = $('#form-index').serialize();
 
-    if($("[type='checkbox']:checked").length < 1) {
-
-        alert('Por favor, selecione pelo menos uma peça para baixar.');
-    } else {
-
+    if($("[type='checkbox']:checked").length < 1)
+        modalAlerta('Erro', 'Por favor, selecione pelo menos uma peça para baixar.', 'alerta');
+    else
         prepararBaixa(dados);
-    }
 });
 
 function prepararBaixa()
@@ -259,37 +253,20 @@ function aplicarR$()
     });
 }
 /****************************************************/
-function abrirModalAlerta(titulo, texto, tipo) //tipo = alerta ou response
+function modalAlerta(titulo, texto, tipo)
 {
-    $('#id-modal-form').modal('hide');
+    $('#id-modal-alerta').modal('show');
 
     $('#modal-alerta-content .modal-title').text(titulo);
     $('#modal-alerta-content .modal-body').text(texto);
 
-    criarModalFooter(tipo);
+    if (tipo == "alerta")
+        $('#modal-alerta-content #response').remove();
 
-    $('#id-modal-alerta').modal('show');
+    if (tipo == "response")
+        $('#modal-alerta-content #alerta').remove();
 }
 
-function criarModalFooter(tipo)
-{
-    let buttons = Array();
-    let modal_footer = $('#modal-alerta-content .modal-footer');
-
-    modal_footer.html('');
-
-    if (tipo == 'alerta') {
-        /*buttons.class = 'testeok';
-        buttons.onclick = 'onclickok()';*/
-
-        buttons[0] = ['class''testeok'];
-        //pensar na melhor forma de fazer isso. se array ou objeto
-        console.log(buttons);
-
-        //modal_footer.append(`<button class='btn btn-primary ${buttons['class']}' onclick='aa'>Ok</button>`);
-    }
-
-    /*if (tipo == 'response') {
-
-    }*/
-}
+$("#id-modal-alerta").on('show.bs.modal', function (e) {
+    $("#id-modal-form").modal("hide");
+});

@@ -1,4 +1,6 @@
-<div class="modal fade" id="id-modal-alerta" tabindex="-1" aria-hidden="true">
+<?php use MF\ViewHelper\Buttons; ?>
+
+<div class="modal fade" id="id-modal-alerta" tabindex="1" aria-hidden="true">
 
   <div class="modal-dialog">
 
@@ -13,7 +15,20 @@
           </button>
       </div>
       <div class="modal-body"></div>
-      <div class="modal-footer"></div>
+      <div class="modal-footer" id="alerta">
+        <?php
+          foreach (Buttons::buttonsModalNotCrud('alerta') as $button) {
+            echo $button;
+          }
+        ?>
+      </div>
+      <div class="modal-footer" id="response">
+        <?php
+          foreach (Buttons::buttonsModalNotCrud('response') as $button) {
+            echo $button;
+          }
+        ?>
+      </div>
     </div>
   </div>
 </div>
