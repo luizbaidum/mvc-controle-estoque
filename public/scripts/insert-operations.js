@@ -10,10 +10,10 @@ function novaCaixa(dados)
         complete: function(response) {
             if(response.responseJSON.resultado_operacao == true) {
 
-                alert("Caixa ID " + response.responseJSON.id_operacao + " inserida com sucesso!");
+                modalAlerta("Sucesso", "Caixa ID " + response.responseJSON.id_operacao + " inserida com sucesso!", "alerta");
                 $('form')[0].reset();
             } else {
-                alert("Erro no processo de inserir Caixa ID " + response.responseJSON.id_operacao + ". Verifique se este ID já está cadastrado.");
+                modalAlerta("Erro", "Erro no processo de inserir Caixa ID " + response.responseJSON.id_operacao + ". Verifique se este ID já está cadastrado.", "alerta");
             }
         }
     })
@@ -29,12 +29,13 @@ function novaPeca()
         dataType: "json",
         data: dados,
         complete: function(response) {
+            console.log(response);
             if(response.responseJSON.resultado_operacao == true) {
 
-                alert("Peca ID " + response.responseJSON.id_operacao + " inserida com sucesso!");
+                modalAlerta("Sucesso", "Peca ID " + response.responseJSON.id_operacao + " inserida com sucesso!", "alerta");
                 $('form')[0].reset();
             } else {
-                alert("Erro no processo de inserir Peca ID " + response.responseJSON.id_operacao + ". Verifique se este ID já está cadastrado.");
+                modalAlerta("Erro", "Erro no processo de inserir Peca ID " + response.responseJSON.id_operacao + ". Verifique se este ID já está cadastrado.", "alerta");
             }
         }
     })

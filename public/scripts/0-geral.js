@@ -270,3 +270,7 @@ function modalAlerta(titulo, texto, tipo)
 $("#id-modal-alerta").on('show.bs.modal', function (e) {
     $("#id-modal-form").modal("hide");
 });
+/****************************************************/
+$(document).on('click', '#recarregar', function() {
+    window.location.href = "/";
+});
