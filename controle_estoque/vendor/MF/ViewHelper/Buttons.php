@@ -75,7 +75,8 @@ class Buttons {
     {
         if ($tipo == 'alerta') {
             $buttons = [
-                "ok" => '<button id="recarregar" type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>',
+                "pagina_inicial" => '<button id="recarregar" type="button" class="btn btn-danger" data-dismiss="modal">Voltar para início</button>',
+                "fechar_modal" => '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar esta mensagem</button>',
             ];
         }
 

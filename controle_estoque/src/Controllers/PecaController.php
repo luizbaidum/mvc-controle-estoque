@@ -125,7 +125,7 @@ class PecaController extends Action {
 
 			$obj->setIdPeca($_POST['idPeca']);
 			$obj->setNomePeca($_POST['nomePeca']);
-			$obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca']));
+			$_POST['vlrCompraPeca'] != '' ? $obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca'])) : $obj->setVlrCompraPeca('');
 			$obj->setQtdPeca($_POST['qtdPeca']);
 			$obj->setCaixaPeca($_POST['caixaPeca']);
 

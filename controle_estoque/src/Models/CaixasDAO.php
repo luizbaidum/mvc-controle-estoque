@@ -72,14 +72,15 @@ class CaixasDAO extends Model {
 			WHERE `idCaixa` = :old_id";
 
 		$stmt = $this->db->prepare($query);
-		$stmt->bindValue(':new_id', $obj->getIdCaixa(), \PDO::PARAM_INT);
+		$stmt->bindValue(':new_id', $obj->getIdCaixa(), \PDO::PARAM_STR);
 		$stmt->bindValue(':nome', $obj->getNomeCaixa(), \PDO::PARAM_STR);
 		$stmt->bindValue(':cor', $obj->getCorCaixa(), \PDO::PARAM_STR);
 		$stmt->bindValue(':descricao', $obj->getDescricaoCaixa(), \PDO::PARAM_STR);
 		$stmt->bindValue(':data_insert', $this->getTime(), \PDO::PARAM_STR);
-		$stmt->bindValue(':old_id', $obj->getOldId(), \PDO::PARAM_INT);
+		$stmt->bindValue(':old_id', $obj->getOldId(), \PDO::PARAM_STR);
 
 		$result = $stmt->execute();
+
 		return $result;
 	}
 }
