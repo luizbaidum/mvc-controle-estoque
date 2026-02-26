@@ -41,9 +41,9 @@
 
   <div class="form-group">
 
-    <label for="caixaPeca">Caixa onde está a peça *</label>
+    <label for="idCaixa">Caixa onde está a peça *</label>
       
-    <select class="form-control" id="caixaPeca" name="caixaPeca" required>
+    <select class="form-control" id="idCaixa" name="idCaixa" required>
     
       <option value="">Selecione</option>
 
@@ -52,7 +52,7 @@
         foreach($lista_caixas as $key => $value) {
 
           $selected = '';
-          if ($value["idCaixa"] == $peca_editar['caixaPeca']) $selected = 'selected';  
+          if ($value["idCaixa"] == $peca_editar['idCaixa']) $selected = 'selected';  
 
           echo '<option id="'.$value["idCaixa"].'" value="'.$value["idCaixa"].'" '.$selected.'>'.$value["nomeCaixa"].'</option>';
       } ?>

@@ -1,12 +1,7 @@
 <form method="post" action="/nova_peca/insert" enctype="multipart/form-data">
 
   <div class="form-group">
-
     <input name="operation" id="operation" value="nova_peca" type="hidden">
-
-    <label for="idPeca">ID da peça* (números ou letras)</label>
-
-    <input type="text" class="form-control" id="idPeca" name="idPeca" required>
   </div>
 
   <div class="form-group">
@@ -20,7 +15,7 @@
       <?php foreach($lista_pecas as $key => $value): ?>
         <option value=""> <?= 'id: ' . $value->idPeca . ' - nome: ' . $value->nomePeca ?> </option>
       <?php endforeach; ?>
-    </select>     
+    </select>
   </div>
 
   <div class="form-group">
@@ -39,9 +34,9 @@
 
   <div class="form-group">
 
-    <label for="caixaPeca">Caixa onde está a peça *</label>
-      
-    <select class="form-control" id="caixaPeca" name="caixaPeca" required>
+    <label for="idCaixa">Caixa onde está a peça *</label>
+
+    <select class="form-control" id="idCaixa" name="idCaixa" required>
 
       <option value="">Selecione</option>
 

@@ -21,26 +21,23 @@ class CaixaController extends Action {
 	}
 
     public function novaCaixa()
-	{	
+	{
 		try {
 			$caixa = Container::getModel('CaixasDAO');
 
 			$obj = new CaixasEntity();
 
-			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
-			$obj->setIdCaixa(preg_replace('/[^a-z0-9]/i', '', $_POST['idCaixa']));
 			$obj->setNomeCaixa($_POST['nomeCaixa']);
 			$obj->setCorCaixa($_POST['corCaixa']);
 			$obj->setDescricaoCaixa($_POST['descricaoCaixa']);
 
 			$resultado_operacao = $caixa->insert($obj);
 
-			if ($resultado_operacao == 1) {
-
-				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdCaixa());
+			if ($resultado_operacao != 0) {
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $resultado_operacao);
 				echo json_encode($resposta);
 			} else {
-				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdCaixa());
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getNomeCaixa());
 				throw new Exception('Erro ao lançar nova Caixa. Verifique se o ID da Caixa já está cadastrado.');
 			}
 		} catch (Exception $e) {

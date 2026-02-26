@@ -12,7 +12,7 @@ use src\Models\UsoPecaEntity;
 class PecaController extends Action {
 
 	public function index()
-	{	
+	{
 		$model_peca = Container::getModel('PecasDAO');
 		$model_caixa = Container::getModel('CaixasDAO');
 
@@ -24,39 +24,35 @@ class PecaController extends Action {
 	}
 
     public function novaPeca()
-	{	
+	{
 		try {
 			$model_peca = Container::getModel('PecasDAO');
 
 			$obj = new PecasEntity();
 
-			//está reconhecendo o $_post normalmente, mesmo ele vindo do ajax todo 'zoado'
-			$obj->setIdPeca(preg_replace('/[^a-z0-9]/i', '', $_POST['idPeca']));
 			$obj->setNomePeca($_POST['nomePeca']);
 			$_POST['vlrCompraPeca'] != '' ? $obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca'])) : $obj->setVlrCompraPeca('');
 			$obj->setQtdPeca($_POST['qtdPeca']);
-			$obj->setCaixaPeca($_POST['caixaPeca']);
+			$obj->setIdCaixa($_POST['idCaixa']);
 
 			if ($_FILES['fotoPeca']['name'] != '') {
 				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
 				$foto_peca = substr_replace($foto_peca, '.', -3, 0);
 			}
-			
+
 			if (isset($foto_peca)) {
 				$obj->setFotoPeca($foto_peca);
 				$resultado_upload = $model_peca->upload_img($obj);
 			}
-				
+
 			if ((isset($foto_peca) && $resultado_upload === true) || !isset($foto_peca))
 				$resultado_operacao = $model_peca->insert($obj);
 
-			if ($resultado_operacao != 1) {
-
-				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
+			if ($resultado_operacao == 0) {
+				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getNomePeca());
 				throw new Exception('Erro ao lançar nova Peça. Verifique se o ID da Peça já está cadastrado.');
 			} else {
-				
-				$resposta = array('resultado_operacao' => true, 'id_operacao' => $obj->getIdPeca());
+				$resposta = array('resultado_operacao' => true, 'id_operacao' => $resultado_operacao);
 				echo json_encode($resposta);
 			}
 
@@ -70,7 +66,7 @@ class PecaController extends Action {
 	{
 		try {
 			$pecas_excluir = $_POST['idPeca'];
-	
+
 			$model_peca = Container::getModel('PecasDAO');
 
 			$resultado_operacao = $model_peca->deletar($pecas_excluir);
@@ -80,7 +76,6 @@ class PecaController extends Action {
 				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
 				echo json_encode($resposta);
 			} else {
-				
 				$resposta = array('resultado_operacao' => false, 'ids_operacao' => $pecas_excluir);
 				throw new Exception('Erro ao deletar peça(s).');
 			}
@@ -92,7 +87,7 @@ class PecaController extends Action {
 
 	public function prepararEditarPeca()
 	{
-		try {	
+		try {
 			$model_peca = Container::getModel('PecasDAO');
 			$model_caixa = Container::getModel('CaixasDAO');
 			$model_uso = Container::getModel('UsoPecaDAO');
@@ -106,7 +101,7 @@ class PecaController extends Action {
 
 			$this->view->dados['peca_editar'] = $peca_editar;
 			$this->view->dados['lista_caixas'] = $lista_caixas;
-			
+
 			$this->render('editar_peca', 'Editar peça ID: '.$id_peca, 'layout-base-inserts');
 
 			if(!$peca_editar || !$lista_caixas) throw new Exception('Erro ao carregar peça para edição.');
@@ -117,7 +112,7 @@ class PecaController extends Action {
 	}
 
 	public function editarPeca()
-	{	
+	{
 		try {
 			$model_peca = Container::getModel('PecasDAO');
 
@@ -127,7 +122,7 @@ class PecaController extends Action {
 			$obj->setNomePeca($_POST['nomePeca']);
 			$_POST['vlrCompraPeca'] != '' ? $obj->setVlrCompraPeca(NumbersHelper::formatBRtoUS($_POST['vlrCompraPeca'])) : $obj->setVlrCompraPeca('');
 			$obj->setQtdPeca($_POST['qtdPeca']);
-			$obj->setCaixaPeca($_POST['caixaPeca']);
+			$obj->setIdCaixa($_POST['idCaixa']);
 
 			if ($_FILES['fotoPeca']['name'] != '') {
 				$foto_peca = $this->limparCaracteres($_FILES['fotoPeca']['name']);
@@ -140,12 +135,12 @@ class PecaController extends Action {
 
 			if (isset($foto_peca))
 				$resultado_upload = $model_peca->upload_img($obj);
-			
-			if ((isset($foto_peca) && $resultado_upload === true) || !isset($foto_peca))	
+
+			if ((isset($foto_peca) && $resultado_upload === true) || !isset($foto_peca))
 				$resultado_operacao = $model_peca->editar($obj);
 
 			if ($resultado_operacao != 1) {
-				
+
 				$resposta = array('resultado_operacao' => false, 'id_operacao' => $obj->getIdPeca());
 				throw new Exception('Erro ao editar Peça.');
 			} else {

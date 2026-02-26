@@ -8,6 +8,7 @@
         protected $nomeCaixa;
         protected $corCaixa;
         protected $descricaoCaixa;
+        protected $dataHora;
         protected $oldId;
 
         /**
@@ -106,6 +107,26 @@
         public function setOldId($oldId)
         {
                 $this->oldId = $oldId;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of dataHora
+         */ 
+        public function getDataHora()
+        {
+                return $this->dataHora;
+        }
+
+        /**
+         * Set the value of dataHora
+         *
+         * @return  self
+         */ 
+        public function setDataHora($dataHora)
+        {
+                $this->dataHora = $dataHora;
 
                 return $this;
         }

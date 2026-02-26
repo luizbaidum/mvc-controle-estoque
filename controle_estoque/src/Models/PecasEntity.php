@@ -8,7 +8,7 @@
         protected $nomePeca;
         protected $vlrCompraPeca;
         protected $qtdPeca;
-        protected $caixaPeca;
+        protected $idCaixa;
         protected $fotoPeca;
         protected $oldId;
 
@@ -90,21 +90,21 @@
         }
 
         /**
-         * Get the value of caixaPeca
+         * Get the value of idCaixa
          */ 
-        public function getCaixaPeca()
+        public function getIdCaixa()
         {
-                return $this->caixaPeca;
+                return $this->idCaixa;
         }
 
         /**
-         * Set the value of caixaPeca
+         * Set the value of idCaixa
          *
          * @return  self
          */ 
-        public function setCaixaPeca($caixaPeca)
+        public function setIdCaixa($idCaixa)
         {
-                $this->caixaPeca = $caixaPeca;
+                $this->idCaixa = $idCaixa;
 
                 return $this;
         }
