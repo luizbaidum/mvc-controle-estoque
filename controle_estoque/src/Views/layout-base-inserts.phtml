@@ -2,7 +2,7 @@
 <?php include "../controle_estoque/vendor/MF/ViewHelper/DataExtract.php"; ?>
 
 <html lang="pt-br">
-	
+
 	<?php require_once('Principais/view_head.php'); ?>
 
 	<body>
@@ -11,23 +11,23 @@
 			<div>
 				<h3><?= $this->title; ?></h3>
 			</div>
-			
+
 			    <?= $this->content(); ?>
 
-			<div class="menu_index"> 
+			<div class="menu_index">
 				<span>
 					<?php
-						foreach(Buttons::buttonsCrud() as $button) {
+						foreach (Buttons::buttonsCrud() as $button) {
 							echo $button;
 						}
 					?>
-				</span>               
+				</span>
 			</div>
 		</div>
 
 		<?php include 'modal_form.phtml' ?>
 		<?php include 'modal_alerta.phtml' ?>
-		
+
 	</body>
 
 	<?php require_once('Principais/view_bottom.php'); ?>

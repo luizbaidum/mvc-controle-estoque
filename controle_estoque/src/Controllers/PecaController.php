@@ -71,8 +71,7 @@ class PecaController extends Action {
 
 			$resultado_operacao = $model_peca->deletar($pecas_excluir);
 
-			if($resultado_operacao == count($pecas_excluir)) {
-
+			if ($resultado_operacao == count($pecas_excluir)) {
 				$resposta = array('resultado_operacao' => true, 'ids_operacao' => $pecas_excluir);
 				echo json_encode($resposta);
 			} else {

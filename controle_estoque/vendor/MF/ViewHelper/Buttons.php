@@ -4,7 +4,7 @@ namespace MF\ViewHelper;
 
 class Buttons {
 
-    public static function buttonsMenu() 
+    public static function buttonsMenu()
     {
         $buttons_menu = [
             "novo" => '<span><button class="buttons_menu dropdown-toggle btn" type="button" id="dropdown-novo" data-toggle="dropdown" aria-haspopup="true">
@@ -25,11 +25,17 @@ class Buttons {
                             <button class="dropdown-item" id="prepara-edit-peca">Peça</button>
                             <button class="dropdown-item listar-caixas">Caixa</button>
                         </div></span>',
+            "relatorio" => '<span>
+                                <button class="buttons_menu dropdown-toggle btn" type="button" id="dropdown-relatorio" data-toggle="dropdown" aria-haspopup="true">Relatório</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdown-relatorio">
+                                    <a class="dropdown-item" href="/relatorio_uso">Uso</a>
+                                </div>
+                            </span>',
         ];
         return $buttons_menu;
     }
 
-    public static function buttonsCrud() 
+    public static function buttonsCrud()
     {
         $buttons_crud = [
             "salvar" => '<button id="salvar" type="button" class="buttons_crud">Salvar</button>',
@@ -38,14 +44,14 @@ class Buttons {
         return $buttons_crud;
     }
 
-    public static function buttonsOrdenar($option_ordenacao) 
+    public static function buttonsOrdenar($option_ordenacao)
     {
         $buttons_ordenar = '<button type="button" class="dropdown-item ordenar" id="'.$option_ordenacao.'" name="ordenar[]" value="'.$option_ordenacao.'">'.$option_ordenacao.'</button>';
 
         return $buttons_ordenar;
     }
 
-    public static function buttonsModalCrud($operacao) 
+    public static function buttonsModalCrud($operacao)
     {
         if ($operacao == 'apagar') {
             $buttons_crud = [

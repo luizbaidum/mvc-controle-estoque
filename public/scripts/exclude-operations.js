@@ -15,18 +15,21 @@ $('#form-index').submit((e) => {
 
     e.preventDefault();
 
-    if(operacao == 'deletar_peca' && confirmarExclusao() == true) {
+    if (operacao == 'deletar_peca' && confirmarExclusao() == true) {
         $.ajax({
             method: "POST",
             url: "/delete_peca",
             dataType: "json",
             data: dados,
-            complete: function(response) {
-                if(response.responseJSON.resultado_operacao == true) {
-
-                    modalAlerta("Sucesso", 'Peça(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!', "alerta")
+            complete: function (response) {
+                if (response.resultado_operacao != undefined) {
+                    if (response.responseJSON.resultado_operacao == true) {
+                        modalAlerta("Sucesso", 'Peça(s) ID(s) '+ response.responseJSON.ids_operacao +' excluída(s) com sucesso!', "alerta")
+                    } else {
+                        modalAlerta('Erro', 'Erro ao excluir Peça(s) ID(s) '+ response.responseJSON.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.', 'alerta');
+                    }
                 } else {
-                    modalAlerta('Erro', 'Erro ao excluir Peça(s) ID(s) '+ response.responseJSON.ids_operacao + '. Provavelmente essas peças estão sendo usadas por outra tabela.', 'alerta');
+                    modalAlerta('Erro', response.responseText, 'alerta');
                 }
             }
         })
